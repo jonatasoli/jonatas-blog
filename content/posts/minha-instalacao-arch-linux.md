@@ -7,14 +7,18 @@ date: 2021-01-08
 # Instalação do Arch Linux
 
 Bom começando 2021 com um blog novo decidi compartilhar o meu roteiro para instalar o Arch Linux com algumas explicações.
-No longínquo ano de 2004 eu bricanva com instalações complicadas como o FreeBSD, Gentoo e o Slackware, foi uma boa base para aprender muito, com todos os kernel panics  da vida,
+
+No longínquo ano de 2004 eu brincava com instalações complicadas como o FreeBSD, Gentoo e o Slackware, foi uma boa base para aprender muito, com todos os kernel panics  da vida,
 mas minha vida com o pinguim naquela época ainda era só uma curiosidade, pois trabalhava com Delphi e ambiente Windows além de que nessa época era bem complicado jogar no Linux.
+
 Desde de 2014 voltei a trabalhar usando Linux inicialmente como freelance e depois na minha ocupação principal, um pouco isso se deve ao trabalho do Dionatan do [Diolinux](https://diolinux.com.br/), mas desde então conhecim uma distro que não havia conhecido lá no começo dos anos 2000 que era o Arch linux, gostei muito da ideia do Pacman que é muito parecido com o Brew do MacOs, mas mesmo assim sempre fiquei nas distros ubuntu like pois era um sistema que eu tinha mais familiaridade.
+
 Esse ano de 2021 vai ser um ano atipico pra mim eu nesse momento estou usando um Mac, mas no meio do ano vou trabalhar alguns meses numa estação Windows até que mais pro final do
 ano estou pensando em pegar um notebook da [System76](https://system76.com/), então no perído entre festas ali de 2020 eu decidi me aventurar em fazer uma instalação do Arch numa
 virtualbox para ter um roteiro pronto pra usar no meio do ano pra voltar a usar o Arch.
-Um ponto importante é que lá por 2017 eu comecei a usar o xubuntu com o gerenciador de janelas i3, antes de começar a usar o mac estava usando o [Xmonad](https://xmonad.org/) nesse guia eu levo em
-consideração a instalação do Xmonad pois já tenho meus arquivos de configuração que basicamente devo copiar, caso tenha interesse você pode ver no meu [GitHub](https://github.com/jonatasoli/dotfiles).
+
+Um ponto importante é que lá por 2017 eu comecei a usar o xubuntu com o gerenciador de janelas i3, antes de começar a usar o mac estava usando o [Xmonad](https://xmonad.org/) nesse guia eu levo em consideração a instalação do Xmonad pois já tenho meus arquivos de configuração que basicamente devo copiar, caso tenha interesse você pode ver no meu [GitHub](https://github.com/jonatasoli/dotfiles).
+
 Um disclamer antes do guia, na verdade eu achei a configuração do Arch relativamente tranquila, a [documentação oficial](https://wiki.archlinux.org/index.php/installation_guide),
 além de que pra mim me enrolei em alguns pontos que não estão muitos explicitos ali, então por isso fiz esse guia, dois vídeos que me ajudaram muito foi esse do [Diolinux](https://www.youtube.com/watch?v=4orYC5ARfn8&t=3212s) e essa do [Derek Taylor](https://www.youtube.com/watch?v=PQgyW10xD8s&t=1340s), que alias também tem materiais muitos bons.
 
