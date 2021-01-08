@@ -30,7 +30,7 @@ Pode ser que essa pasta não exista ai o computador não tem suporte a UEFI
 ls /sys/firmware/efi/efivars
 ```
 
-## Gerando o partionamento
+## Gerando o particionamento
 
 Aqui acredito que é algo bem pessoal, cada um organiza do jeito que acha melhor eu particularmente uso um / /boot /home /swap usando uma estrutura de partições GPT, caso você não
 saiba o que é de uma olhada [nesse artigo do sempreupdate](https://sempreupdate.com.br/quais-as-diferencas-entre-gpt-guid-e-mbr/).

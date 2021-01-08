@@ -3,6 +3,7 @@
     <Header />
     <slot />
     <div class="footer">
+      <p>Copyright © 2021 Jônatas Oliveira</p>
       <p>
         Desenvolvido com
         <a class="link" href="//gridsome.org">Gridsome</a>
