@@ -76,6 +76,10 @@ Criar um jogo simples de plataforma com duas fases e power-ups ou fazer essa evo
 Criar um jogo simples de plataforma com quatro fases e power-ups ou fazer essa evolução no jogo do mês anterior. Além de publicar ele na steam.
 
 
+Todos os objetivos para cada projeto eu coloquei no mapa abaixo:
+![Mapa de objetivos dos projetos](./desafio_12_projetos.png)
+
+
 ## Motivação
 
 A ideia é conseguir provar uma tese que venho estudando em vários livros e cursos, onde direcionando meu estudo exclusivamente para pratica deliberada e através de projetos pequenos, com feedback rápido, fail fast e uma prática metódica eu consiga me desenvolver mais rapidamente.
