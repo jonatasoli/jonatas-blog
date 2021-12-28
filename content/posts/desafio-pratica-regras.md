@@ -18,6 +18,8 @@ date: 2021-12-27
 * Precisa ser público
 * As horas precisam ser de prática
 * Cada projeto precisa ser quebrado em pequenas atividades
+* Comemorar entrega do projeto
+* Comomorar cada habilidade que foi aprendida
 
 ## Durante as sessões de prática
 * Aspecto que quer melhorar

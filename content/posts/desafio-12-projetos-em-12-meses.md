@@ -77,7 +77,8 @@ Criar um jogo simples de plataforma com quatro fases e power-ups ou fazer essa e
 
 
 Todos os objetivos para cada projeto eu coloquei no mapa abaixo:
-![Mapa de objetivos dos projetos](./desafio_12_projetos.png)
+[Mapa de objetivos dos projetos](https://i.pinimg.com/originals/47/b2/eb/47b2eb88d67546eb3ed3577c07dea948.png)
+
 
 
 ## Motivação
