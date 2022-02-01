@@ -1,6 +1,6 @@
 ---
-title: "Desafio de prática - Escopo Janeiro"
-description: "Escopo Inicial - Janeiro"
+title: "Desafio de prática - Escopo Fevereiro"
+description: "Escopo Inicial - Fevereiro"
 date: 2022-01-01
 ---
 
