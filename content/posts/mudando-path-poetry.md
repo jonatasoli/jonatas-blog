@@ -12,7 +12,7 @@ Quando usava o pipenv isso não era tanto um problema, pois ele tinha um comando
 
 Pra fazer isso é bem simples é só executar o comando abaixo no seu terminal:
 ```
-poetry config virtualenvs.path .env
+poetry config virtualenvs.in-project true
 ```
 
 Lembrando que pra funcionar você precisa ter o poetry instalado no seu pipenv =D
