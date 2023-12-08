@@ -24,7 +24,7 @@
     </div>
     <div class="flex space-x-1 items-center">
       <IconLink 
-         href="https://www.youtube.com/channel/UCgKNiUMfCRXqyQqOHNTFj3Qo"
+         href="https://www.youtube.com/@devjonatas"
          target="_blank"
       >
         <YoutubeIcon class="w-8 h-8 fill-current" />
