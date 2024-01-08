@@ -3,7 +3,7 @@ title: "52 semanas de planejamento em 2023"
 imgUrl: "/post-images/calendario-tumb-tratada.png"
 youtubeId: "Ak7ntnnIIvI"
 summary: "As ferramentas que estou usando no meu workflow de trabalho"
-publishedAt: 2021-01-15
+publishedAt: 2024-01-06
 ---
 
 
