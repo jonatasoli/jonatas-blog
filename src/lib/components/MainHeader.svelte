@@ -16,7 +16,7 @@
 
     <div class="flex space-x-1 items-center">
       <IconLink
-         href="https://discord.gg/WnjMrqXU"
+         href="https://discord.gg/3Q7dtwrR"
          target="_blank"
       >
         <DiscordIcon class="w-8 h-8 fill-current" />
