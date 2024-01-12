@@ -1,4 +1,5 @@
 ---
+postId: 5
 title: "Desafio de prática - Regras"
 imgUrl: ""
 summary: "Regras pro desafio de prática"

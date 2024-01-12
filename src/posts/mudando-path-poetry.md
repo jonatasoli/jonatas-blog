@@ -1,4 +1,5 @@
 ---
+postId: 3
 title: "Mudando path do poetry"
 imgUrl: ""
 summary: "Como configurar o poetry para mudar o diretório padrão que ele cria a Virtual Env"

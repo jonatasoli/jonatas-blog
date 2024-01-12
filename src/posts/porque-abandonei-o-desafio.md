@@ -1,4 +1,5 @@
 ---
+postId: 9
 title: "Por que eu abandonei o desafio de 12 meses?"
 imgUrl: ""
 summary: "Um breve resumo da minha vida e as dificuldade em fixar um compromisso!"

@@ -1,4 +1,5 @@
 ---
+postId: 11
 title: "Rust Descomplicado: Desvendando os mistérios dos tipos básicos"
 imgUrl: "/post-images/rust-tipos-primitivos.png"
 youtubeId: "dgtzHc5z80g"
@@ -146,6 +147,7 @@ fn main() {
     - Oferece uma precisão muito maior, aproximadamente 15 a 17 dígitos decimais significativos.
     - Por ser mais preciso, é geralmente preferido em aplicações que exigem alta precisão, como cálculos científicos ou financeiros que envolvem números muito grandes ou muito pequenos, ou quando se deseja evitar erros acumulados em cálculos longos.
 
+
 ```rust
 fn main() {
     // Exemplo com f64
@@ -169,26 +171,31 @@ fn main() {
     println!("Essa é a letra: {}", letra);
 }
 ```
-E o que é Unicode?
+
+### E o que é Unicode?
 
 Unicode é um padrão de codificação de caracteres universal que visa definir um único código numérico para cada caractere de qualquer sistema de escrita do mundo. A ideia por trás do Unicode é criar uma forma de representação padronizada para caracteres de todos os idiomas e símbolos usados globalmente.
 
 Um exemplo armazenando o kanji _Megami_ do japones:
+
 ```rust
 fn main() {
-    let megane = '\u{76EE}';
+    let megane = 'u{76EE}'; 
     println!("{}", megane);
 }
 ```
 
 Um exemplo armazenando um emoji:
+
 ```rust
 fn main() {
-    let emoji_sorriso = '\u{1F603}';
+    let emoji_sorriso = 'u{1F603}'; 
     println!("{}", emoji_sorriso);
 }
 
 ```
+
+
 ## Booleano (Boolean)
 
 O tipo booleano é usado para presentar como o nome já diz um valor booleano. Sendo `true` para verdadeiro e `false`  para falso.

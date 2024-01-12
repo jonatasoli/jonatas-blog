@@ -44,9 +44,9 @@
       class="flex space-x-4 text-gray-600 dark:text-gray-300 font-light
           underline"
     >
-      <a {href}>Read More</a>
+      <a {href}>Leia Mais</a>
       {#if post.metadata.youtubeId}
-        <a href={youtubeHref}>Watch Video</a>
+        <a href={youtubeHref}>Assista</a>
       {/if}
     </div>
   </div>

@@ -1,4 +1,5 @@
 ---
+postId: 7
 title: "Desafio de prática - Escopo Janeiro"
 imgUrl: ""
 summary: "Escopo Inicial - Janeiro"

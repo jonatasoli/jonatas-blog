@@ -1,4 +1,5 @@
 ---
+postId: 1
 title: "Minha instalação do Arch Linux"
 imgUrl: ""
 summary: "Um roteiro de como eu instalo o Arch Linux"

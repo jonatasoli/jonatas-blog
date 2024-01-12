@@ -1,4 +1,5 @@
 ---
+postId: 10
 title: "52 semanas de planejamento em 2023"
 imgUrl: "/post-images/calendario-tumb-tratada.png"
 youtubeId: "Ak7ntnnIIvI"
@@ -55,4 +56,4 @@ As vezes você não vai conseguir seguir seu foco: Há semanas que você se plan
 
 Caso queira ver o material original desse método o link vai estrar na descrição.
 
-Então é isso que queria lhe mostrar, caso queira ver mais conteúdos como esse pense em se inscrever no canal e ativar o sininho e se quiser trocar uma ideia sobre organização pode entrar no nosso [servidor no discord](https://discord.gg/3Q7dtwrR).
+Então é isso que queria lhe mostrar, caso queira ver mais conteúdos como esse pense em se inscrever no canal e ativar o sininho e se quiser trocar uma ideia sobre organização pode entrar no nosso [servidor no discord](https://discord.gg/83ZsKGaRVa).

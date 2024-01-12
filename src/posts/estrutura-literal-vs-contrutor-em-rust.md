@@ -1,4 +1,5 @@
 ---
+postId: 4
 title: "Sintaxe literal vs Construtor em Rust"
 imgUrl: ""
 summary: "As ferramentas que estou usando no meu workflow de trabalho"

@@ -16,4 +16,5 @@
       <Post />
     </CopyCodeInjector>
   </div>
+  <script id={metadata.postId} src="//blog-dev-jonatas.disqus.com/count.js" async></script>
 </article>
