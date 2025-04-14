@@ -14,7 +14,7 @@
     <p class="text-2xl font-light">
       Eu sou um desenvolvedor full-stack amante de open-source
       trabalho com desenvolvimento web e no momento
-      estou trabalhando no meu primeiro jogo e produço conteúdo
+      estou trabalhando no meu primeiro jogo e produzo conteúdo
       no youtube e na twich.
     </p>
     <p class="text-2xl font-thin">
