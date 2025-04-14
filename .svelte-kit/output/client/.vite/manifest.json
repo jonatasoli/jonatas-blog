@@ -1,0 +1,225 @@
+{
+  ".svelte-kit/generated/client-optimized/app.js": {
+    "dynamicImports": [
+      ".svelte-kit/generated/client-optimized/nodes/0.js",
+      ".svelte-kit/generated/client-optimized/nodes/1.js",
+      ".svelte-kit/generated/client-optimized/nodes/2.js",
+      ".svelte-kit/generated/client-optimized/nodes/3.js"
+    ],
+    "file": "_app/immutable/entry/app.7d05a29f.js",
+    "imports": [
+      "_preload-helper.a4192956.js",
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/app.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/0.css": {
+    "file": "_app/immutable/assets/0.46cfb7fa.css",
+    "src": ".svelte-kit/generated/client-optimized/nodes/0.css"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/0.js": {
+    "css": [
+      "_app/immutable/assets/0.46cfb7fa.css"
+    ],
+    "file": "_app/immutable/nodes/0.fc2ccb23.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js",
+      "_index.7aeff21f.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/0.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/1.js": {
+    "file": "_app/immutable/nodes/1.c2135027.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js",
+      "_singletons.8aa169db.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/1.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/2.js": {
+    "file": "_app/immutable/nodes/2.e26674d1.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js",
+      "_dates.56387e5a.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/2.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/3.css": {
+    "file": "_app/immutable/assets/3.79497bea.css",
+    "src": ".svelte-kit/generated/client-optimized/nodes/3.css"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/3.js": {
+    "css": [
+      "_app/immutable/assets/3.79497bea.css"
+    ],
+    "dynamicImports": [
+      "src/posts/52-semanas-de-planejamento.md",
+      "src/posts/afiando-o-machado-2021.md",
+      "src/posts/desafio-12-projetos-em-12-meses.md",
+      "src/posts/desafio-fevereiro.md",
+      "src/posts/desafio-janeiro.md",
+      "src/posts/desafio-pratica-regras.md",
+      "src/posts/estrutura-literal-vs-contrutor-em-rust.md",
+      "src/posts/minha-instalacao-arch-linux.md",
+      "src/posts/mudando-path-poetry.md",
+      "src/posts/porque-abandonei-o-desafio.md",
+      "src/posts/tipos-primitivos-rust.md"
+    ],
+    "file": "_app/immutable/nodes/3.13cd6bdf.js",
+    "imports": [
+      "_preload-helper.a4192956.js",
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js",
+      "_dates.56387e5a.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/3.js"
+  },
+  "_dates.56387e5a.js": {
+    "file": "_app/immutable/chunks/dates.56387e5a.js"
+  },
+  "_index.7a40327c.js": {
+    "file": "_app/immutable/chunks/index.7a40327c.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js"
+    ]
+  },
+  "_index.7aeff21f.js": {
+    "file": "_app/immutable/chunks/index.7aeff21f.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js"
+    ]
+  },
+  "_preload-helper.a4192956.js": {
+    "file": "_app/immutable/chunks/preload-helper.a4192956.js"
+  },
+  "_scheduler.94dd1e8a.js": {
+    "file": "_app/immutable/chunks/scheduler.94dd1e8a.js"
+  },
+  "_singletons.8aa169db.js": {
+    "file": "_app/immutable/chunks/singletons.8aa169db.js",
+    "imports": [
+      "_index.7aeff21f.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
+    "file": "_app/immutable/entry/start.cd826ec3.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_singletons.8aa169db.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js"
+  },
+  "src/posts/52-semanas-de-planejamento.md": {
+    "file": "_app/immutable/chunks/52-semanas-de-planejamento.e1627da0.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/52-semanas-de-planejamento.md"
+  },
+  "src/posts/afiando-o-machado-2021.md": {
+    "file": "_app/immutable/chunks/afiando-o-machado-2021.facbf3b6.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/afiando-o-machado-2021.md"
+  },
+  "src/posts/desafio-12-projetos-em-12-meses.md": {
+    "file": "_app/immutable/chunks/desafio-12-projetos-em-12-meses.7a1bbeaa.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/desafio-12-projetos-em-12-meses.md"
+  },
+  "src/posts/desafio-fevereiro.md": {
+    "file": "_app/immutable/chunks/desafio-fevereiro.7ee25a48.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/desafio-fevereiro.md"
+  },
+  "src/posts/desafio-janeiro.md": {
+    "file": "_app/immutable/chunks/desafio-janeiro.5c6864f1.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/desafio-janeiro.md"
+  },
+  "src/posts/desafio-pratica-regras.md": {
+    "file": "_app/immutable/chunks/desafio-pratica-regras.fb33b57e.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/desafio-pratica-regras.md"
+  },
+  "src/posts/estrutura-literal-vs-contrutor-em-rust.md": {
+    "file": "_app/immutable/chunks/estrutura-literal-vs-contrutor-em-rust.6d5035c4.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/estrutura-literal-vs-contrutor-em-rust.md"
+  },
+  "src/posts/minha-instalacao-arch-linux.md": {
+    "file": "_app/immutable/chunks/minha-instalacao-arch-linux.6d60595e.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/minha-instalacao-arch-linux.md"
+  },
+  "src/posts/mudando-path-poetry.md": {
+    "file": "_app/immutable/chunks/mudando-path-poetry.025376b3.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/mudando-path-poetry.md"
+  },
+  "src/posts/porque-abandonei-o-desafio.md": {
+    "file": "_app/immutable/chunks/porque-abandonei-o-desafio.4792fa74.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/porque-abandonei-o-desafio.md"
+  },
+  "src/posts/tipos-primitivos-rust.md": {
+    "file": "_app/immutable/chunks/tipos-primitivos-rust.485e012b.js",
+    "imports": [
+      "_scheduler.94dd1e8a.js",
+      "_index.7a40327c.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/tipos-primitivos-rust.md"
+  }
+}

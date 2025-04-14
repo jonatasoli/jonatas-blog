@@ -1,0 +1,222 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "imports": [
+      "_internal.js"
+    ],
+    "isEntry": true,
+    "src": ".svelte-kit/generated/server/internal.js"
+  },
+  "_dates.js": {
+    "file": "chunks/dates.js"
+  },
+  "_index.js": {
+    "file": "chunks/index.js"
+  },
+  "_index2.js": {
+    "file": "chunks/index2.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_ssr.js": {
+    "file": "chunks/ssr.js"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "imports": [
+      "_internal.js",
+      "_index.js",
+      "_index2.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js"
+  },
+  "src/posts/52-semanas-de-planejamento.md": {
+    "file": "chunks/52-semanas-de-planejamento.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/52-semanas-de-planejamento.md"
+  },
+  "src/posts/afiando-o-machado-2021.md": {
+    "file": "chunks/afiando-o-machado-2021.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/afiando-o-machado-2021.md"
+  },
+  "src/posts/desafio-12-projetos-em-12-meses.md": {
+    "file": "chunks/desafio-12-projetos-em-12-meses.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/desafio-12-projetos-em-12-meses.md"
+  },
+  "src/posts/desafio-fevereiro.md": {
+    "file": "chunks/desafio-fevereiro.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/desafio-fevereiro.md"
+  },
+  "src/posts/desafio-janeiro.md": {
+    "file": "chunks/desafio-janeiro.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/desafio-janeiro.md"
+  },
+  "src/posts/desafio-pratica-regras.md": {
+    "file": "chunks/desafio-pratica-regras.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/desafio-pratica-regras.md"
+  },
+  "src/posts/estrutura-literal-vs-contrutor-em-rust.md": {
+    "file": "chunks/estrutura-literal-vs-contrutor-em-rust.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/estrutura-literal-vs-contrutor-em-rust.md"
+  },
+  "src/posts/minha-instalacao-arch-linux.md": {
+    "file": "chunks/minha-instalacao-arch-linux.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/minha-instalacao-arch-linux.md"
+  },
+  "src/posts/mudando-path-poetry.md": {
+    "file": "chunks/mudando-path-poetry.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/mudando-path-poetry.md"
+  },
+  "src/posts/porque-abandonei-o-desafio.md": {
+    "file": "chunks/porque-abandonei-o-desafio.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/porque-abandonei-o-desafio.md"
+  },
+  "src/posts/tipos-primitivos-rust.md": {
+    "file": "chunks/tipos-primitivos-rust.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/posts/tipos-primitivos-rust.md"
+  },
+  "src/routes/+layout.css": {
+    "file": "_app/immutable/assets/_layout.81e1d907.css",
+    "src": "src/routes/+layout.css"
+  },
+  "src/routes/+layout.svelte": {
+    "css": [
+      "_app/immutable/assets/_layout.81e1d907.css"
+    ],
+    "file": "entries/pages/_layout.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_index2.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+layout.svelte"
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_dates.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+page.svelte"
+  },
+  "src/routes/+page.ts": {
+    "file": "entries/pages/_page.ts.js",
+    "isEntry": true,
+    "src": "src/routes/+page.ts"
+  },
+  "src/routes/api/posts/+server.ts": {
+    "dynamicImports": [
+      "src/posts/52-semanas-de-planejamento.md",
+      "src/posts/afiando-o-machado-2021.md",
+      "src/posts/desafio-12-projetos-em-12-meses.md",
+      "src/posts/desafio-fevereiro.md",
+      "src/posts/desafio-janeiro.md",
+      "src/posts/desafio-pratica-regras.md",
+      "src/posts/estrutura-literal-vs-contrutor-em-rust.md",
+      "src/posts/minha-instalacao-arch-linux.md",
+      "src/posts/mudando-path-poetry.md",
+      "src/posts/porque-abandonei-o-desafio.md",
+      "src/posts/tipos-primitivos-rust.md"
+    ],
+    "file": "entries/endpoints/api/posts/_server.ts.js",
+    "imports": [
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/posts/+server.ts"
+  },
+  "src/routes/blog/posts/[slug]/+page.css": {
+    "file": "_app/immutable/assets/_page.79497bea.css",
+    "src": "src/routes/blog/posts/[slug]/+page.css"
+  },
+  "src/routes/blog/posts/[slug]/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.79497bea.css"
+    ],
+    "file": "entries/pages/blog/posts/_slug_/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_dates.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/blog/posts/[slug]/+page.svelte"
+  },
+  "src/routes/blog/posts/[slug]/+page.ts": {
+    "dynamicImports": [
+      "src/posts/52-semanas-de-planejamento.md",
+      "src/posts/afiando-o-machado-2021.md",
+      "src/posts/desafio-12-projetos-em-12-meses.md",
+      "src/posts/desafio-fevereiro.md",
+      "src/posts/desafio-janeiro.md",
+      "src/posts/desafio-pratica-regras.md",
+      "src/posts/estrutura-literal-vs-contrutor-em-rust.md",
+      "src/posts/minha-instalacao-arch-linux.md",
+      "src/posts/mudando-path-poetry.md",
+      "src/posts/porque-abandonei-o-desafio.md",
+      "src/posts/tipos-primitivos-rust.md"
+    ],
+    "file": "entries/pages/blog/posts/_slug_/_page.ts.js",
+    "isEntry": true,
+    "src": "src/routes/blog/posts/[slug]/+page.ts"
+  }
+}
