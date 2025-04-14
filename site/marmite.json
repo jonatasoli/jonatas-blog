@@ -1,0 +1,57 @@
+{
+  "marmite_version": "0.2.5",
+  "posts": 1,
+  "pages": 12,
+  "generated_at": "2025-04-14 09:04:09.050689746 +02:00",
+  "timestamp": 1744614249,
+  "elapsed_time": 0.037923909,
+  "config": {
+    "name": "Jonatas",
+    "tagline": "Aprendendo a fazer jogos e se aventurando pelo Rust e Python",
+    "url": "https://blog.jonatasoliveira.dev/",
+    "footer": "<strong>Copyright Singular Journey</strong>",
+    "language": "pt_BR",
+    "pagination": 20,
+    "pages_title": "Pages",
+    "tags_title": "Tags",
+    "tags_content_title": "Posts tagged with '$tag'",
+    "archives_title": "Archive",
+    "archives_content_title": "Posts from '$year'",
+    "streams_title": "Streams",
+    "streams_content_title": "",
+    "default_author": "",
+    "authors_title": "Authors",
+    "enable_search": true,
+    "enable_related_content": false,
+    "search_title": "",
+    "content_path": "content",
+    "site_path": "",
+    "templates_path": "templates",
+    "static_path": "static",
+    "media_path": "media",
+    "card_image": "",
+    "banner_image": "",
+    "logo_image": "",
+    "default_date_format": "%b %e, %Y",
+    "menu": [
+      [
+        "Tags",
+        "tags.html"
+      ],
+      [
+        "Archive",
+        "archive.html"
+      ],
+      [
+        "Authors",
+        "authors.html"
+      ]
+    ],
+    "extra": {
+      "colorscheme": "catppuccin"
+    },
+    "authors": {},
+    "toc": true,
+    "json_feed": false
+  }
+}
