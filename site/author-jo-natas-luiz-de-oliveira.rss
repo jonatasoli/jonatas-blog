@@ -1,0 +1,1345 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Jonatas</title><link>https://blog.jonatasoliveira.dev/</link><description>Aprendendo a fazer jogos e se aventurando pelo Rust e Python</description><pubDate>Wed, 11 Jun 2025 00:00:00 GMT</pubDate><lastBuildDate>Tue, 10 Jun 2025 09:19:52 GMT</lastBuildDate><generator>marmite</generator><item><title>30 dias usando Helix</title><link>https://blog.jonatasoliveira.dev//30-dias-usando-helix.html</link><description><![CDATA["Me desafiei a aprender a usar o editor Helix por 30 dias!"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//30-dias-usando-helix.html</guid><pubDate>Wed, 11 Jun 2025 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h3><a href="#veja-também-no-youtube" aria-hidden="true" class="anchor" id="veja-também-no-youtube"></a><a href="https://www.youtube.com/watch?v=MURMkIlCHRg&amp;t">Veja também no Youtube</a></h3>
+<p>Olá gente, estou esse mês me desafiando a usar o <a href="https://helix-editor.com/">helix</a> que é um editor baseado em rust por 30 dias.
+Só pra contextualizar, eu uso vim/neovim a um bom tempo e eu estou montando um material de como configurar o neovim do zero, nesse meio tempo tenho que continuar trabalhando, e eu decidi não usar uma vm pra ir configurando em paralelo enquanto minha config estável contuasse me atendendo. Então resolvi testar um editor novo que é em algumas partes inspirado no vim/neovim pra ir usando.</p>
+<h2><a href="#helix" aria-hidden="true" class="anchor" id="helix"></a>Helix</h2>
+<p>É um projeto feio em rust e tem como principais features, melhorar a parte de multicursos relacionado ao vim/neovim além de já ter uma configuração lsp pronta pra uso, quase como um mason do neovim só que ele em si não instala os server só detecta os mesmos.</p>
+<h2><a href="#alguns-desafios" aria-hidden="true" class="anchor" id="alguns-desafios"></a>Alguns desafios</h2>
+<p>Bom primeira coisa que acaba confundindo um pouco é que eu tenho alguns atalhos próprios no neovim e além de ele ter por padrão alguns atalhos estou precisando reaprender a usar do modo dele, uma coisa que é dificil pra mim é desapegar um pouco de algumas formas de navegar do neovim e usar ai fiz no meu obsidian um mapa dos principais atalhos que compartilho com vocês abaixo:
+<a href="helix-shortcuts.html" data-wikilink="true">Helix Shortcuts</a></p>
+<pre><code>`Ctrl`+`,` | Abre a caixa de diálogo de configurações.
+`Ctrl`+`Shift`+`,` | Salva as configurações atuais.
+`Ctrl`+`P` | Abre o painel de pesquisa.
+`Ctrl`+`B` | Abre a barra lateral.
+`Ctrl`+`F` | Abre a barra de pesquisa do editor.
+`Ctrl`+`E` | Abre a barra de navegação.
+`Ctrl`+`T` | Abre uma nova guia.
+`Ctrl`+`W` | Fecha a guia atual.
+`Ctrl`+`Shift`+`W` | Fecha todas as guias.
+`Ctrl`+`J` | Desloca para baixo uma linha.
+`Ctrl`+`K` | Desloca para cima uma linha.
+`Ctrl`+`H` | Apaga a palavra anterior.
+`Ctrl`+`D` | Apaga a letra anterior.
+`Ctrl`+`C` | Copia o texto selecionado.
+`Ctrl`+`V` | Cola o texto copiado.
+`Ctrl`+`X` | Corta o texto selecionado.
+`Ctrl`+`Z` | Desfaz a última alteração.
+`Ctrl`+`Y` | Refaz a última alteração.
+`Ctrl`+`A` | Seleciona todo o texto.
+`Ctrl`+`E` | Move o cursor até o final do texto.
+`Ctrl`+`B` | Move o cursor para o início do texto.
+`Home` | Move o cursor para o início da linha atual.
+`End` | Move o cursor para o fim da linha atual.
+`Page Up` | Move o cursor para cima uma página.
+`Page Down` | Move o cursor para baixo uma página.
+`Left` | Move o cursor para a esquerda.
+`Right` | Move o cursor para a direita.
+`Up` | Move o cursor para cima.
+`Down` | Move o cursor para baixo.
+</code></pre>
+<h2><a href="#novos-modos" aria-hidden="true" class="anchor" id="novos-modos"></a>Novos modos</h2>
+<p>No caso do Helix tem dois modos que estou usando que são bastante importantes, primeiro o modo <em>Space</em> que serve pra navegar entre os arquivos e buffers e o <em>Go To</em> mode que serve pra navegar nos arquivos em si, aqui o principal desafio é que muitas das coisas que estão ali eu já tinha uma forma personalizada de trabalhar no neovim, então estou com o trabalho de reaprender os atalhos até ver na <a href="https://docs.helix-editor.com/">documentação</a> se tem alguma forma de personalizar esses comandos para os que eu já estava usando.</p>
+<h2><a href="#config" aria-hidden="true" class="anchor" id="config"></a>Config</h2>
+<p>A configuração usa um arquivo .toml e é bem simples de trabalhar com ele vou mostrar as configurações que você configura no .config/helix/config.toml</p>
+<pre><code class="language-toml">theme = &quot;catppuccin_mocha&quot;
+
+[editor]
+line-number = &quot;relative&quot;
+mouse = false
+
+[editor.statusline]
+left = [&quot;mode&quot;, &quot;spinner&quot;]
+center = [&quot;file-name&quot;]
+right = [&quot;diagnostics&quot;, &quot;selections&quot;, &quot;position&quot;, &quot;file-encoding&quot;, &quot;file-line-ending&quot;, &quot;file-type&quot;]
+separator = &quot;│&quot;
+mode.normal = &quot;NORMAL&quot;
+mode.insert = &quot;INSERT&quot;
+mode.select = &quot;SELECT&quot;
+
+[editor.lsp]
+enable = true
+display-messages = false
+
+[editor.file-picker]
+hidden = false
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 25 # increase value to reduce forced mid-word wrapping
+max-indent-retain = 0
+wrap-indicator = &quot;&quot;  # set wrap-indicator to &quot;&quot; to hide it
+
+</code></pre>
+<p>Uma coisa legal ele já consegue pegar vários temas por default e é só passar o nome do tema.
+Na sessão <em>editor</em> eu deixo o número de linhas relativo pois é útil quando você quer pular linhas e desativo a iterção do mouse.
+Em <em>editor.statusline</em> eu crio uma linha de status bem simples pra ficar parecida com a que eu usava no neovim.
+Em <em>editor.lsp</em> eu habilito o linter e desativo as mensagens de progresso do linter na linha de status.
+Em <em>editor.file-picker</em> eu só desativo a opção de esconder arquivos ocultos.
+E finalmente me <em>editor.soft-wrap</em> eu habilito algumas opções para fazer a quebra de linha na tela.</p>
+<h2><a href="#configuração-dos-linters" aria-hidden="true" class="anchor" id="configuração-dos-linters"></a>Configuração dos linters</h2>
+<p>No meu caso eu uso majoritariamente python, typescript e rust como linguagens então precisei configurar globalmente os linters de cada uma das linguagens e preciso chegar usando <code>helix --health</code>pra ver as configurações ou se quero uma linguagem ou framework especifico uso o comando <code>helix --health python</code>por exemplo.</p>
+<p>A config das linguagens fica em .config/helix/languages.toml e meu arquivo no momento está assim:</p>
+<pre><code>[[language]]
+name = &quot;python&quot;
+language-servers = [&quot;pyright&quot;, &quot;ruff&quot;]
+[language-server.pyright]
+command = &quot;pyright-langserver&quot;
+args = [&quot;--stdio&quot;]
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = &quot;basic&quot;
+[language-server.ruff]
+command = &quot;ruff-lsp&quot;
+[language-server.ruff.config.settings]
+args = [&quot;--ignore&quot;, &quot;E501&quot;]
+[language.formatter]
+command = &quot;blue&quot;
+args = [&quot;--line-length&quot;, &quot;88&quot;, &quot;--quiet&quot;, &quot;-&quot;]
+
+[[language]]
+name = &quot;rust&quot;
+[language-server.rust-analyzer.config.check]
+command = &quot;clippy&quot;
+</code></pre>
+<p>Ainda não fiz as configs relativas a typescript, vue, nuxt e svelte por que nesses dias só fiz pequenos ajustes nos projetos que estão usando essa linguagem.
+No mais essa config ainda estou aprendendo e ela não está 100% preciso trabalhar um pouco em cima dela ainda.</p>
+<h2><a href="#desafios" aria-hidden="true" class="anchor" id="desafios"></a>Desafios</h2>
+<p>Bom um dos principais desafios no momento é quando preciso de algo que não está na documentação além de ser até bem abrangente ainda preciso caçar algumas coisas.
+Na parte do lsp deu um trabalhinho instalar o linter globalmente e ainda preciso remover algumas coisas que não nele.
+Copiar algo do editor e colar por exemplo no navegador no qual estou escrevendo esse artigo não funciona por padrão e ainda não descobri como fazer para habilitar o xclip por exemplo.
+Além disso eles possuem um artigo de quem está <a href="https://github.com/helix-editor/helix/wiki/Migrating-from-Vim">migrando do vim</a> que é bem útil pra quem está começando.</p>
+<p>Por enquanto é isso e vou atualizando conforme for progredindo aqui.</p>
+<h2><a href="#dia-2" aria-hidden="true" class="anchor" id="dia-2"></a>Dia 2</h2>
+<h2><a href="#sobre-alguns-desafios-anteriores" aria-hidden="true" class="anchor" id="sobre-alguns-desafios-anteriores"></a>Sobre alguns desafios anteriores</h2>
+<p>Bom descobri que tinha um health check pro clipboard</p>
+<pre><code class="language-bash">➜ helix --health clipboard
+System clipboard provider: wl-paste+wl-copy
+</code></pre>
+<p>No meu caso uso o wayland ai uso o <em>wl-copy</em> e estava funcionando, acontece que só usando o atalho <code>y</code> ele não copia pro <em>clipboard</em> no caso precisa usar <code>&lt;Space&gt;+y</code>para copia-lo.
+Uma coisa que acho meio perigosa no atalho que eles criaram para deletar caracteres com a letra <code>d</code> é que no vim temos um atalho <code>dd</code> que remove a linha inteira isso pode acabar confundindo, principalmente quem já tem a memória muscular pra fazer isso.
+Outra coisa meio ruim é que no NeoVIm eu uso muito <code>C+v</code> + um jump para copiar e agora preciso fazer essa sequencia.
+<code>v + jump + &lt;Space&gt;+y</code>
+antes eu fazia assim
+<code>&lt;Shift&gt; + v + jump +y</code>
+O espaço no final sempre acaba me pegando, mas acredito que é questão de praticar mais também para se adaptar.
+As vezes me confundo também com o <code>a</code> no caso do vim ele entra no mode de inserção no caractere posterior aqui no helix ele pula uma linha e entra no modo de inserção.</p>
+<h2><a href="#coisas-legais-que-descobri" aria-hidden="true" class="anchor" id="coisas-legais-que-descobri"></a>Coisas legais que descobri</h2>
+<p>Uma coisa legal que penso em levar pro meu Neovim é ele já fechar parenteses, chaves e colchetes automaticamente. Porém quando estou editando o script do meu <a href="https://www.udemy.com/course/rust-da-logica-aos-jogos/?referralCode=C82C9336A8CF938D12E7">curso de rust</a> as vezes da uma dor de cabeça já que estou usando o mkdocs pra trabalhar com ele e alguns marcações não precisam ser fechadas e ele fecha, acredito que deva haver alguma forma de resolver isso só não sei ainda.</p>
+<p>Uma coisa lega que descobri que consigo jogar o editor pra background e depois voltar, mais tarde descobri que também conseguia fazer isso com o vim por que na verdade é um comando do shell em si.</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+z</td>
+<td>joga o editor pra background</td>
+</tr>
+<tr>
+<td>fg</td>
+<td>volta o editor para primeiro plano</td>
+</tr>
+</tbody>
+</table>
+<h2><a href="#sobre-o-lsp" aria-hidden="true" class="anchor" id="sobre-o-lsp"></a>Sobre o LSP</h2>
+<p>Precisei hoje instalar os servers de svelte e vue</p>
+<pre><code class="language-bash">npm install -g svelte-language-server
+npm install -g typescript-svelte-plugin
+npm install -g @vue/language-server
+npm install -g prettier
+</code></pre>
+<p>Ai aproveitei e adicionei uma configuração extra no meu languages.toml</p>
+<pre><code class="language-toml">[[language]]
+name = &quot;vue&quot;
+auto-format = true
+formatter = { command = &quot;prettier&quot;, args = [&quot;--parser&quot;, &quot;vue&quot;] }
+</code></pre>
+<p>Um ponto importante é que o helix é dividido em 3 partes</p>
+<h2><a href="#language-configuration" aria-hidden="true" class="anchor" id="language-configuration"></a><a href="https://docs.helix-editor.com/guides/adding_languages.html#language-configuration">Language configuration</a></h2>
+<p>Nessa sessão fica as configurações especificas que você precisa de uma linguagem e a extensão da mesma.</p>
+<h2><a href="#grammar-configuration" aria-hidden="true" class="anchor" id="grammar-configuration"></a><a href="https://docs.helix-editor.com/guides/adding_languages.html#grammar-configuration">Grammar configuration</a></h2>
+<p>Se tiver uma configuração do tree-sitter disponível ele vai usar normalmente ele vai usar um caminho padrão, no meu caso eu precisei configurar os linters para funcionarem globalmente para o helix conseguir pegar.</p>
+<h2><a href="#queries" aria-hidden="true" class="anchor" id="queries"></a><a href="https://docs.helix-editor.com/guides/adding_languages.html#queries">Queries</a></h2>
+<p>As queries na verdade também fazem parte do tree-sitter e elas provem o highlight e a edentação da linguagem.</p>
+<p>fora isso é importando atualizar as gramáticas periodicamente.</p>
+<pre><code class="language-bash">helix --grammar fetch
+helix --grammar build
+</code></pre>
+<h3><a href="#afinal-o-que-é-lsp" aria-hidden="true" class="anchor" id="afinal-o-que-é-lsp"></a>Afinal o que é LSP</h3>
+<p>O Language Server Protocol (LSP) é um protocolo de comunicação usado entre um Editor de Código e um Servidor de Linguagem. Sua principal finalidade é permitir a integração eficiente de funcionalidades de análise de código e ferramentas específicas de linguagem diretamente nos editores de código.</p>
+<p><em>Como Funciona:</em></p>
+<ul>
+<li><strong>Cliente-Server Model:</strong> O LSP segue um modelo cliente-servidor, onde o editor (cliente) se comunica com um servidor específico para uma linguagem de programação.</li>
+<li><strong>Comunicação via JSON-RPC:</strong> As mensagens são trocadas entre o cliente e o servidor usando o formato JSON-RPC, o que facilita a implementação em várias linguagens.</li>
+</ul>
+<p>No nosso caso o helix tem um client LSP e precisamos instalar os servidores para usa-los com ele.</p>
+<h3><a href="#afinal-o-que-é-o-tree-sitter" aria-hidden="true" class="anchor" id="afinal-o-que-é-o-tree-sitter"></a>Afinal o que é o Tree-sitter</h3>
+<p>O Tree-sitter é um parser de código incremental e gerador de árvores de sintaxe. Ele é projetado para ser eficiente, preciso e capaz de lidar com linguagens de programação complexas.</p>
+<p><em>Como Funciona:</em></p>
+<ul>
+<li><strong>Análise Incremental:</strong> O Tree-sitter realiza análises incrementais, o que significa que, ao modificar o código-fonte, apenas as partes afetadas são reanalisadas, proporcionando uma resposta mais rápida.</li>
+<li><strong>Geração de Árvore de Sintaxe:</strong> Ele gera uma árvore de sintaxe para o código-fonte, representando a estrutura hierárquica do mesmo.</li>
+</ul>
+<p>Ele é muito importante para eu conseguir navegar pelo código através das arvores que ele gera.</p>
+<h3><a href="#navegação" aria-hidden="true" class="anchor" id="navegação"></a>Navegação</h3>
+<p>Uma coisa nova é a navegação ela tem algumas coisas parecidas com o vim e outras não e precisei fazer uma tabela de navegação para me ajudar a me orientar.</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>seleciona linha</td>
+</tr>
+<tr>
+<td>v</td>
+<td>entra no select mode</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Seleciono as mesmas palavras com multi-cursor</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Se estiver com linhas selecionadas da pra buscar um padrão dentro da seleção para fazer alteração</td>
+</tr>
+</tbody>
+</table>
+<h3><a href="#buscas" aria-hidden="true" class="anchor" id="buscas"></a>Buscas</h3>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>descipriton</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Space+/</td>
+<td>Busca nos arquivos</td>
+</tr>
+<tr>
+<td>Space+f</td>
+<td>Busca pelo nome do arquivo</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Uma coisa não muito boa, é que ele ainda não tem uma forma de fazer uma busca dentro dos arquivos, isso é algo que acabo usando muito em projetos grandes então é um ponto ainda pra melhorar. Ele possui uma busca, mas em alguns casos acabou não dando muito certo.</p>
+<h3><a href="#dica-extra" aria-hidden="true" class="anchor" id="dica-extra"></a>Dica extra</h3>
+<p>Você tem um tutorial bem legal se você é novato em editores como o vim que é o modo tutor dele:</p>
+<pre><code class="language-bash">helix --tutor
+</code></pre>
+<p>É sempre interessante pra quem quer começar olhar esse tutor, no caso do vim também tem e recomendo a todos que olhem.</p>
+<h3><a href="#próximos-cápitulos" aria-hidden="true" class="anchor" id="próximos-cápitulos"></a>Próximos cápitulos</h3>
+<p>Bom acredito que essa semana foi uma semana pra se adaptar e pensar algumas coisas de modo diferente nesse semana tenho um pouco mais de trabalho planejado com python e svelte então vou explorar um pouco mais o trabalho com os buffers e registradores além das diversas features relacionadas a manipular a seleção de código e multi cursores e dar uma refinada na minha configuração e criar alguns atalhos, então nos vemos na próxima semana.</p>
+<h2><a href="#semana-2" aria-hidden="true" class="anchor" id="semana-2"></a>Semana 2</h2>
+<p>Bom passamos a semana 2 com o hélix, essa semana com um trabalho mais afundo no editor.</p>
+<h3><a href="#criando-atalhos-no-space-mode" aria-hidden="true" class="anchor" id="criando-atalhos-no-space-mode"></a>Criando atalhos no space mode</h3>
+<p>Bom sinto falta de alguns atalhos de navegação, como no neovim se usa muito a memoria muscular eu decidi criar alguns atalhos no meu config.toml</p>
+<pre><code class="language-toml">[keys.normal.space]
+w = &quot;:write&quot; # Salvar buffer com espaço + w
+q = &quot;:bc&quot; # Fechar buffer
+z = &quot;:bp&quot; # Ir pro próximo buffer
+x = &quot;:bn&quot; # Ir pro buffer anterior
+
+</code></pre>
+<p>No caso a chave <code>keys.normal.space</code> representa as teclas de ação pra usar no space mode no modo normal.
+Ai criei atalhos pra navegar pra frente e para trás nos buffers, fechar um buffer e salvar um buffer, o que fez ajudar muito meu trabalho no dia-a-dia.</p>
+<h3><a href="#desafios-1" aria-hidden="true" class="anchor" id="desafios-1"></a>Desafios</h3>
+<p>Uma coisa não muito legal que estava me acontecendo é que eu criava uma exception num arquivo em python e quando ia usa-lo o helix não estava identificando para importar.
+Descobri que o meu languages.toml não estava funcionando, agora que estava trabalhando num projeto mais focado eu estava vendo que eu olhava o server e aparecia pylsp que é o default e não o pyright + ruff ou mesmo o svelte estava dando um monte de erro, ai percebi que tinha colocado language.toml ao invés de languages.toml então ele não estava usando a minha config ajustei ai começou a funcionar corretamente.</p>
+<p>Trabalhei bastante com svelte essa semana e auto format não funcionou direito assim como o auto-complete então vou ter que nas próximas semanas se esforçar um pouco mais.</p>
+<h3><a href="#coisas-legais" aria-hidden="true" class="anchor" id="coisas-legais"></a>Coisas Legais</h3>
+<p>Melhorando um pouco minha tabela com as navegações que mais uso:</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>seleciona linha</td>
+</tr>
+<tr>
+<td>v</td>
+<td>entra no select mode</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Seleciono as mesmas palavras com multi-cursor</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Se estiver com linhas selecionadas da pra buscar um padrão dentro da seleção para fazer alteração</td>
+</tr>
+<tr>
+<td>[f  ou ]f</td>
+<td>pula funções</td>
+</tr>
+<tr>
+<td>[t  ou]t</td>
+<td>pula classes</td>
+</tr>
+</tbody>
+</table>
+<p>Também os atalhos mais usados no go to mode</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d</td>
+<td>vai pra definição da função ou classe</td>
+</tr>
+<tr>
+<td>r</td>
+<td>vai aonde referencio a função ou classe</td>
+</tr>
+<tr>
+<td>a</td>
+<td>vou pro ultimo arquivo acessado</td>
+</tr>
+<tr>
+<td>m</td>
+<td>vou pro último arquivo modificado</td>
+</tr>
+</tbody>
+</table>
+<p>Outra coisa que uso muito no neovim é mudar o texto dentro de um parenteses ou aspas e aqui existe um modo pra fazer isso é que o match mode usando a tecla <code>m</code>no modo normal.</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>muda o texto no que está dentro do padrão</td>
+</tr>
+<tr>
+<td>d</td>
+<td>deleta o que está dentro do padrão</td>
+</tr>
+<tr>
+<td>a</td>
+<td>seleciona tudo junto com o padrão</td>
+</tr>
+<tr>
+<td>i</td>
+<td>seleciona tudo dentro do padrão</td>
+</tr>
+</tbody>
+</table>
+<p>Quando digo o padrão é o <code>() {} [] &quot;&quot; ''</code>
+Sendo sincero isso está um pouco difícil de acostumar ainda acho mais funcional o jeito do vim de trabalhar com padrões.</p>
+<h3><a href="#concluindo" aria-hidden="true" class="anchor" id="concluindo"></a>Concluindo</h3>
+<p>Essa semana trabalhei mais com padrões e melhores mais meu fluxo de trabalho isso me ajudou a ser mais produtivo com a ferramenta.
+A parte de desenvolver com svelte não esta sendo muito boa então vou ter que me concentrar em ver qual o problema. No caso por exemplo do nuxtjs ele funcionou bem.</p>
+<h2><a href="#semana-3" aria-hidden="true" class="anchor" id="semana-3"></a>Semana 3</h2>
+<p>Ola gente compartilhando como foi minha terceira semana, como foi black friday e estava trabalhando num projeto não consegui explorar tanto em expandir meus recursos mais sim em trabalhar com o qie ja conhecia.</p>
+<h3><a href="#desafios-2" aria-hidden="true" class="anchor" id="desafios-2"></a>Desafios</h3>
+<p>Bom a parte de selecionar código algumas vezes me dava trabalho, por exemplo quando eu queria selecionar todo o arquivo se eu usava o v as vezes não pegava tudo e usando x não me parece uma ideia muito legal e em arquivos grandes se mostra algo não muito inteligente.
+Lembrando um chefe meu que usava vim, &quot;tudo no vim da para fazer com dois comandos.&quot;.
+Provavelmente não estava fazendo do jeito certo e tem um jeito melhor de fazer.
+Outra coisa que sinto falta é uma indicação visual nas tabs, estava com várias tabs abertas, mas não aparecia a tab que eu estava usando  em destaque ai não sabia se estava salvo o buffer ou não e isso as vezes me deu uma dor de cabeça.</p>
+<h3><a href="#coisas-legais-1" aria-hidden="true" class="anchor" id="coisas-legais-1"></a>Coisas legais</h3>
+<p>É incrível como usar por um tempo um editor você acaba trabalhando bem com seu fluxo. Essa semana eu precisei codar bastante e as coisas começam a ficar mais naturais.
+Parte de lint estava funcionando bem assim como as buscas o que ajuda a ficar produtivo, outra coisa que usei bastante foi o multi-cursor que realmente é algo bem útil no helix.</p>
+<p>Acabei colocando um server novo agora para ter uma camada de buffer de comandos</p>
+<p>Pra isso precisei instalar o <a href="https://github.com/estin/simple-completion-language-server">simple-completion-language-server</a></p>
+<p>Ajustar meu languages.toml</p>
+<pre><code class="language-toml">[language-server.scls]
+command = &quot;simple-completion-language-server&quot;
+config = { max_completion_items = 20, snippets_first = false }
+
+[language-server.scls.environment]
+RUST_LOG = &quot;debug,simple-completion-langauge-server=debug&quot;
+LOG_FILE = &quot;/tmp/completion.log&quot;
+
+
+[[language]]
+name = &quot;python&quot;
+roots = [&quot;pyproject.toml&quot;]
+language-servers = [&quot;scls&quot;, &quot;pyright&quot;, &quot;ruff&quot;]
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = &quot;basic&quot;
+
+[language-server.ruff]
+command = &quot;ruff-lsp&quot;
+
+[language-server.ruff.config.settings]
+args = [&quot;--ignore&quot;, &quot;E501&quot;]
+
+[language.formatter]
+command = &quot;blue&quot;
+
+
+[[language]]
+name = &quot;rust&quot;
+[language-server.rust-analyzer.config.check]
+auto-format = false
+language-servers = [&quot;rust-analyzer&quot;, &quot;scls&quot;]
+command = &quot;clippy&quot;
+
+
+[[language]]
+name = &quot;vue&quot;
+auto-format = true
+formatter = { command = &quot;prettier&quot;, args = [&quot;--parser&quot;, &quot;vue&quot;] }
+
+
+[[language]]
+name = &quot;svelte&quot;
+auto-format = true
+formatter = { command = 'prettier', args = [&quot;--plugin&quot;, &quot;prettier-plugin-svelte&quot;, &quot;--stdin&quot;] }
+
+
+[[language]]
+name = &quot;git-commit&quot;
+language-servers = [ &quot;scls&quot; ]
+
+
+</code></pre>
+<p>Ele além disso ele me da alguns snipets do código.</p>
+<p>Bom por enquanto ainda não tive muita fluência com o svelte ainda, trabalhei um pouco no meu blog e o auto-complete não estava tão legal, isso é uma coisa que sinto falta que tinha no neovim que são alguns snippets.</p>
+<p>Bom esse texto foi mais curto foi muito mais usando que qualquer coisa e a experiência está sendo interessante, convido você testar também ele pois é um editor muito interessante.</p>
+<p>Até semana que vem.</p>
+<h2><a href="#semana-4" aria-hidden="true" class="anchor" id="semana-4"></a>Semana 4</h2>
+<p>Olá, estamos na semana 4 e foi uma jornada muito interessante até aqui.
+Bom estou muito mais adaptado ao hélix alem de ainda ter velhos hábitos como apertar yy pra copiar ou DD pra deletar, principalmente quando eu estava querendo fazer algo mais rápido com pressa. Claro que poderia criar um atalho pra fazer esses comandos mas acabei não fazendo.
+Acho que no final dessa semana uma coisa que fiquei devendo bastante é ler a documentação com calma, eu meio que fui alterando e lendo e como não reservei um tempo pra ler tudo com calma fica o sentimento que poderia tirar mais do editor.</p>
+<h3><a href="#algumas-coisas-que-não-consegui-resolver" aria-hidden="true" class="anchor" id="algumas-coisas-que-não-consegui-resolver"></a>Algumas coisas que não consegui resolver</h3>
+<p>Como nem tudo são flores nos casos que abri muitos buffers fica um pouco difícil as vezes de visualizar em qual arquivo você está não explorei a fundo a customização nativa dele, talvez consiga algo melhor do que o default mas, ai foi um problema pra mim.
+Outro problema foi o svelte e o tailwind o primeiro ele ate me dava algumas coisas no auto complete porem não tudo, no caso do tailwind o meu problema foi ele não dar autocomplete.
+No caso de ele vir com o client lsp pra mim foi uma faca de dois gumes por um lado se você tem clients qie ja esta acostumado a instalar globalmente é muito bom, porem no caso do python por exemplo eu uso cliente diferentes pra projetos diferentes e ai não fica muito legal trabalhar assim.</p>
+<h3><a href="#alguns-ajustes" aria-hidden="true" class="anchor" id="alguns-ajustes"></a>Alguns ajustes</h3>
+<p>Bom como de costume em editores com arquivos de configuração é legal ver as configurações dos outros pra buscar ideias, no meu caso dei uma olhada no github no meu amigo Bruno Rocha e fiz algumas alterações no meu arquivo do config.toml</p>
+<p><code>color-modes = true</code> para cada modo ele muda a cor
+<code>gutters = [&quot;diff&quot;, &quot;diagnostics&quot;, &quot;line-numbers&quot;, &quot;spacer&quot;]</code> mostrar algumas diferenças visuais entre as versões de um arquivo</p>
+<h3><a href="#conclusão" aria-hidden="true" class="anchor" id="conclusão"></a>Conclusão</h3>
+<p>O hélix é um editor muito promissor, segue a filosofia do vim e kakaroune principalmente no segundo. Tenta trazer coisas novas como ter um client lsp já funcional, adicionou o suporte a multi servers que ajudou muito.
+Ainda sinto falta DD um sistema de plugins pra conseguir entender algumas coisas e trazer funcionalidades que ele ainda não tem, mas entendo qie ele esta querendo trazer uma experiencia mais &quot;baterias inclusas&quot; do que o neovim e arriscou dizer que é uma boa opção pra iniciantes por ser de algumas formas mais amigável que o neovim e mesmo assim você precisando aprender a configurar seu editor.
+Alem disso ainda tem coisas que me fazem continuar com o com como um suporte melhor ao svelte e ter um autocomplete bom pro tailwind. Nos próximos meses devo refazer minha config do zero pro neovim e enquanto isso devo continuar usando o hélix pois ele é muito bom e talvez ate contribuir com ele.
+Convido você que quer aprender a usar um editor de terminal experimente o hélix primeiro e depois vá pro vim ele tem uma configuração mais simples e você vai aprender a maior parte da navegação por ele. Não me leve a mal ainda gosto mais do neovim porém vejo que muitos novatos sofrem pra configurar o neovim no dia a dia o hélix é uma boa opção de começar a usar com menos configuração enquanto ajusta seu neovim aos poucos.
+Estero que quem acompanhou essa jornada se inspire a conhecer também.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Rust Descomplicado: Desvendando os mistérios dos tipos básicos</title><link>https://blog.jonatasoliveira.dev//rust-descomplicado-desvendando-os-miste-rios-dos-tipos-ba-sicos.html</link><description><![CDATA["Neste artigo, vamos explorar os tipos primitivos de Rust, um dos blocos fundamentais para trabalhar nesta linguagem."]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//rust-descomplicado-desvendando-os-miste-rios-dos-tipos-ba-sicos.html</guid><pubDate>Fri, 12 Jan 2024 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h1><a href="#rust-descomplicado-desvendando-os-mistérios-dos-tipos-básicos" aria-hidden="true" class="anchor" id="rust-descomplicado-desvendando-os-mistérios-dos-tipos-básicos"></a>Rust Descomplicado: Desvendando os Mistérios dos Tipos Básicos</h1>
+<p>Olá tudo bem? Hoje quero falar com você sobre os tipos primitivos em rust. Tipos primitivos são em linguagens de programação como Rust, são os tipos básicos de dados que são fornecidos pela linguagem e não são construídos a partir de outros tipos.
+Cada tipo tem um tamanho determinado para armazenar suas informações e a partir desses tipos básicos o rust consegue criar os outros tipos que ele usa, e claro você também pode criar seus próprios tipos.</p>
+<p>Mas, sem enrolação vamos ao video.</p>
+<h2><a href="#inteiros-integers" aria-hidden="true" class="anchor" id="inteiros-integers"></a>Inteiros (Integers)</h2>
+<p>O primeiro tipo que vamos falar são os tipos inteiros, e sim no plural pois temos vários tipos inteiros.
+Os números inteiros são divididos em dois grupos os números inteiros com sinal também chamados de <em>Signed</em> (representa positivos, negativos e zero) e os números inteiros sem sinal também chamados de <em>Unsigned</em> (Representa positivos e zero).</p>
+<p>Para os inteiros <em>Signed</em> temos:</p>
+<ul>
+<li><code>i8</code>: 8 bits que varia entre -128 a 127.</li>
+<li><code>i16</code>: 16 bits que varia entre -32,768 a 32,767</li>
+<li><code>i32</code>: 32 bits que varia entre -2,147,483,648 a 2,147,483,647</li>
+<li><code>i64</code>: 64 bits que varia entre -9,223,372,036,854,775,808 a 9,223,372,036,854,775,807.</li>
+<li><code>i128</code>: 128 bits que varia entre -170,141,183,460,469,231,731,687,303,715,884,105,728 a 170,141,183,460,469,231,731,687,303,715,884,105,727.</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    // i8
+    let number_i8: i8 = -128;
+    println!(&quot;i8: {}&quot;, number_i8);
+
+    // i16
+    let number_i16: i16 = -32768;
+    println!(&quot;i16: {}&quot;, number_i16);
+
+    // i32
+    let number_i32: i32 = -2147483648;
+    println!(&quot;i32: {}&quot;, number_i32);
+
+    // i64
+    let number_i64: i64 = -9223372036854775808;
+    println!(&quot;i64: {}&quot;, number_i64);
+
+    // i128
+    let number_i128: i128 = -170141183460469231731687303715884105728;
+    println!(&quot;i128: {}&quot;, number_i128);
+}
+</code></pre>
+<p>Para os interior <em>Unsigned</em> temos:</p>
+<ul>
+<li><code>u8</code>: 8 bits que varia entre 0 a 255.</li>
+<li><code>u16</code>: 16 bits que varia entre 0 a 65,535.</li>
+<li><code>u32</code>: 32 bits que varia entre 0 a 4,294,967,295.</li>
+<li><code>u64</code>: 64 bits que varia entre 0 a 18,446,744,073,709,551,615.</li>
+<li><code>u128</code>: 128 bits que varia entre 0 a 340,282,366,920,938,463,463,374,607,431,768,211,455.</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    // u8
+    let number_u8: u8 = 255;
+    println!(&quot;u8: {}&quot;, number_u8);
+
+    // u16
+    let number_u16: u16 = 65535;
+    println!(&quot;u16: {}&quot;, number_u16);
+
+    // u32
+    let number_u32: u32 = 4294967295;
+    println!(&quot;u32: {}&quot;, number_u32);
+
+    // u64
+    let number_u64: u64 = 18446744073709551615;
+    println!(&quot;u64: {}&quot;, number_u64);
+
+    // u128
+    let number_u128: u128 = 340282366920938463463374607431768211455;
+    println!(&quot;u128: {}&quot;, number_u128);
+}
+</code></pre>
+<p>Fora isso temos o tipo <code>usize</code> e <code>isize</code> que representam palavras no formato do processador que está sendo usado ou seja 32 bits pra processadores de 32 bits e 64 bits para processadores de 64 bits.</p>
+<p>O uso de <code>isize</code> é útil quando você está lidando com índices de coleções ou quando deseja garantir que seu código seja eficiente em diferentes arquiteturas sem ter que se preocupar com o tamanho exato do inteiro.</p>
+<p>Suponha que você queira imprimir o tamanho de um vetor em termos de número de elementos, e para isso, você pode usar o tipo <code>isize</code> para garantir portabilidade. Aqui está um exemplo:</p>
+<p>rust</p>
+<pre><code class="language-rust">fn main() {
+    let vetor = vec![1, 2, 3, 4, 5];
+
+    // Usando .len() para obter o tamanho do vetor, que retorna um usize.
+    // Convertendo para isize para impressão e operações posteriores.
+    let tamanho: isize = vetor.len() as isize;
+
+    println!(&quot;O tamanho do vetor é: {}&quot;, tamanho);
+
+    // Aqui, apenas para ilustrar, vamos fazer uma operação simples.
+    let novo_tamanho = tamanho + 10;
+
+    println!(&quot;Se adicionar 10, o novo tamanho é: {}&quot;, novo_tamanho);
+}
+
+</code></pre>
+<p>Neste exemplo, usamos <code>isize</code> para representar o tamanho do vetor. Ao fazer isso, garantimos que o código funcione tanto em arquiteturas de 32 bits quanto de 64 bits, adaptando-se automaticamente ao tamanho da palavra do sistema.</p>
+<p>Um parenteses:</p>
+<p>Os termos &quot;32 bits&quot; e &quot;64 bits&quot; referem-se ao tamanho da palavra de um processador, o que, por sua vez, influencia o tamanho máximo de dados que o processador pode processar em uma única operação e a quantidade máxima de memória RAM que o sistema operacional pode endereçar.</p>
+<h2><a href="#ponto-flutuante-floating-point" aria-hidden="true" class="anchor" id="ponto-flutuante-floating-point"></a>Ponto Flutuante (Floating-Point)</h2>
+<p>Para pontos flutuantes vamos ter:</p>
+<ul>
+<li><code>f32</code>: Ponto flutuante de precisão simples (32 bits).</li>
+<li><code>f64</code>: Ponto flutuante de precisão dupla (64 bits). É o padrão para números decimais em Rust.</li>
+</ul>
+<p>Em computação, os termos &quot;precisão simples&quot; e &quot;precisão dupla&quot; referem-se ao número de bits usados para representar números de ponto flutuante em um computador. No contexto do Rust e da maioria das linguagens de programação, esses termos são geralmente associados aos tipos <code>f32</code> e <code>f64</code>, respectivamente.</p>
+<ol>
+<li>
+<p><strong>Precisão Simples (<code>f32</code>)</strong>:</p>
+<ul>
+<li>Utiliza 32 bits para representar um número de ponto flutuante.</li>
+<li>Oferece uma precisão de aproximadamente 7 dígitos decimais significativos.</li>
+<li>É mais eficiente em termos de uso de memória e pode ser mais rápido em algumas operações devido ao tamanho menor.</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-rust">fn main() {
+    // Exemplo com f32
+    let numero_f32: f32 = 3.14159;  // Aproximadamente Pi
+    println!(&quot;Valor usando f32: {}&quot;, numero_f32);
+
+    // Outro exemplo com f32
+    let outro_f32: f32 = 123.456789;  // Aproximadamente 123.456789
+    println!(&quot;Outro valor usando f32: {}&quot;, outro_f32);
+}
+</code></pre>
+<ol>
+<li>
+<p><strong>Precisão Dupla (<code>f64</code>)</strong>:</p>
+<ul>
+<li>Utiliza 64 bits para representar um número de ponto flutuante.</li>
+<li>Oferece uma precisão muito maior, aproximadamente 15 a 17 dígitos decimais significativos.</li>
+<li>Por ser mais preciso, é geralmente preferido em aplicações que exigem alta precisão, como cálculos científicos ou financeiros que envolvem números muito grandes ou muito pequenos, ou quando se deseja evitar erros acumulados em cálculos longos.</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-rust">fn main() {
+    // Exemplo com f64
+    let numero_f64: f64 = 3.141592653589793;  // Valor mais preciso de Pi
+    println!(&quot;Valor usando f64: {}&quot;, numero_f64);
+
+    // Outro exemplo com f64
+    let outro_f64: f64 = 123456789.987654321;  // Número grande com precisão dupla
+    println!(&quot;Outro valor usando f64: {}&quot;, outro_f64);
+}
+</code></pre>
+<h2><a href="#caractere-character" aria-hidden="true" class="anchor" id="caractere-character"></a>Caractere (Character)</h2>
+<p>Para representar um caractere temos o tipo char e é usado para representar 1 caractere. Temos os tipos str e String mas, eles são usados para representar um grupo de caracteres o tipo primitivo é apenas o char.</p>
+<p>O char armazena 4 bytes e é usado para representar um caractere Unicode.</p>
+<pre><code class="language-rust">fn main() {
+    let letra = 'A';
+    println!(&quot;Essa é a letra: {}&quot;, letra);
+}
+</code></pre>
+<h3><a href="#e-o-que-é-unicode" aria-hidden="true" class="anchor" id="e-o-que-é-unicode"></a>E o que é Unicode?</h3>
+<p>Unicode é um padrão de codificação de caracteres universal que visa definir um único código numérico para cada caractere de qualquer sistema de escrita do mundo. A ideia por trás do Unicode é criar uma forma de representação padronizada para caracteres de todos os idiomas e símbolos usados globalmente.</p>
+<p>Um exemplo armazenando o kanji <em>Megami</em> do japones:</p>
+<pre><code class="language-rust">fn main() {
+    let megane = 'u{76EE}'; 
+    println!(&quot;{}&quot;, megane);
+}
+</code></pre>
+<p>Um exemplo armazenando um emoji:</p>
+<pre><code class="language-rust">fn main() {
+    let emoji_sorriso = 'u{1F603}'; 
+    println!(&quot;{}&quot;, emoji_sorriso);
+}
+
+</code></pre>
+<h2><a href="#booleano-boolean" aria-hidden="true" class="anchor" id="booleano-boolean"></a>Booleano (Boolean)</h2>
+<p>O tipo booleano é usado para presentar como o nome já diz um valor booleano. Sendo <code>true</code> para verdadeiro e <code>false</code>  para falso.</p>
+<pre><code class="language-rust">fn main() {
+    let verdadeiro = true;
+    let falso = false;
+
+    println!(&quot;Verdadeiro -&gt; {}, Falso -&gt; {}&quot;, verdadeiro, falso)
+}
+
+</code></pre>
+<p>Bom o post de hoje é isso nos vemos na próxima semana.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>52 semanas de planejamento em 2023</title><link>https://blog.jonatasoliveira.dev//52-semanas-de-planejamento-em-2023.html</link><description><![CDATA["As ferramentas que estou usando no meu workflow de trabalho"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//52-semanas-de-planejamento-em-2023.html</guid><pubDate>Fri, 06 Jan 2023 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h1><a href="#52-semanas-de-planejamento-em-2023" aria-hidden="true" class="anchor" id="52-semanas-de-planejamento-em-2023"></a>52 Semanas de planejamento em 2023</h1>
+<p>Olá estamos na primeira semana do ano e muita gente faz resoluções de ano novo e cria planos, e talvez você tenha colocado como meta se planejar melhor.
+Por conta dissso quero te ajudar e explicar algo que fiz em 2023 e foi uma grande conquista.</p>
+<p>Bom eu consegui me planejar em todas as 52 semanas definindo um foco para cada semana e isso pra mim foi algo inédito. Veja bem cada semana eu me sentei por um breve período e defini todos meus compromissos agendados, planejamentos e lembretes além é claro de qual seria o meu foco em cada semana.</p>
+<p>Só pra sua curiosidade essa primeira semana de 2023 meu foco foi criar o meu primeiro vídeo no youtube nesse ano de 2024 sobre esse tema.</p>
+<p>Mas, antes de explicar como eu faço meu planejamento semanal, gostaria de falar que nesse ano de 2024 estou iniciando minha jornada como game developer que é um dos meus grandes objetivos para esse ano e comecei com um desafio de aprender bevy engine o suficiente para fazer um tutorial no meu <a href="https://www.youtube.com/@devjonatas">canal do youtube</a> no final desse período, mas o dia a dia nessa jornada vou publicar no meu youtube além do meu servidor no discord eu convido você para me acompanhar.</p>
+<p>Vale reforçar que esse planejamento me ajuda muito a me guiar com minha priorização do que vou fazer e o tempo que vou dedicar para cada assunto que preciso fazer na vida seja na vida pessoal ou no trabalho o que no método que uso é chamado de contexto.</p>
+<p>Então para iniciar o método que uso é o <a href="https://www.youtube.com/@VidaOrganizadaTV">MVO feito pela Thais Godinho</a> onde trabalhamos lá com metas, objetivos e projetos vendo coisas a longo prazo até o planejamento do dia, mas hoje vamos focar no planejamento da semana e do dia.</p>
+<p>Pra fazer esse planejamento é possível usar várias ferramentas online e também no papel mas, hoje vou  usar o google calendar que é a ferramenta que uso no dia a dia.</p>
+<p>Eu sou uma pessoa que gosta muito de usar ferramentas open source, mas no caso do calendário até hoje não consegui uma ferramenta de calendário que funcionasse comigo e tenha uma boa sincronização com o google calendar pois fora meu planejamento eu tenho o calendário da minha esposa e filho para acompanhar. Caso você conheça alguma ferramenta legal que faça isso pode colocar nos comentários eu adoraria experimentar.</p>
+<p>Então inicialmente com uma conta do google já criada eu entro no Google Calendar, em português fica como Google Agenda ai no software já vem com uma agenda padrão que é o que a maioria usa, nele eu renomeio para &quot;Pessoais&quot;, ai crio duas novas agendas uma chamada &quot;Planejados&quot; coloco uma cor cinza e outra chamada &quot;Lembretes e Informações&quot; e coloco um tom amarelo.</p>
+<h2><a href="#ai-como-funciona-cada-agenda" aria-hidden="true" class="anchor" id="ai-como-funciona-cada-agenda"></a>Ai como funciona cada agenda?</h2>
+<p>Agendados: São compromissos no qual eu tenho um horário marcado, como uma reunião, um horário no dentista ou qualquer outra coisa que tem um horário definido.</p>
+<p>Planejados: São coisas que você precisa fazer mas, não tem um horário fixo, pode ser arrumar a casa, um projeto que você está trabalhando ou mesmo um horário pra estudar por exemplo. Também deslocamento pra um compromisso externo eu defino um bloco planejado pois além de um lembrete do horário que preciso sair tenho uma forma visual de ver o tempo que planejei para chegar no local. É importante também pensar que essa agenda você não vai colocar a atividade em si por exemplo eu estou aprendendo a bevy engine, não vou criar um evento &quot;Setup do projeto&quot; outro &quot;Criar menu inicial&quot;, outro &quot;Importar assets&quot; eu vou apenas criar um evento chamado Bevy e ai as atividades que preciso fazer eu uso outras ferramentas.</p>
+<p>Lembrete e informações: São atividades que preciso fazer no dia e não tem um horário especifico como pagar uma conta, jogar o lixo fora ou ver o status de algum pendencia no site do governo por exemplo. Importante reforçar de que como esses compromissos não tem uma hora definida eu deixo como um evento do dia inteiro no calendar.</p>
+<p>Como disse em cada semana eu defino um foco e ele é um evento do tipo &quot;Lembretes e Informações&quot; no meu calendário, então eu defino ele como um evento do dia inteiro e coloco o início dele no domingo e o final no sábado. E como ele funciona? O foco da semana é sua bussolá ele vai aparecer em todos os dias no seu calendário e é um exercício diário para você ver se está priorizando atividades do seu foco no dia a dia ou se está desviando para outro caminho.</p>
+<p>Com isso como funciona o meu planejamento? Eu na semana atual defino a próxima semana então já vejo os compromissos que tenho que são agendados, crio blocos da agenda de planejados para as atividades e finalmente vejo o que eu preciso lembrar de fazer como pagar uma conta e coloco como lembrete.
+Claro que nem tudo precisa ser feito de uma vez só há algumas coisas que vão aparecendo no decorrer da semana que vou colocando para as próximas semanas.</p>
+<h2><a href="#o-que-eu-aprendi-em-52-semanas-de-planejamento" aria-hidden="true" class="anchor" id="o-que-eu-aprendi-em-52-semanas-de-planejamento"></a>O que eu aprendi em 52 semanas de planejamento?</h2>
+<p>Eu aprendi algumas coisas depois dessas 52 semanas e fui ajustando e aprendendo no decorrer das semanas.</p>
+<p>Há semanas que seu foco vai ser sobreviver: Há momentos na nossa vida que estamos num turbilhão de problemas que tudo está caótico e realmente não conseguimos focar em nada, nesses caso eu coloca como foco &quot;sobreviver&quot; pois, o foco era simplesmente conseguir passar por aquele momento difícil. E é importante perceber se você passou mais de uma semana com o foco em sobreviver, vale a pena repensar na sua semana ou mesmo procurar ajuda.</p>
+<p>Planeje seus descaço: Mesmo férias é importante planejar e não digo de planejar viagens e tal, mas ver compromissos que ou coisas que você precisa fazer nas suas férias. E caso não tenha nada mesmo pra fazer só coloque como foco &quot;Relaxa&quot;.</p>
+<p>Não faça a agenda Tetris: É importante criar intervalos entre um compromisso e outro no qual você pode usar pra beber uma água, ir no banheiro ou mesmo responder suas mensagens. Lembre-se você não é uma máquina, essas pequenas pausas entre os eventos são importantes no seu dia a dia.</p>
+<p>As vezes você não vai conseguir seguir seu foco: Há semanas que você se planejou e organizou mas, tudo mudou. As vezes acontecem coisas externas no qual não podemos controlar e você vai precisar replanejar tudo ou mesmo descartar todo o planejamento já feito e está tudo bem. O importante é ver o que você não pode fazer que precisa mover pra próxima semana e o que você vai deixar pra trás mesmo. A vida é dinâmica então não da pra seguir sempre um plano a risca.</p>
+<p>Caso queira ver o material original desse método o link vai estrar na descrição.</p>
+<p>Então é isso que queria lhe mostrar, caso queira ver mais conteúdos como esse pense em se inscrever no canal e ativar o sininho e se quiser trocar uma ideia sobre organização pode entrar no nosso <a href="https://discord.gg/83ZsKGaRVa">servidor no discord</a>.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Por que eu abandonei o desafio de 12 meses?</title><link>https://blog.jonatasoliveira.dev//por-que-eu-abandonei-o-desafio-de-12-meses.html</link><description><![CDATA["Um breve resumo da minha vida e as dificuldade em fixar um compromisso!"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//por-que-eu-abandonei-o-desafio-de-12-meses.html</guid><pubDate>Fri, 06 May 2022 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h2><a href="#o-desafio" aria-hidden="true" class="anchor" id="o-desafio"></a>O desafio</h2>
+<p>No começo de 2022 eu me propus a fazer um desafio de prática deliberada durante 12 meses com o objetivo de fazer vários pequenos projetos nesse periodo e no final eu queria conseguir lançar meu primeiro jogo na steam.</p>
+<p>No começo estava tudo bem, fiz o primeiro projeto em janeiro, porém mesmo ele, acabei mudando muito o escopo durante o processo. Pois eu queria refatorar um template de fastapi para ter mais opções e tal, depois pensei em focar em fazer um cli e acabou virando uma pr para o projeto do fastapi, que no final nem foi aceito pois a comunidade me convenceu que fazer um cli oficial não faria sentido e até achei uma solução mais simples usando o make. Enfim, eu deveria ter feito uma retrospectiva mais detalhada, mas eu não a fiz por que fiquei chateado com a pr, o problema foi um pouco mais embaixo.</p>
+<h2><a href="#cavando-esse-buraco" aria-hidden="true" class="anchor" id="cavando-esse-buraco"></a>Cavando esse buraco</h2>
+<p>Durante esse trabalho eu tinha me proposto fazer duas horas por dia entre as 20 e as 22 pois normalmente meu filho estaria dormindo e ficaria tudo bem. O que foi bem durante as primeiras semanas, só que comecei a ter algumas dificuldades.</p>
+<p>O tempo que estava separado pra isso foi sendo consumido por muitas outras atividades, pior que em tese eu sabia que precisava fazer essas atividades, só estava talvez me enganando um pouco.</p>
+<p>Fui fazendo as lives, e foram acontecendo problemas, uma hora doente, outra o bebe chora, outra tem que limpar a casa, outra preparar as refeições e quando vejo estou exausto e me arrastando por ai.</p>
+<h2><a href="#nem-tudo-funciona-como-planejado" aria-hidden="true" class="anchor" id="nem-tudo-funciona-como-planejado"></a>Nem tudo funciona como planejado</h2>
+<p>Primeira dificuldade foi que peguei covid, cheguei até fazer algumas lives do desafio com covid sem saber mas, depois do covid fiquei bem cansado por um tempo, com isso o agravante que toda a familia também pegou, acabei necessitando investir um tempo ficando com minha familia cuidando deles.</p>
+<p>Segundo ponto foi meu esgotamento por conta do trabalho, entrei numa situação do trabalho onde algumas decisões acabaram me desgastando e me deixando exausto. Chegou um ponto que muitas vezes ia por meu filho pra dormir e acabava dormindo junto com ele, outras vezes eu ia conseguia apenas fazer os trabalhos domesticos e já não aguentava mais ficar acordado. Esse stress estava (ainda está) me consumindo muito.</p>
+<p>Ultimo ponto que vem me trazendo dificuldades é que hoje estou sem um escritório, na verdade sem nenhuma casa. Ano passado fui pra casa da minha sogra ficar um tempo lá e nesse momento estou na casa da minha mãe, no futuro devo estar indo pra uma casa fixa na alemanha, o que me leva a pensar que posso ter problema pra fazer lives por conta do fuso horario.</p>
+<h2><a href="#mudanças-e-compromisso" aria-hidden="true" class="anchor" id="mudanças-e-compromisso"></a>Mudanças e compromisso</h2>
+<p>Esse post não é pra ficar justificando com os problemas, já que cada um tem seus problemas e acredito que muita gente que fixa compromisso ou faz lives periodicamente tem seus problemas. Mas, queria deixar tambem algumas reflexões que tive durante esse período:</p>
+<ul>
+<li>Muitas atividades: Além do meu trabalho, tenho a responsabilidade de fazer atividades domésticas, ficar com meu filho, ficar com minha esposa, estudar inglês, estudar sobre autismo e além disso preciso reservar um tempo de fazer algo só pra mim.</li>
+<li>Muito abrangente: Fora os meus estudos de algoritmos, eu quero estudar rust e lua, design de jogos, pixelart, front frameworks e etc eu vejo que preciso direcionar mais os estudos por conta do tempo.</li>
+</ul>
+<p>Com isso tenho a conclusão que não consigo fazer de seg a sex 2 horas por dia de estudo focado, na verdade não consigo todos os dias e nem duas horas. Além disso nesse momento desisti um pouco da ideia de tentar fazer lives periódicas pelo simples fato que não tenho hoje um ambiente minimo pra fazer uma live e o tempo, pra quem viu algumas das minhas lives eu algumas vezes tinha que sair pra ver meu filho chorando já que ele ainda tem dificuldade de dormir sozinho e isso acaba atrapalhando a live em si, pra isso vou esperar realmente ter um momento oportuno pra voltar.</p>
+<h2><a href="#está-tudo-perdido-entâo" aria-hidden="true" class="anchor" id="está-tudo-perdido-entâo"></a>Está tudo perdido entâo?</h2>
+<p>Bom acredito em algo que minha esposa me fiz &quot;Quem quer da um jeito!&quot;, com isso sei que tenho problemas em manter a periodicidade relacionada aos dias, porém consigo usar um ciclo de estudos espaçado. Como funciona? Bom vou escolhar por exemplo três assuntos (python, autismo e inglês), monto um plano de estudo pros 3 assuntos onde cada ciclo tenha entre 20 e 30 min, com isso estudo 30 min de python, se tiver tempo vou pra próxima e assim por diante. Pode ser que faça um assunto em um dia, depois no dia seguinte faça os 3, no outro não faço nada, no outro faço dois ciclos.</p>
+<p>A ideia é ter menos projetos e mantendo eles pequenos (alguns não muito), além de tentar ir equilibrando os pratos da vida.</p>
+<h2><a href="#meu-plano" aria-hidden="true" class="anchor" id="meu-plano"></a>Meu plano</h2>
+<p>Bom já tenho 3 projetos de software, estou preparando um curso, tenho os desafios de aprender o basico de programação usando jogos e o rpg-api, tenho estudos de autismo, estudo do inglês além disso tenho minhas leituras (que não deixam de ser técnicas), o ponto é que vou diminuir bem o ritmo e não vou me comprometer com a twitch por enquanto.</p>
+<p>Vou tentar usar o mastodon pra ser meu diário de desenvolvimento, mostrando meus pequenos avanços e tentar primeiro focar no curso, quando terminar ele vou focar nos desafio e por ultimo vou focar nas apis. O ponto é por mais que queira produzir muito sobre desenvolvimento e ser altamente comprometido com minhas metas, quando se tem outras pessoas dependendo de você a coisa fica mais complicada, e nem falo do meu caso, penso em tanta gente em situações muito mais complicadas que eu e fazem um esforço herculeo pra conseguir aprender algo pra melhorar a vida da sua familia.</p>
+<p>Meu caso sei que posso ajudar muita gente, mas digamos há muitas outras pessoas que conseguem fazer o que eu quero fazer e melhor, minha prioridade sempre vai ser minha familia, se esse projeto atrapalhar a dinamica familiar é por que não vale ser trabalhado no momento.</p>
+<h2><a href="#conclusão" aria-hidden="true" class="anchor" id="conclusão"></a>Conclusão</h2>
+<p>Além de tudo a mensagem que queria passar é positiva, tente dar um jeito nos seus planos as vezes vale sim congelar ele, as vezes diminuir o ritmo só não perca eles pelo caminho se você realmente quer algo, estou praticamente a 3 anos num ensaio de começar a fazer jogos que é um sonho que tinha quando entrei na faculdade, sei que sou capaz e vou conseguir, mas sei que hoje com meus 34 anos, casado e um filho autista que eu preciso ser o melhor pai/esposo quanto eu conseguir. Isso não quer dizer abandonar tudo, mas achar um ponto de equilibrio onde consiga tocar os projetos pessoais e também cuidar da minha familia e das minhas responsabilidades.</p>
+<p>Enquanto isso continuamos a nadar!</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Desafio de prática - Escopo Fevereiro</title><link>https://blog.jonatasoliveira.dev//desafio-de-pra-tica-escopo-fevereiro.html</link><description><![CDATA["Escopo Inicial - Fevereiro"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//desafio-de-pra-tica-escopo-fevereiro.html</guid><pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h1><a href="#por-que" aria-hidden="true" class="anchor" id="por-que"></a>Por que?</h1>
+<ul>
+<li>Atender demandas de um cliente antigo de um projeto já criado</li>
+<li>Aplicar o método da refatoração</li>
+<li>Melhorar o conhecimento em GitHub Actions</li>
+</ul>
+<p>Bom o objetivo desse projeto é atender algumas demandas que já me foram pedidas num projeto antigo <a href="https://github.com/jonatasoli/Fast-Ecommerce">fast-ecommerce</a>.</p>
+<p>O objetivo é transformar num monorepo, ajustar testes, criar features e fazer pequenos refactors durante o processo.</p>
+<h1><a href="#o-que" aria-hidden="true" class="anchor" id="o-que"></a>O que?</h1>
+<h2><a href="#conceitos" aria-hidden="true" class="anchor" id="conceitos"></a>Conceitos</h2>
+<ul>
+<li>Testar a migração do vue 2 para o vue 3</li>
+<li>Aprender a gerar um testes de unidade no GitHub Actions</li>
+<li>Exercitar refactors</li>
+</ul>
+<p>Aqui basicamente tem estudos mais focados em testes e GitHub Actions, mas o projeto vai ser mais focado na prática.</p>
+<h2><a href="#fatos" aria-hidden="true" class="anchor" id="fatos"></a>Fatos</h2>
+<ul>
+<li>Montar um pré-commit no projeto</li>
+<li>Adicionar o projeto badges de build, dependencias e analise estática</li>
+<li>O projeto front precisa ser migrado para vue3</li>
+<li>Os projetos precisam ficar num monorepo</li>
+<li>O projeto front precisa remover dependências do cliente</li>
+<li>O projeto back precisa sofrer alguns refactors</li>
+<li>O projeto front precisa aceitar scripts do tipo typescript</li>
+<li>Ajustes sugeridos no sonarcloud</li>
+</ul>
+<h2><a href="#procedimentos" aria-hidden="true" class="anchor" id="procedimentos"></a>Procedimentos</h2>
+<ul>
+<li>Reforçar conceitos de arquitetura</li>
+<li>Reforçar conceitos de teste</li>
+<li>Reforçar os conhecimentos de vue3</li>
+<li>Reforçar os conhecimentos de typescript</li>
+</ul>
+<h1><a href="#como" aria-hidden="true" class="anchor" id="como"></a>Como?</h1>
+<p><a href="https://cli.vuejs.org/migrating-from-v3/">Vue3 migrate</a></p>
+<ul>
+<li>Rodar script de migração</li>
+<li>Resolver conflitos</li>
+<li>Bônus - Fazer refactors para composition API</li>
+</ul>
+<p><a href="https://www.typescriptlang.org/docs/">Typescript</a>:</p>
+<ul>
+<li>Refatorar scripts já usando typescript</li>
+</ul>
+<p><a href="https://github.com/features/actions">GitHub Actions</a></p>
+<ul>
+<li>Rodar testes de unidade (sem db)</li>
+<li>Rodar o coverage</li>
+<li>Ajustes no <a href="https://sonarcloud.io/">sonarcloud</a></li>
+</ul>
+<p><a href="https://pre-commit.com/">Git</a></p>
+<ul>
+<li>Rodar o prospector</li>
+<li>Rodar o safety</li>
+</ul>
+<p>Basicamente é um projeto focado em atender uma demanda, montar features, e fazer melhorias.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Desafio de prática - Escopo Janeiro</title><link>https://blog.jonatasoliveira.dev//desafio-de-pra-tica-escopo-janeiro.html</link><description><![CDATA["Escopo Inicial - Janeiro"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//desafio-de-pra-tica-escopo-janeiro.html</guid><pubDate>Wed, 29 Dec 2021 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h1><a href="#por-que" aria-hidden="true" class="anchor" id="por-que"></a>Por que?</h1>
+<ul>
+<li>Melhorar o conhecimento em python</li>
+<li>Montar minha primeira lib no pypi</li>
+<li>Melhorar o conhecimento em GitHub Actions</li>
+</ul>
+<p>Bom o objetivo desse projeto é conseguir completar a talvez unica fase prevista no <a href="https://github.com/jonatasoli/fastapi-template-cookiecutter">projeto de templates fastapi</a>,
+assim montar o exemplo da documentação do fastapi que tem apenas o main.py e o meu exemplo melhorado do repositório que mencionei, além disso quero usar uma ferramenta de script como o typer do próprio criador do fastapi pra adicionar as funcionalidades: add template, inicializar/gerar/rodar migrations e rodar o app do template.</p>
+<p>Como o template sem o cookiecutter está pronto o maior trabalho vai ser fazer ele funcionar com o cookiecuter em si, além de fazer os testes rodarem via github actions.</p>
+<h1><a href="#o-que" aria-hidden="true" class="anchor" id="o-que"></a>O que?</h1>
+<h2><a href="#conceitos" aria-hidden="true" class="anchor" id="conceitos"></a>Conceitos</h2>
+<ul>
+<li>Aprender typer</li>
+<li>Aprender a gerar um teste de unidade no GitHub Actions</li>
+<li>Publicar uma lib no PyPi</li>
+</ul>
+<p>Aqui basicamente vou estudar o typer que é a ferramenta de script feita pelo criador do fastapi, aprender a gerar os testes de unidade sem containers via GitHub Action e por fim como publicar uma biblioteca no PyPi.</p>
+<h2><a href="#fatos" aria-hidden="true" class="anchor" id="fatos"></a>Fatos</h2>
+<ul>
+<li>Montar um pré-commit no projeto</li>
+<li>Adicionar o projeto badges de build, dependencias e analise estática</li>
+<li>O projeto precisa ser desenvolvido como lib</li>
+<li>O projeto precisa poder criar um template</li>
+<li>O projeto precisa poder iniciar - gerar - migrar as migrations do bd</li>
+<li>O projeto precisa poder iniciar o projeto com uvicorn</li>
+</ul>
+<h2><a href="#procedimentos" aria-hidden="true" class="anchor" id="procedimentos"></a>Procedimentos</h2>
+<ul>
+<li>Reforçar conceitos de OO</li>
+<li>Reforçar conceitos de teste</li>
+<li>Reforçar o conhecimento em cookiecuter</li>
+<li>Reforçar conhecimentos em desenvolvimento web com python</li>
+</ul>
+<h1><a href="#como" aria-hidden="true" class="anchor" id="como"></a>Como?</h1>
+<p><a href="https://cookiecutter.readthedocs.io/en/latest/">Cookiecutter</a></p>
+<ul>
+<li>Gerar 2 projetos diferentes</li>
+<li>Opções do poetry</li>
+<li>Adicionar como o exemplo o projeto <a href="https://github.com/jonatasoli/fastapi-design-api-example">design api</a></li>
+</ul>
+<p><a href="https://typer.tiangolo.com/">Typer</a>:</p>
+<ul>
+<li>Criar o prefixo &quot;fast&quot;</li>
+<li>Receber paramêtros (create | db [init/make/migrate] | runserver)</li>
+</ul>
+<p><a href="https://github.com/features/actions">GitHub Actions</a></p>
+<ul>
+<li>Rodar testes de unidade (sem db)</li>
+<li>Rodar o coverage</li>
+<li>Adicionar o <a href="https://sonarcloud.io/">sonarcloud</a></li>
+</ul>
+<p><a href="https://pre-commit.com/">Git</a></p>
+<ul>
+<li>Rodar o prospector</li>
+<li>Rodar o safety</li>
+</ul>
+<p>Basicamente nesse projeto é consultar as documentações e aplicar os conceitos acima, estimativa inicial pra todos esses passo é fazer tudo em 20 horas.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Desafio de prática - Plano</title><link>https://blog.jonatasoliveira.dev//desafio-de-pra-tica-plano.html</link><description><![CDATA["Meu desafio para 2023"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//desafio-de-pra-tica-plano.html</guid><pubDate>Tue, 28 Dec 2021 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h1><a href="#desafio-de-prática" aria-hidden="true" class="anchor" id="desafio-de-prática"></a>Desafio de prática</h1>
+<p>Olá, bom estou oficialmente abrindo meu desafio de prática público de 2022.</p>
+<h2><a href="#como-funciona" aria-hidden="true" class="anchor" id="como-funciona"></a>Como funciona?</h2>
+<p>As regras eu disponibilizei <a href="https://jonatasoliveira.dev/blog/desafio-de-pratica-regras/">nesse link</a>, ainda posso melhorar um pouco ele mas, o resumo está lá.</p>
+<p>A idéia é fazer um compromisso público de alcaçar um objetivo, usando projetos no máximo mensais onde vou praticar determinadas habilidades para alçar um objetivo.</p>
+<p>A ideia desse desafio é fazer um compromisso para praticar algumas habilidades, isso não contabiliza  horas de estudo especifico, durante cada sessão de prática ele vai ter objetivos e a ideia caso aconteça algum bloqueio é tentar se desbloquear apenas vendo as documentações de sistemas.</p>
+<p>Além disso trabalhando com projeto pequenos, tarefas como baby steps e feedback contínuo que eu chegue a um grau mais elevado de conhecimento no fim desse desafio, ou seja, a ideia é conseguir entrar muito melhor do que entrei.</p>
+<h2><a href="#meu-desafio" aria-hidden="true" class="anchor" id="meu-desafio"></a>Meu desafio</h2>
+<p>Para 2022 preciso dar um ponto em alguns projetos que abri e também quero lançar meu primeiro jogo na steam.
+Então dividi os dois primeiros meses no ano para organizar 2 projetos que já tenho aberto, ai os próximos 10 meses vão ser focados no desenvolvimento de jogos e esses jogos vão tanto me ajudar a trabalhar habilidades que uso no trabalho quanto habilidades pro meu jogo.
+Nesse ano vou focar em desenvolver pixel art e trabalhar com uma engine em rust pro meu jogo na qual vou compilar pra steam. Nesse desafio estou calculando investir 20 horas mensais de prática, que é o máximo que vou conseguir no momento.</p>
+<p>Estou inicialmente pensando em fazer alguns jogos no estilo de livro-jogo texto, pois são bem simples e da pra fazer tudo com apenas programação, sendo que imagens seriam um plus, mas dentro desse desafio não pretendo eu mesmo criar os fluxos da história pretendo pegar pronto de algum amigo que se interessar =-).</p>
+<h2><a href="#projetos" aria-hidden="true" class="anchor" id="projetos"></a>Projetos</h2>
+<p>** Janeiro **</p>
+<p>Projeto do template fastapi, vou montar um cli pra criar um projeto simples e a evolução do exemplo usando a sessão dos dados como injeção de dependência. Além disso transformar isso numa lib e publica-la no pypi.</p>
+<p>** Fevereiro **</p>
+<p>Projeto do fast-ecommerce criar uma documentação em monorepo, adicionar testes via github actions e atualizar dependências com o mínimo de refatoração.</p>
+<p>** Março **</p>
+<p>Criar um livro-jogo usando vue/ts e python/fastapi.</p>
+<p>** Abril **</p>
+<p>Criar um pixel art pro jogo de Março, a abertura do jogo e o encerramento.</p>
+<p>** Maio **</p>
+<p>Criar um livro-jogo usando vue/ts e rust/actix.</p>
+<p>** Junho **</p>
+<p>Criar em pixel art 10 diagramações do jogo do mês anterior fora a abertura e o encerramento.</p>
+<p>** Julho **</p>
+<p>Criar um livro-jogo usando uma engine de games em rust no momento a mais provavel é a <a href="https://bevyengine.org/">bevy</a>.</p>
+<p>** Agosto **</p>
+<p>Criar em pixel art 20 diagramações do jogo do mês anterior fora a abertura e o encerramento.</p>
+<p>** Setembro **</p>
+<p>Criar um jogo simples de plataforma usando apenas uma tela.</p>
+<p>** Outubro **</p>
+<p>Criar um jogo simples de plataforma com uma fase e power-ups ou fazer essa evolução no jogo do mês anterior.</p>
+<p>** Novembro **</p>
+<p>Criar um jogo simples de plataforma com duas fases e power-ups ou fazer essa evolução no jogo do mês anterior.</p>
+<p>** Dezembro **</p>
+<p>Criar um jogo simples de plataforma com quatro fases e power-ups ou fazer essa evolução no jogo do mês anterior. Além de publicar ele na steam.</p>
+<p>Todos os objetivos para cada projeto eu coloquei no mapa abaixo:
+<a href="https://i.pinimg.com/originals/47/b2/eb/47b2eb88d67546eb3ed3577c07dea948.png">Mapa de objetivos dos projetos</a></p>
+<h2><a href="#motivação" aria-hidden="true" class="anchor" id="motivação"></a>Motivação</h2>
+<p>A ideia é conseguir provar uma tese que venho estudando em vários livros e cursos, onde direcionando meu estudo exclusivamente para pratica deliberada e através de projetos pequenos, com feedback rápido, fail fast e uma prática metódica eu consiga me desenvolver mais rapidamente.
+E sim a ideia não é nem lançar curso e nem livro sobre aprendendo a aprender, mas sim tentar provar que com os conceitos que coloquei na minha postagem de regras vou conseguir aprender um conhecimento e fixa-lo mais rapidamente e assim conseguir ajudar outras pessoas com as postagens que eu for fazendo durante o 2022.</p>
+<p>Bom os planos e retrospectivas dos projetos vou publicando aqui e vou tentar sempre que possível compartilhar no <a href="https://www.twitch.tv/devjonatas">twitch</a>, bom é isso por enquanto e até 2022.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Desafio de prática - Regras</title><link>https://blog.jonatasoliveira.dev//desafio-de-pra-tica-regras.html</link><description><![CDATA["Regras pro desafio de prática"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//desafio-de-pra-tica-regras.html</guid><pubDate>Mon, 27 Dec 2021 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h1><a href="#projeto" aria-hidden="true" class="anchor" id="projeto"></a>Projeto</h1>
+<ul>
+<li>Precisa definir um período em meses ou anos</li>
+<li>Mapear o que quer aprender</li>
+<li>O plano precisa ser horas de prática estudos tem que ser a parte e não é necessário registrar</li>
+<li>Fazer cada projeto com duração máximo de 1 mês</li>
+<li>Escopo de projetos futuros pode ser corrigido</li>
+</ul>
+<h2><a href="#regras-para-cada-projeto" aria-hidden="true" class="anchor" id="regras-para-cada-projeto"></a>Regras para cada projeto</h2>
+<ul>
+<li>Desenhar um mapa (Por que? O que? Como?)</li>
+<li>Artigo antes do projeto com o escopo e o mapa</li>
+<li>Retrospectiva depois do projeto</li>
+<li>Precisa ser público</li>
+<li>As horas precisam ser de prática</li>
+<li>Cada projeto precisa ser quebrado em pequenas atividades</li>
+<li>Comemorar entrega do projeto</li>
+<li>Comomorar cada habilidade que foi aprendida</li>
+</ul>
+<h2><a href="#durante-as-sessões-de-prática" aria-hidden="true" class="anchor" id="durante-as-sessões-de-prática"></a>Durante as sessões de prática</h2>
+<ul>
+<li>Aspecto que quer melhorar</li>
+<li>Precisa ser especifico</li>
+<li>Registrar o dia-a-dia diário de bordo
+** Ser específico
+** Por o que quer melhorar
+** Por detalhes que ache relevante</li>
+<li>Metas ambiciosas</li>
+</ul>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Sintaxe literal vs Construtor em Rust</title><link>https://blog.jonatasoliveira.dev//sintaxe-literal-vs-construtor-em-rust.html</link><description><![CDATA["As ferramentas que estou usando no meu workflow de trabalho"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//sintaxe-literal-vs-construtor-em-rust.html</guid><pubDate>Thu, 08 Apr 2021 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<p>Essa é uma tradução livre <a href="https://steveklabnik.com/writing/structure-literals-vs-constructors-in-rust">deste artigo</a>.</p>
+<h1><a href="#estrutura-literal-vs-construtor-em-rust" aria-hidden="true" class="anchor" id="estrutura-literal-vs-construtor-em-rust"></a>Estrutura literal vs construtor em Rust</h1>
+<p>Aprender o básico de uma linguagem e a sintaxe é fácil. Agora como dar sentido para todos aqueles bits pode ser um pouco mais difícil. Há uma rede de interseções de três funcionalidades do Rust que vejo pessoas usando, mas nunca vi escrito.Eu espliquei essa técnica para algumas pessoas em <em>#rust-bennigers</em> outro dia, pensei em escrever pra ajudar você também.</p>
+<p>Um pequeno review, se você tem uma <em>struct</em> em Rust como este:</p>
+<pre><code>struct Point {
+    x: i32,
+    y: i32,
+}
+</code></pre>
+<p>Você pode usar a 'sintaxe literal do <em>struct</em>' para criar uma nova instância do struct:</p>
+<pre><code>let origin = Point { x: 0, y: 0 };
+</code></pre>
+<p>Normalmente, esta sintaxe somente funciona se você tem acessso a propriedade da <em>struct</em> e de seu membro pela regra de privacidade do <em>Rust</em>.</p>
+<pre><code>mod foo {
+    pub struct Point {
+        x: i32,
+        y: i32,
+    }
+
+    pub fn foo(x: i32, y: i32) -&gt; Point {
+        Point { x: x, y: y } // isto é bom , já que estamos no mesmo módulo
+    }
+}
+
+fn main() {
+    let origin = foo::Point { x: 0, y: 0 }; // isto não é bom
+}
+</code></pre>
+<p>Nós não podemos usar a sintaxe literal <em>struct</em> na função <em>main</em> por que <em>x</em> e <em>y</em> também não são publicos.</p>
+<p>Mas, dentro do mesmo módulo nós temos acesso, então funciona. Como podemos deixar <em>main</em> instanciar <em>Point</em>, se não podemos usar uma sintaxe literal? Bem, nossa função foo faz isto, então nós podemos expo-la. Seria mais conveniente se nós associarmos a uma função <em>new</em>.</p>
+<pre><code>mod foo {
+    pub struct Point {
+        x: i32,
+        y: i32,
+    }
+    
+    impl Point {
+        pub fn new(x: i32, y: i32) -&gt; Point {
+            Point { x: x, y: y } // Isto é bom, já que estamos no mesmo módulo
+        }
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+}
+
+</code></pre>
+<p>Certo, mas se por alguma razão nós quiséssemos que <em>x</em> e <em>y</em> sejam públicos ou ainda se quiséssemos forçar as pessoas a criar uma função <em>new</em> para criar um <em>Point</em>?</p>
+<p>Talvez nossa mudança gere um efeito colateral importante. Então se trocarmos nosso código para isto:</p>
+<pre><code>mod foo {
+    pub struct Point {
+        pub x: i32,
+        pub y: i32,
+    }
+    
+    impl Point {
+        pub fn new(x: i32, y: i32) -&gt; Point {
+            Point { x: x, y: y } // isto é bom, já que estamos no mesmo módulo
+        }
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+
+    // mas, isto também:
+    let origin = foo::Point { x: 0, y: 0 };
+}
+</code></pre>
+<p>Fazendo todos os elementos de <em>Point</em> publicos, nós reativariamos a sintaxe literal, que não é o que gostariamos de chegar, então o que fazer?</p>
+<p>Pra corrigir isso precisamos de dois <em>insights</em>. O primeiro é &quot;zero-size types&quot;. No Rust tem alguns tipos que não requerem nenhum armazenamento. Vamos pegar o exemplo da tupla vazia '()', ele também só tem uma possibilidade de valor que é a própria tupla vazia. Assim nós não há necessidade de armazenar nada em memória pra representa-la.</p>
+<p>Se nós temos um valor válido, nós já saberemos o que ele é. Isso significa que quando a aplicação é compilada a tupla vazia () simplesmente desaparece, então podemos fazer isso.</p>
+<pre><code>mod foo {
+    pub struct Point {
+        pub x: i32,
+        pub y: i32,
+        _secret: (),
+    }
+    
+    impl Point {
+        pub fn new(x: i32, y: i32) -&gt; Point {
+            Point { x: x, y: y, _secret: () }
+        }
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+}
+</code></pre>
+<p>Agora nós temos um novo atributo privado <em>_secret()</em>. Eu dei esse nome com o <em>underscore</em> '_', por que não temos intenção de usa-lo pra nada. Assim o Rust não vai nos dar nenhum warning pois como <em>_secret</em> é do tipo () e será gerado em tempo de compilação e não afetará nosso <em>struct</em> <em>Point</em>.</p>
+<p>Mas, tendo este atributo privado afeta a permissão que temos para contruir <em>Point</em>. <em>main</em> não pode usar a sintaxe literal de <em>struct</em> uma vez que nem todos os campos são públicos.</p>
+<p>No entanto lembre-se que privacidade é em nível de módulo em Rust, portanto ainda podemos usar a sintaxe literal dentro do módulo <em>foo</em>:</p>
+<pre><code>mod foo {
+    pub struct Point {
+        pub x: i32,
+        pub y: i32,
+        _secret: (),
+    }
+    
+    impl Point {
+        pub fn new(x: i32, y: i32) -&gt; Point {
+            Point { x: x, y: y, _secret: () }
+        }
+    }
+
+    fn foo() -&gt; Point {
+        Point: { x: 0, y: 0, _secret: () } // Isto ainda é permitido!
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+}
+</code></pre>
+<p>Para previnir que <em>foo</em> seja usado com sintaxe literal, nós precisamos de mais um conceito: <em>pub use</em>, veja isto:</p>
+<pre><code>mod foo {
+    mod point {
+        pub struct Point {
+            pub x: i32,
+            pub y: i32,
+            _secret: (),
+        }
+    
+        impl Point {
+            pub fn new(x: i32, y: i32) -&gt; Point {
+                Point { x: x, y: y, _secret: () }
+            }
+        }
+    }
+
+    pub use foo::point::Point;
+
+    fn foo() -&gt; Point {
+        Point::new(0, 0) // Precisamos usar `new` aqui, Já que não estamos mais dentro do mesmo módulo!
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+}
+
+</code></pre>
+<p>Dando pra <em>Point</em> seu próprio módulo, tudo que é privado pra ele fica privado para quem o usa-lo também. Mas, escrevendo <code>foo::point::Point</code> fica verboso, ai <code>pub use</code> vem nos salvar! Nós re-exportamos a estrutura de <em>Point</em> em <em>foo</em>, então nós podemos ainda usar  <code>foo:Point</code>, mas uma vez que um de seus membros é privado, a sintaxe literal não é permitida.</p>
+<p>Para mim, entender coisas como essa é quando eu realmente começo a sentir que estou conhecendo uma linguagem: juntando três ou quatro conceitos díspares para atingir algum objetivo. É quando uma linguagem deixa de ser um monte de partes desconexas e começa a se tornar um todo coeso.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Mudando path do poetry</title><link>https://blog.jonatasoliveira.dev//mudando-path-do-poetry.html</link><description><![CDATA["Como configurar o poetry para mudar o diretório padrão que ele cria a Virtual Env"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//mudando-path-do-poetry.html</guid><pubDate>Wed, 27 Jan 2021 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<p>Olá tudo bem?</p>
+<p>Estou passando aqui pra dar uma dica rápida, quando você possui muitos projetos em python as vezes fica difícil de gerenciar as Virtal Envs do projetos.</p>
+<p>Quando usava o pipenv isso não era tanto um problema, pois ele tinha um comando para remover uma virtualenv e recria-la novamente, porém o poetry até esse momento ainda não criou tal comando. Ai lembre do Renzo do <a href="https://www.python.pro.br">Python Pro</a>, falava que criava as envs diretamente no projeto numa pasta .env, então decidi fazer assim também no meu ambiente e vem me ajudando muito.</p>
+<p>Pra fazer isso é bem simples é só executar o comando abaixo no seu terminal:</p>
+<pre><code>poetry config virtualenvs.in-project true
+</code></pre>
+<p>Lembrando que pra funcionar você precisa ter o poetry instalado no seu pipenv =D</p>
+<p>Bom gente é isso, espero que lhe ajudem.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Afiando o machado 2021</title><link>https://blog.jonatasoliveira.dev//afiando-o-machado-2021.html</link><description><![CDATA["As ferramentas que estou usando no meu workflow de trabalho"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//afiando-o-machado-2021.html</guid><pubDate>Fri, 15 Jan 2021 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h1><a href="#afiando-o-machado-em-2021" aria-hidden="true" class="anchor" id="afiando-o-machado-em-2021"></a>Afiando o machado em 2021</h1>
+<p>Bom estamos começando mais um ano, deixando esse difícil ano de 2020 pra trás, então decidi no hiato entre 2020 e 2021 de revisar meu ambiente de desenvolvimento, então gostaria de compartilhar com vocês como está ficando.</p>
+<p>Pra começar é bom colocar as linguagens / frameworks que tenho configuradas no meu ambiente :</p>
+<ul>
+<li>Dart / Flutter</li>
+<li>Python / Flask / Django / FastAPI</li>
+<li>Javascript / Vue</li>
+<li>Rust</li>
+<li>Go</li>
+</ul>
+<p>Um ponto que acho interessante frisar que em 2021 vou ter um ano atípico no que diz a sistema operacional, vou começar o ano com o Mac, lá pelo meio do ano vou usar o Windows e no fim do ano devo voltar pro Linux, mais precisamente o Arch se não viu meu artigo anterior <a href="https://jonatasoliveira.dev/blog/minha-instalacao-do-arch-linux/">acesse aqui</a> ali eu já fiz uma guia da minha instalação.</p>
+<p>Com isso meu ambiente de desenvolvimento tem que ser o mais flexível possível, além de tudo eu gosto de trabalhar no terminal então como vou usar o WSL2 no Windows (talvez até um virtualbox mesmo) vai ser mais tranquila essa transição.</p>
+<p>Legal já frisar que nesse artigo específico não vou explicar detalhadamente a configuração de cada ferramenta, pretendo fazer isso ao longo do ano, mas já queria falar quais ferramentas estou usando hoje.</p>
+<p>Outro ponto importante pra mim é eu gosto de experimentar uma coisa ou outra, mas sempre de forma separada do fluxo padrão, pois eu posso achar que um projeto ainda não está tão legal pra mim, simplesmente desistir ou ainda intrega-lo no meu workflow principal, removendo a ferramenta anterior, faço isso muito por curiosidade sobre o desenvolvimento de outras ferramentas e vez ou outra acabo incorporando uma ferramenta nova durante o ano ou mesmo um plugin. Algo pra entrar no meu workflow precisa me deixar mais produtivo e não o contrário.</p>
+<p>Pra facilitar a sua leitura deu dividi o artigo nos tópicos abaixo:</p>
+<ul>
+<li>Fontes</li>
+<li>Prompt de comando</li>
+<li>Emulador de terminal</li>
+<li>Multiplexador</li>
+<li>Python</li>
+<li>Dart / Flutter</li>
+<li>Vue</li>
+<li>Editor</li>
+<li>Docker</li>
+<li>Conclusão</li>
+</ul>
+<h2><a href="#fontes" aria-hidden="true" class="anchor" id="fontes"></a>Fontes</h2>
+<p>Uma coisa que pode não parecer muito importante, mas que no meu workflow eu acho super importante é o uso do <a href="https://www.nerdfonts.com/">nerdfonts</a>, pois ele me dá um conjunto de fontes e ícones que vou colocar tanto no meu terminal, quanto no meu editor de texto, como eu fico 80% do meu tempo dentro do terminal ter boas fontes e bons ícones ajuda a deixar o ambiente mais agradável, sei que muita gente gosta e vive bem com um terminal mais &quot;seco&quot; e vive bem com isso.</p>
+<p>Além disso, eu pretendo usar também os ícones e fontes no próprio Xmonad.</p>
+<h2><a href="#tema" aria-hidden="true" class="anchor" id="tema"></a>Tema</h2>
+<p>Um tema que venho usando e gosto muito é o <a href="https://draculatheme.com/">dracula</a>, o bom dele é que basicamente posso usar o mesmo esquema de cores em todas as ferramentas que uso, inclusive no meu browser, então tudo que eu posso eu tento usar o drácula como tema.</p>
+<p>No caso do Xmonad ainda não tem um tema, mas pretendo resolver essa pendência =D.</p>
+<h2><a href="#prompt-de-comando" aria-hidden="true" class="anchor" id="prompt-de-comando"></a>Prompt de comando</h2>
+<p>Aqui eu uso o <a href="https://www.zsh.org/">zsh</a> como shell, para complementar uso o <a href="https://ohmyz.sh/">ohmyzsh</a> pois ele me trás vários plugins úteis para o dia-a-dia e o <a href="https://starship.rs/">starship</a> para customizar a visualização do prompt pois ele possui várias opções de customizar a visualização e acho ele infinitamente mais leve que o tema do <a href="https://github.com/romkatv/powerlevel10k">powerlevel10k</a> que me dá várias opções mas, pelo menos no mac hoje fica bem pesado quando uso.</p>
+<p>Com isso já consigo usar autocomplete e ter alguns indícios visuais de um repositório, e no meu .zshrc eu vou colocando as configurações e alias de comando que mais uso no dia-a-dia.</p>
+<p>Uma coisa que penso em experimentar durante o ano é o <a href="https://fishshell.com/">fish shell</a> e o <a href="https://elv.sh/learn/">elvish shell</a>.</p>
+<h2><a href="#emulador-de-terminal" aria-hidden="true" class="anchor" id="emulador-de-terminal"></a>Emulador de terminal</h2>
+<p>Pode não parecer, mas minha ideia é ter o menor número de ferramentas / plugins dentro do meu workflow, pois é fácil você configurar algo e raramente usar. Porém no caso do emulador de terminal ainda tenho um dilema estou usando 2, o <a href="https://github.com/alacritty/alacritty">alacritty</a> e o <a href="https://sw.kovidgoyal.net/kitty/">kitty</a>.</p>
+<p>O <a href="https://github.com/alacritty/alacritty">alacritty</a> é um emulador de terminal pequeno, leve e poderoso, ele segue o conceito dos emuladores com poucas features, o que é perfeito pra usar em tilling manager como o Xmonad ou o i3, porém hoje ele não tem uma feature que estou usando no momento, que é a compatibilidade para fontes com ligadura, tipo o fira code.</p>
+<p>Por conta disso estou usando o <a href="https://sw.kovidgoyal.net/kitty/">kitty</a>, que é um emulador de terminal com muitos recursos, porém fora suas configurações básicas, não uso as features tmux like dele, muito por que acho que o próprio alacritty no futuro vai ter essa feature e eu devo voltar pra ele, e não me entenda mal o kitty é ótimo, mas muitas das features dele eu já resolvo com tmux + Xmonad, o que pode parecer estranho já que quero ter sempre o mínimo possível de ferramentas, mas durante esse ano se em algum momento eu achar que o Kitty está sendo mais vantajoso com certeza vou permanecer nele.</p>
+<p>Mas por enquanto a ideia é ter o alacritty como emulador de terminal principal.</p>
+<h2><a href="#multiplexador" aria-hidden="true" class="anchor" id="multiplexador"></a>Multiplexador</h2>
+<p>Aqui só tem uma ferramenta que uso que é o <a href="https://github.com/tmux/tmux">tmux</a>, ele nada mais é que um multiplexador, trabalha com abas além de manipular as janelas de maneira muito parecida com o tilling manager, mas então por que usar isso até pelo que falei sobre o kitty?</p>
+<p>Uso principalmente por conta de gerar uma sessão e uma sessão básica, e o que isso quer dizer? Primeiro quando crio uma sessão no tmux, mesmo que feche o terminal a sessão ainda vai ficar de pé até que você reinicie o computador ou mate a sessão. Assim mesmo que acidentalmente feche o terminal a minha sessão vai continuar em pé normalmente.</p>
+<p>Agora outra feature que o tmux tem é poder criar templates de sessões, ou seja, já posso configurar quantidade de janelas, diretório que vai abrir além de dar start em alguma ferramenta como um git fetch ou coisa do tipo. Hoje uso apenas uma sessão e abro tudo que eu possa precisar, isso até por que hoje estou usando o mac e é mais conveniente abrir tudo já, porém quando voltar a usar o linux penso em criar sessões especializadas (editor, kubernetes, dart e etc), pois ao invés de ficar trabalhando com várias abas no tmux, posso trabalhar com uma apenas mas, com o workflow da atividade que vou trabalhar já.</p>
+<p>Voltando ao kitty ele faz isso também tanto em manter sessão quanto montar templates de uso, aqui a preferência é por já ter o costumo com os atalhos do tmux, conforme esse ano for passando talvez eu faça alguns testes usando só o kitty, por que talvez eu ganhe mais usando só ele ao invés do alacritty + tmux.</p>
+<h2><a href="#python" aria-hidden="true" class="anchor" id="python"></a>Python</h2>
+<p>Aqui nessa sessão eu configuro a versão do python e meu ambiente virtuais, primeira ferramenta que uso é o <a href="https://github.com/pyenv/pyenv">pyenv</a>, no caso ele vai gerenciar a versão do python que estou usando em determinado projeto, por exemplo, hoje tenho projetos que usam python 3.5, 3.7 e 3.9, isso muito por que alguns projetos usam bibliotecas de terceiros que são incompatíveis com versões mais recentes do python.</p>
+<p>Além disso o pyenv me dá a possibildade de não &quot;sujar&quot; a versão do python do sistema (mac/linux), pois essa versão vai ser usada para as aplicações do sistema, e prefiro deixar ela intocada, isso é interessante se você algum dia já instalou várias bibliotecas no seu python de sistema e um aplicativo já parou de funcionar por conflito, tendo a versão do python segregada te ajuda a resolver esse problema, além disso o pyenv você consegue configurar na sua versão global todas as versões que vc está usando.</p>
+<p>O pyenv tem plugins para gerenciar suas virtuals envs, porém hoje eu prefiro usar o <a href="https://python-poetry.org/">poetry</a>, ele ajudar a manter o controle das bibliotecas que uso em determinado projeto, mantém uma árvore de dependências, versionando inclusive lib dependentes do meu projeto além de criar minha virtualenv tudo com um comando, e isso é uma das coisas que mais gosto dele.</p>
+<h2><a href="#dart--flutter" aria-hidden="true" class="anchor" id="dart--flutter"></a>Dart / Flutter</h2>
+<p>Aqui não tem muito segredo, pois eu simplesmente uso o procedimento do site do <a href="https://flutter.dev/docs/get-started/install">flutter</a> pra fazer a instalação, como não mexo tanto no dart/flutter (esse ano devo usar mais), então a configuração padrão já me atende sem muito problema.</p>
+<p>Aqui talvez num futuro se precisar trabalhar com versões diferentes do dart uma solução seria usar o [asdf] (<a href="https://github.com/asdf-vm/asdf">https://github.com/asdf-vm/asdf</a>), mas ainda não sei se seria necessário.</p>
+<h2><a href="#vue" aria-hidden="true" class="anchor" id="vue"></a>Vue</h2>
+<p>Para trabalhar com vue eu preciso de duas coisas, primeiro o <a href="https://github.com/nvm-sh/nvm">NVM</a> com ele eu consigo usar a versão do Node que eu quiser para determinado projeto de forma fácil e rápida, é um processo bem parecido com o pyenv, a segunda coisa que preciso é o <a href="https://cli.vuejs.org/">VueCLI</a> que já ajuda a criar os projetos VUE de forma bem rápida, além de subir um plugins pré configurados.</p>
+<h2><a href="#editor" aria-hidden="true" class="anchor" id="editor"></a>Editor</h2>
+<p>Já usei vários editores na vida, mas nos últimos anos tenho dado preferência ao vim e mais especificamente ao <a href="https://neovim.io/">NeoVim</a>, muito por que mesmo tendo vários plugins nele ainda é bem leve para se trabalhar.</p>
+<p>O NeoVim quando instalado já possui várias configurações interessantes, das quais pretendo colocar em outro post que já ajuda bastante, mas gostaria de falar aqui dos principais plugins que uso hoje.</p>
+<p>Para ter um intellisense e alguns auto formats eu uso o <a href="https://github.com/neoclide/coc.nvim">COC</a> ele já me da uma gama de possibilidades de configurar o interpretador para python, js, vue e dart e sem muito esforço, sua única inconveniência ao meu ver é ter que criar uma pasta de configuração .vim em todos os projetos que trabalho. Com ajuda do COC eu também configuro a parte do <a href="https://github.com/universal-ctags/ctags">cTags</a> para poder funcionar os Go To na navegação do código.</p>
+<p><a href="https://github.com/preservim/nerdtree">NerdTree</a> eu uso para poder navegar nos diretórios do projeto e poder alterar, adicionar e remover pastas e diretórios é bem fácil de usar e bem funcional.</p>
+<p><a href="https://github.com/junegunn/fzf.vim">FZF</a>, <a href="https://github.com/kien/ctrlp.vim">CTRLP</a> e o <a href="https://github.com/wincent/ferret">FERRET</a>, são um conjunto de plugins para fazer busca tanto no diretório quanto detro dos arquivos junto com o <a href="https://github.com/BurntSushi/ripgrep">RG</a> e o <a href="https://github.com/ggreer/the_silver_searcher">AG</a> para aplicar os algoritmos de busca o que otimiza o tempo para fazer as buscas. Com isso já consigo fazer buscas rápidas pelo meu código.</p>
+<p><a href="https://github.com/tpope/vim-fugitive">VIM-FUGITIVE</a> pra mim um dos melhores plugins para dominar no vim, com ele eu consigo trabalhar e ir fazendo meus commits, pulls, pushs sem precisar ter uma outra janela do terminal pra ficar fazendo isso, o que acaba facilitando muito a vida, além de conseguir fazer um gitdiff quando em pull acontece algum conflito com minhas alterações.</p>
+<p>Bom poderia falar de muitos outros plugins que uso mas, acredito que hoje esses são os mais essenciais pro meu dia-a-dia de trabalho.</p>
+<h2><a href="#docker" aria-hidden="true" class="anchor" id="docker"></a>Docker</h2>
+<p>Aqui também uso as instalações padrões do <a href="https://docs.docker.com/get-docker/">docker</a> e <a href="https://docs.docker.com/compose/install/">docker-compose</a>, além de muitas vezes ainda não desenvolver diretamente no docker, todas as estruturas de apoio para o desenvolvimento como db, filas, ferramentas de monitoração e etc, eu rodo no docker, e também quando preciso simular algum problema que não ocorre quando subo o projeto diretamente no poetry eu acabo apelando pra subir o projeto via docker-compose e ver se consigo replicar o erro.</p>
+<p>Penso que quando você começa a trabalhar com docker, você vai sentir dificuldade de deixar ele, pois ele ajuda muito a deixar as configs do seu sistema limpas, pois todas as bibliotecas, instalações e afins estão contidas dentro do container.</p>
+<h2><a href="#conclusão" aria-hidden="true" class="anchor" id="conclusão"></a>Conclusão</h2>
+<p>A ideia aqui foi apresentar o conjunto de ferramentas que uso no meu workflow de trabalho no dia-a-dia, aqui além de talvez você me falar que instalando o pacote do jetbrains eu teria quase tudo isso já na mão.</p>
+<p>Mas, como sempre digo a melhor ferramenta é a que você se sente mais produtivo, acredito que o meu workflow tem uma produtividade bem alta e com um baixo custo de recursos (vendo que tenho um mac de 2014 e um notebook que é um core 2 duo com 4gb de ram), além disso ter um workflow via terminal é extremamente poderoso pois faço praticamente tudo que preciso apenas usando alguns comandos ou atalhos no teclado. Acredito que no caso de um workflow como o meu tem um grande trabalho em &quot;esculpir&quot; as configurações, porém ele fica exatamente do jeito que você quer ao contrário de um jetbrains ou mesmo o vscode que você acaba ficando preso a algumas definições da ferramenta.</p>
+<p>Enfim, espero que você goste e convido a compartilhar ferramentas que você ache legal pra trabalhar num workflow usando terminal ou algum outro workflow que você use, gosto muito de conhecer outros workflows de trabalho =).</p>
+<p>Então é isso e até o próximo artigo.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Minha instalação do Arch Linux</title><link>https://blog.jonatasoliveira.dev//minha-instalac-a-o-do-arch-linux.html</link><description><![CDATA["Um roteiro de como eu instalo o Arch Linux"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//minha-instalac-a-o-do-arch-linux.html</guid><pubDate>Fri, 08 Jan 2021 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">author-jo-natas-luiz-de-oliveira</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<h1><a href="#instalação-do-arch-linux" aria-hidden="true" class="anchor" id="instalação-do-arch-linux"></a>Instalação do Arch Linux</h1>
+<p>Bom começando 2021 com um blog novo decidi compartilhar o meu roteiro para instalar o Arch Linux com algumas explicações.</p>
+<p>No longínquo ano de 2004 eu brincava com instalações complicadas como o FreeBSD, Gentoo e o Slackware, foi uma boa base para aprender muito, com todos os kernel panics  da vida,
+mas minha vida com o pinguim naquela época ainda era só uma curiosidade, pois trabalhava com Delphi e ambiente Windows além de que nessa época era bem complicado jogar no Linux.</p>
+<p>Desde de 2014 voltei a trabalhar usando Linux inicialmente como freelance e depois na minha ocupação principal, um pouco isso se deve ao trabalho do Dionatan do <a href="https://diolinux.com.br/">Diolinux</a>, mas desde então conhecim uma distro que não havia conhecido lá no começo dos anos 2000 que era o Arch linux, gostei muito da ideia do Pacman que é muito parecido com o Brew do MacOs, mas mesmo assim sempre fiquei nas distros ubuntu like pois era um sistema que eu tinha mais familiaridade.</p>
+<p>Esse ano de 2021 vai ser um ano atipico pra mim eu nesse momento estou usando um Mac, mas no meio do ano vou trabalhar alguns meses numa estação Windows até que mais pro final do
+ano estou pensando em pegar um notebook da <a href="https://system76.com/">System76</a>, então no perído entre festas ali de 2020 eu decidi me aventurar em fazer uma instalação do Arch numa
+virtualbox para ter um roteiro pronto pra usar no meio do ano pra voltar a usar o Arch.</p>
+<p>Um ponto importante é que lá por 2017 eu comecei a usar o xubuntu com o gerenciador de janelas i3, antes de começar a usar o mac estava usando o <a href="https://xmonad.org/">Xmonad</a> nesse guia eu levo em consideração a instalação do Xmonad pois já tenho meus arquivos de configuração que basicamente devo copiar, caso tenha interesse você pode ver no meu <a href="https://github.com/jonatasoli/dotfiles">GitHub</a>.</p>
+<p>Um disclamer antes do guia, na verdade eu achei a configuração do Arch relativamente tranquila, a <a href="https://wiki.archlinux.org/index.php/installation_guide">documentação oficial</a>,
+além de que pra mim me enrolei em alguns pontos que não estão muitos explicitos ali, então por isso fiz esse guia, dois vídeos que me ajudaram muito foi esse do <a href="https://www.youtube.com/watch?v=4orYC5ARfn8&amp;t=3212s">Diolinux</a> e essa do <a href="https://www.youtube.com/watch?v=PQgyW10xD8s&amp;t=1340s">Derek Taylor</a>, que alias também tem materiais muitos bons.</p>
+<h2><a href="#verificando-uefi-mode" aria-hidden="true" class="anchor" id="verificando-uefi-mode"></a>Verificando UEFI Mode</h2>
+<ul>
+<li>Verificar o bootmode se o comando abaixo der erro é por que está no UEFI mode
+Pode ser que essa pasta não exista ai o computador não tem suporte a UEFI</li>
+</ul>
+<pre><code>ls /sys/firmware/efi/efivars
+</code></pre>
+<h2><a href="#gerando-o-particionamento" aria-hidden="true" class="anchor" id="gerando-o-particionamento"></a>Gerando o particionamento</h2>
+<p>Aqui acredito que é algo bem pessoal, cada um organiza do jeito que acha melhor eu particularmente uso um / /boot /home /swap usando uma estrutura de partições GPT, caso você não
+saiba o que é de uma olhada <a href="https://sempreupdate.com.br/quais-as-diferencas-entre-gpt-guid-e-mbr/">nesse artigo do sempreupdate</a>.</p>
+<ul>
+<li>Particionar o disco</li>
+</ul>
+<pre><code>fdisk -l #lista discos
+fdisk /dev/sda # ou o disco que vc quer particionar
+exemplo de criação com comandos para o /boot
+- n
+- 1
+- 2048
+- +200M
+
+# Pra criar uma partição existente como swap
+- t
+- 2 # numero da partição
+- 19 # Código do swap
+
+# Bootloader
+- t
+- 1
+- 1 # EFI Filesystem ou 4 bios boot se for MBR
+</code></pre>
+<p>Agora precisamos formatar as partições pra isso usamos o <code>mkfs</code> e no caso do swap usamos o <code>mkwap e swapon</code>.</p>
+<ul>
+<li>Formatar partições</li>
+</ul>
+<pre><code>mkfs.ext4 /dev/sda1
+
+# Swap
+mkswap /dev/sda2
+swapon /dev/sda2
+</code></pre>
+<ul>
+<li>Instalar dostools</li>
+</ul>
+<pre><code>pacman -S dosfstools
+</code></pre>
+<ul>
+<li>Formatar a partição do boot</li>
+</ul>
+<pre><code>mkfs.fat -F 32 /dev/sda1
+# Pode ser BIOS boot ou EFI que é a opção 1
+</code></pre>
+<h2><a href="#montando-os-filesystems" aria-hidden="true" class="anchor" id="montando-os-filesystems"></a>Montando os filesystems</h2>
+<p>Bom o próximo passo é montar o filesystem para fazer a instalação além de montar os diretórios que vão ficar separados em partições diferentes como o /boot e o /home. Acho bom
+enfatizar que o nome das partições vai variar dependendo de como você particionou, no meu caso vai ser /dev/sda1 /dev/sda2 /dev/sda3 e /dev/sda4, porém abaixo deixei da forma mais
+genérica.</p>
+<ul>
+<li>Montar o filesystem</li>
+</ul>
+<pre><code>mount /dev/root_partition /mnt
+</code></pre>
+<ul>
+<li>Criar pastas de boot e home</li>
+</ul>
+<pre><code>mkdir /mnt/home
+mkdir /mnt/boot/ # caso EFI tem que ser /mnt/boot/EFI
+</code></pre>
+<ul>
+<li>Montar o filesystem</li>
+</ul>
+<pre><code>mount /dev/mount-boot /mnt/boot
+mount /dev/mount-home /mnt/home
+</code></pre>
+<h2><a href="#instalação" aria-hidden="true" class="anchor" id="instalação"></a>Instalação</h2>
+<p>Bom agora chegou a hora da instalação, como você vai ver é bem simples:</p>
+<ul>
+<li>instalar os pacotes básicos</li>
+</ul>
+<pre><code>pacstrap /mnt base base-devel linux linux-firmware
+</code></pre>
+<p>Agora vamos gerar o fstab, se não sabe o que é o fstab da uma conferida nesse <a href="https://www.youtube.com/watch?v=C63VJV3sOos">vídeo do Diolinux</a>.</p>
+<ul>
+<li>Gerar o fstab</li>
+</ul>
+<pre><code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre>
+<p>Agora vamos montar o root do arch linux.</p>
+<ul>
+<li>Mudar a montagem pra root</li>
+</ul>
+<pre><code>arch-chroot /mnt
+</code></pre>
+<ul>
+<li>Setar hora local</li>
+</ul>
+<pre><code>ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+hwclock --systohc
+</code></pre>
+<ul>
+<li>Instalar o neovim ou editor da sua preferência.</li>
+</ul>
+<pre><code>pacman -Sy neovim
+</code></pre>
+<ul>
+<li>Editar o arquivo /etc/locale.gen e descomentar o en-UTF8 ou a lingua que você usa como pt_BR-UTF8</li>
+</ul>
+<pre><code># depois gerar os arquivos
+locale-gen
+</code></pre>
+<ul>
+<li>Criar arquivo /etc/locale.conf e add a linguagem padrão do sistema</li>
+</ul>
+<pre><code>LANG=en_US.UTF-8
+</code></pre>
+<h2><a href="#hostname" aria-hidden="true" class="anchor" id="hostname"></a>Hostname</h2>
+<ul>
+<li>
+<p>Add o hostname em /etc/hostname</p>
+</li>
+<li>
+<p>Editar o /etc/hosts</p>
+</li>
+</ul>
+<pre><code>/etc/hosts
+
+127.0.0.1	localhost
+::1		localhost
+127.0.1.1	myhostname.localdomain	myhostname
+</code></pre>
+<h2><a href="#gestão-do-user" aria-hidden="true" class="anchor" id="gestão-do-user"></a>Gestão do USER</h2>
+<ul>
+<li>Definir senha do root</li>
+</ul>
+<pre><code>passwd
+</code></pre>
+<ul>
+<li>Add user</li>
+</ul>
+<pre><code>useradd -m -g users -G wheel,audio,video,storage nome_desejado_para_o_usuario
+</code></pre>
+<ul>
+<li>Add no /etc/sudoers</li>
+</ul>
+<pre><code>myuser ALL=(ALL) ALL
+</code></pre>
+<p>Atualizar agora o usuário que eu criei com o passwd.</p>
+<pre><code>passwd nome_desejado_para_o_usuario
+</code></pre>
+<h2><a href="#pacotes-adicionais" aria-hidden="true" class="anchor" id="pacotes-adicionais"></a>Pacotes adicionais</h2>
+<ul>
+<li>Instalar pacotes adicionais (pra wifi continuar funcionando no pos instalação)</li>
+</ul>
+<pre><code>pacman -S dosfstools os-prober mtools network-manager-applet networkmanager wpa_supplicant wireless_tools dialog sudo
+</code></pre>
+<h2><a href="#grub" aria-hidden="true" class="anchor" id="grub"></a>Grub</h2>
+<p>Acho que foi a parte que mais me enrosquei, importante que precisa já ter criado e formatado, além disso aqui é importante que ele usa pacotes diferentes dependendo do tipo da sua
+partição do boot.</p>
+<ul>
+<li>Instalar o GRUB</li>
+</ul>
+<pre><code>pacman -S grub os-prober
+
+# MBR
+
+grub-install --target=i386-pc --recheck /dev/sda
+
+# EFI
+pacman -S efibootmgr
+grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
+
+CONFIG
+grub-mkconfig -o /boot/grub/grub.cfg
+
+</code></pre>
+<h2><a href="#pós-instalação" aria-hidden="true" class="anchor" id="pós-instalação"></a>Pós Instalação</h2>
+<p>Primeiro vou habilitar o networkmanager pois senão não vai habilitar a rede.</p>
+<ul>
+<li>Hábilitar o network manager</li>
+</ul>
+<pre><code>systemctl enable NetworkManager
+</code></pre>
+<p>Depois disso reinicio e testo através de um ping se está funcionando a rede além é claro de logar com o meu usuário, agora pra usar o pacman vamos usar o sudo.</p>
+<ul>
+<li>Instalar o básico pra usar o Xmonad e algumas aplicações</li>
+</ul>
+<pre><code>sudo pacman -Syy xorg xorg-xinit xf86-video-fbdev(ou sua placa de video) nitrogen picom firefox neovim ranger rxvt-unicode
+sudo pacman -Syy lightdm lightdm-gtk-greeter xmonad xmonad-contrib xmobar dmenu kitty
+</code></pre>
+<p>Ali instalo dois terminais o urxvt e o kitty, isso acontece pois quando fiz a instalação tive problemas com o kitty no inicio da configuração, então uso o urxvt e depois de copiar
+todas as minhas configs eu mudo para o kitty, já que o caração de usar um tilling manager é ter acesso fácil ao terminal.</p>
+<ul>
+<li>Configurar o .xinitrc copiando o exemplo do xorg pra sua home</li>
+</ul>
+<pre><code>cp /etc/X11/xinit/xinitrc .xinitrc
+</code></pre>
+<ul>
+<li>Adicionar o arquivo o start do nitrogen do picom e do xmonad</li>
+</ul>
+<pre><code># Remover
+twm &amp;
+...
+exec xterm -geometry 80x66+0+0 -name login
+
+#Adicionar
+exec xmonad
+</code></pre>
+<p>Bom com essa configuração eu já consigo iniciar o Xmonad, eu gosto de deixar ele funcional já por que se houver algum problema pra subir o Xorg ou o Xmonad ele ainda vai entrar em
+modo texto.</p>
+<ul>
+<li>Testar a inicialização</li>
+</ul>
+<pre><code>startx
+</code></pre>
+<p>Bom agora aqui eu copio meus arquivos de configuração, se você não tem os seus pode usar o meu <a href="https://github.com/jonatasoli/dotfiles">clicando aqui</a>.</p>
+<ul>
+<li>Copiar os arquivos de configuração do xmonad e do xmobar</li>
+</ul>
+<pre><code># criar diretório .xmonad
+# criar diretório .config/xmobar
+
+Normalmente eu reinicio logo novamente e dou um startx só pra ter certeza que tudo está funcionando, ai sim eu habilito o lightdm pra iniciar tudo já no modo gráfico.
+</code></pre>
+<ul>
+<li>Habilitar o lightdm</li>
+</ul>
+<pre><code>sudo systemctl enable lightdm
+</code></pre>
+<p>Depois disso, eu começo a configurar o meu ambiente de desenvolvimento mas, o sistema já está pronto pra ser usado. Caso tenham alguma dúvida pode colocar nos comentários que ajudo
+da melhor maneira que conseguir.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item></channel></rss>
