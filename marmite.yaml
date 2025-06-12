@@ -38,6 +38,8 @@ menu:
   - "https://www.youtube.com/@devjonatas"
 - - Twitch
   - "https://www.twitch.tv/devjonatas"
+- - Newsletter
+  - "https://newsletter.jonatasoliveira.dev"
 
 extra:
   colorscheme: catppuccin
