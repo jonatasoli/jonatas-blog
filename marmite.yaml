@@ -26,10 +26,8 @@ banner_image: ''
 logo_image: ''
 default_date_format: '%b %e, %Y'
 menu:
-- - Tags
-  - tags.html
-- - Archive
-  - archive.html
+- - Newsletter
+  - "https://newsletter.jonatasoliveira.dev"
 - - Github
   - "https://github.com/oliveira-mark"
 - - Linkedin
@@ -38,8 +36,8 @@ menu:
   - "https://www.youtube.com/@devjonatas"
 - - Twitch
   - "https://www.twitch.tv/devjonatas"
-- - Newsletter
-  - "https://newsletter.jonatasoliveira.dev"
+- - Archive
+  - archive.html
 
 extra:
   colorscheme: catppuccin
