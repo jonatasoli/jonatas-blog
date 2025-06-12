@@ -1,10 +1,10 @@
 {
   "marmite_version": "0.2.5",
-  "posts": 12,
+  "posts": 13,
   "pages": 1,
-  "generated_at": "2025-06-10 11:19:52.545361240 +02:00",
-  "timestamp": 1749547192,
-  "elapsed_time": 0.0360972,
+  "generated_at": "2025-06-12 07:25:24.852372229 +02:00",
+  "timestamp": 1749705924,
+  "elapsed_time": 0.036040606,
   "config": {
     "name": "Jonatas",
     "tagline": "Aprendendo a fazer jogos e se aventurando pelo Rust e Python",

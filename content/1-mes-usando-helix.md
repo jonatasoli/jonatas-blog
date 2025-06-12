@@ -2,7 +2,7 @@
 title: "30 dias usando Helix"
 banner_image: "media/post-images/helix-30-dias.png"
 description: "Me desafiei a aprender a usar o editor Helix por 30 dias!"
-date: 2025-06-11
+date: 2025-06-09
 ---
 
 ### [Veja também no Youtube](https://www.youtube.com/watch?v=MURMkIlCHRg&t)

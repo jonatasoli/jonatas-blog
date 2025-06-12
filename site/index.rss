@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Jonatas</title><link>https://blog.jonatasoliveira.dev/</link><description>Aprendendo a fazer jogos e se aventurando pelo Rust e Python</description><pubDate>Wed, 11 Jun 2025 00:00:00 GMT</pubDate><lastBuildDate>Tue, 10 Jun 2025 09:19:52 GMT</lastBuildDate><generator>marmite</generator><item><title>30 dias usando Helix</title><link>https://blog.jonatasoliveira.dev//30-dias-usando-helix.html</link><description><![CDATA["Me desafiei a aprender a usar o editor Helix por 30 dias!"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//30-dias-usando-helix.html</guid><pubDate>Wed, 11 Jun 2025 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">index</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Jonatas</title><link>https://blog.jonatasoliveira.dev/</link><description>Aprendendo a fazer jogos e se aventurando pelo Rust e Python</description><pubDate>Wed, 11 Jun 2025 00:00:00 GMT</pubDate><lastBuildDate>Thu, 12 Jun 2025 05:25:24 GMT</lastBuildDate><generator>marmite</generator><item><title>30 dias usando Helix</title><link>https://blog.jonatasoliveira.dev//30-dias-usando-helix.html</link><description><![CDATA["Me desafiei a aprender a usar o editor Helix por 30 dias!"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//30-dias-usando-helix.html</guid><pubDate>Wed, 11 Jun 2025 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">index</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
 <h3><a href="#veja-também-no-youtube" aria-hidden="true" class="anchor" id="veja-também-no-youtube"></a><a href="https://www.youtube.com/watch?v=MURMkIlCHRg&amp;t">Veja também no Youtube</a></h3>
 <p>Olá gente, estou esse mês me desafiando a usar o <a href="https://helix-editor.com/">helix</a> que é um editor baseado em rust por 30 dias.
 Só pra contextualizar, eu uso vim/neovim a um bom tempo e eu estou montando um material de como configurar o neovim do zero, nesse meio tempo tenho que continuar trabalhando, e eu decidi não usar uma vm pra ir configurando em paralelo enquanto minha config estável contuasse me atendendo. Então resolvi testar um editor novo que é em algumas partes inspirado no vim/neovim pra ir usando.</p>
@@ -442,6 +442,259 @@ Ainda sinto falta DD um sistema de plugins pra conseguir entender algumas coisas
 Alem disso ainda tem coisas que me fazem continuar com o com como um suporte melhor ao svelte e ter um autocomplete bom pro tailwind. Nos próximos meses devo refazer minha config do zero pro neovim e enquanto isso devo continuar usando o hélix pois ele é muito bom e talvez ate contribuir com ele.
 Convido você que quer aprender a usar um editor de terminal experimente o hélix primeiro e depois vá pro vim ele tem uma configuração mais simples e você vai aprender a maior parte da navegação por ele. Não me leve a mal ainda gosto mais do neovim porém vejo que muitos novatos sofrem pra configurar o neovim no dia a dia o hélix é uma boa opção de começar a usar com menos configuração enquanto ajusta seu neovim aos poucos.
 Estero que quem acompanhou essa jornada se inspire a conhecer também.</p>
+<!-- Content Injected to every content markdown footer -->
+]]></content:encoded></item><item><title>Deploy flask application with subdomain on Heroku</title><link>https://blog.jonatasoliveira.dev//deploy-flask-application-with-subdomain-on-heroku.html</link><description><![CDATA["As ferramentas que estou usando no meu workflow de trabalho"]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//deploy-flask-application-with-subdomain-on-heroku.html</guid><pubDate>Wed, 11 Jun 2025 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">index</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
+<p>Hello, I made a very detailed guide on how I uploaded an example project using Heroku and Cloudflare, I hope I can help you.</p>
+<p>As a first step, let's create our project folder:</p>
+<pre><code class="language-shell">mkdir flask_example
+</code></pre>
+<p>In this example, we are going to use poetry to manage dependencies and for that, we need to install it via pip.</p>
+<pre><code class="language-shell">pip install poetry
+</code></pre>
+<p>Let's do the <code>poetry init</code> command to start our configuration, in this case, let's just follow its default configuration, as below:</p>
+<pre><code class="language-shell">❯ poetry init
+
+This command will guide you through creating your pyproject.toml config.
+
+Package name [flask_example]:  
+Version [0.1.0]:  
+Description []:  
+Author [Jonatas Oliveira &lt;contact@jonatasoliveira.dev&gt;, n to skip]:  
+License []:  
+Compatible Python versions [^3.13]:  
+
+Would you like to define your main dependencies interactively? (yes/no) [yes] 
+You can specify a package in the following forms:
+  - A single name (requests): this will search for matches on PyPI
+  - A name and a constraint (requests@^2.23.0)
+  - A git url (git+https://github.com/python-poetry/poetry.git)
+  - A git url with a revision (git+https://github.com/python-poetry/poetry.git#develop)
+  - A file path (../my-package/my-package.whl)
+  - A directory (../my-package/)
+  - A url (https://example.com/packages/my-package-0.1.0.tar.gz)
+
+Package to add or search for (leave blank to skip): 
+
+Would you like to define your development dependencies interactively? (yes/no) [yes] 
+Package to add or search for (leave blank to skip): 
+
+Generated file
+
+[tool.poetry]
+name = &quot;flask-example&quot;
+version = &quot;0.1.0&quot;
+description = &quot;&quot;
+authors = [&quot;Jonatas Oliveira &lt;contact@jonatasoliveira.dev&gt;&quot;]
+readme = &quot;README.md&quot;
+packages = [{include = &quot;flask_example&quot;}]
+
+[tool.poetry.dependencies]
+python = &quot;^3.13&quot;
+
+
+[build-system]
+requires = [&quot;poetry-core&quot;]
+build-backend = &quot;poetry.core.masonry.api&quot;
+</code></pre>
+<p>Now let's install the minimal packages for this example.</p>
+<pre><code class="language-shell">poetry add flask python-decouple python-dotenv gunicorn
+</code></pre>
+<p>Now we create the default directories for static and templates, this example we not use, but is good use with reference.</p>
+<pre><code class="language-shell">mkdir static template
+</code></pre>
+<p>Now let's create the default directories for static and template, in this example, we won't use them, it's more to use as a reference.</p>
+<pre><code class="language-shell">touch config.py app.py main.py
+</code></pre>
+<p>Now let's enter the shell and create the main.py file.</p>
+<pre><code class="language-python">import locale
+
+from flask import Flask
+
+import config as default_config
+
+
+def create_app(config=None) -&gt; Flask:
+    locale.setlocale(locale.LC_ALL, &quot;pt_BR.UTF-8&quot;)  # set locale
+    app = Flask(__name__, static_folder=&quot;../static&quot;, template_folder=&quot;../templates&quot;)
+    if config is None:
+        config = default_config
+    app.config.from_object(config)
+    return app
+
+</code></pre>
+<p>Here I'm already using the flask's config template in a separate file, which isn't the simplest way to get started but is best for a project that expects to grow.</p>
+<pre><code class="language-python">def create_app(config=None) -&gt; Flask:
+</code></pre>
+<p>Here we define our create_app function which is basically our app flask initialization function.</p>
+<pre><code class="language-python">app = Flask(__name__, static_folder=&quot;../static&quot;, template_folder=&quot;../templates&quot;)
+</code></pre>
+<p>Here I set the flask app and define the static_folder and the template_folder, in the API projects these settings can be optional.</p>
+<pre><code class="language-python">    if config is None:
+        config = default_config
+    app.config.from_object(config)
+</code></pre>
+<p>Here we configure the import of the config for the project, we could set the config directly in create_app but it is more organized to use a file just for organization.
+As a parameter of create_app, we put config, in this case, it is set to none by default, this is especially important for testing, where we can configure an exclusive config for testing or if we want to separate the production config. So when calling the app we can pass the config we want.</p>
+<pre><code class="language-pyhton">    return app
+</code></pre>
+<p>Finally, we return the app we want.
+For now, nothing works, but let's now create our default route using a blueprint.</p>
+<p>Let's create the root_blueprint.py file,</p>
+<pre><code class="language-python">from flask import Blueprint
+
+main_blueprint = Blueprint('Main Blueprint with root domain', __name__)
+
+@main_blueprint.route('/')
+def index():
+    return &quot;This is a main blueprint&quot;
+
+</code></pre>
+<p>where:</p>
+<pre><code class="language-python">from flask import Blueprint
+
+main_blueprint = Blueprint('Root route', __name__)
+</code></pre>
+<p>Here we import the Blueprint and define it as a description.</p>
+<pre><code class="language-python">@main_blueprint.route('/')
+def index():
+    return &quot;This is a main blueprint&quot;
+</code></pre>
+<p>Here we create our default route in &quot;/&quot; which is the root of the project.</p>
+<p>Now let's register our blueprint in main.py</p>
+<pre><code class="language-python">    # Blueprints and API Namespaces
+    from root_blueprint import main_blueprint
+    app.register_blueprint(main_blueprint)
+</code></pre>
+<p>Let's create the app.py file so we can start our flask application using it.</p>
+<pre><code class="language-python">from main import create_app
+
+app = create_app()
+</code></pre>
+<p>Now let's run our application by first starting the venv with poetry then let's set it to start in debug mode and run the flask.</p>
+<pre><code class="language-shell">poetry shell
+export FLASK_DEBUG true
+flask run
+</code></pre>
+<p>Run with localhost and see the message below appear:
+<figure><img src="media/post-images/flask-domain-main-blueprint.png" alt="Photo" /></figure>)</p>
+<p>Now let's configure the subdomain in the local environment.
+Go to /etc/hosts and configure our domain and subdomain, it is important to try to use a non-valid domain on the internet because if, for example, you use google.com instead of directing you to the search engine, you will be directed to your address local, in this case, we will use mydomain as the domain.</p>
+<pre><code class="language-sudo">...
+127.0.0.1    subdomain.mydomain mydomain
+</code></pre>
+<p>Now let's create the blueprint subdomain_blueprint.py</p>
+<pre><code class="language-python">from flask import Blueprint
+
+sub_blueprint = Blueprint('Subdomain route', __name__)
+
+@sub_blueprint.route('/', subdomain='subdomain')
+def index():
+    return &quot;This is a subdomain blueprint&quot;
+
+</code></pre>
+<p>Note that in the blueprint decorator, we added <code>subdomain='subdomain'</code> which serves to indicate the subdomain that will be used.</p>
+<p>Now in main.py let's register the blueprint</p>
+<pre><code class="language-python">    from sub_blueprint import sub_blueprint
+    app.register_blueprint(sub_blueprint)
+</code></pre>
+<p>Now we need to configure our config.py to be able to recognize our locally created domain.</p>
+<pre><code class="language-python">from decouple import config
+
+SERVER_NAME = config('SERVER_NAME')
+</code></pre>
+<p>Basically, we are going to use the python decouple lib so we can dynamically configure the SERVER_NAME.
+Because of this, we will need to create a .env file with the name SERVER_NAME (it is important to put the .env in .gitignore as it cannot be uploaded to your repository)</p>
+<pre><code class="language-python">SERVER_NAME=mydomain:5000
+</code></pre>
+<p>now let's test the domain and subdomain in the browser.
+<figure><img src="media/post-images/flask-domain-main-blueprint.png" alt="Photo" /></figure>)</p>
+<p><figure><img src="media/post-images/flask-domain-subdomain.png" alt="Photo" /></figure>)</p>
+<p>Now let's upload this project to git and place the .env in .gitignore</p>
+<pre><code class="language-shell">echo '.env' &gt; .gitignore
+echo 'venv'  &gt;&gt; .gitignore
+echo '__py_cache__' &gt;&gt; .gitignore
+git add .
+git commit -m &quot; initial commit&quot;
+git push origin main
+</code></pre>
+<p>Go to namecheap and hire a domain following the site's standard procedure.
+<figure><img src="media/post-images/flask-domain-manage-dns.png" alt="Photo" /></figure>)</p>
+<p>With the domain purchased, we will register it at Cloudflare by first adding the domain name and clicking on &quot;Add a Site&quot;.
+<figure><img src="media/post-images/flask-domain-cloudflare-1.png" alt="Photo" /></figure>)
+<figure><img src="media/post-images/flask-domain-cloudflare-2.png" alt="Photo" /></figure>)
+<figure><img src="media/post-images/flask-domain-cloudflare-3.png" alt="Photo" /></figure>)
+<figure><img src="media/post-images/flask-domain-cloudflare-4.png" alt="Photo" /></figure>)
+<figure><img src="media/post-images/flask-domain-cloudflare-5.png" alt="Photo" /></figure>)</p>
+<p>With the nameservers in hand, let's add it to NameCheap.
+<figure><img src="media/post-images/flask-domain-namecheap-1.png" alt="Photo" /></figure>)
+<figure><img src="media/post-images/flask-domain-namecheap-2.png" alt="Photo" /></figure>)
+<figure><img src="media/post-images/flask-domain-namecheap-3.png" alt="Photo" /></figure>)</p>
+<p>Now we go config Heroku.</p>
+<p>It is necessary to <a href="https://signup.heroku.com/">create a Heroku account</a> before continuing, creating the account we will log in and add the app by clicking on create a new app.</p>
+<div class="markdown-alert markdown-alert-warning">
+<p class="markdown-alert-title">For create app</p>
+<p>You must first register a credit card on Heroku before proceeding, as there are no more paid plans now.</p>
+</div>
+<p>In the first step, put a name for your app and choose the region, then click on Create App.
+<figure><img src="media/post-images/flask-domain-heroku-1.png" alt="Photo" /></figure>)</p>
+<p>On the next screen, we will choose the <a href="https://devcenter.heroku.com/articles/heroku-cli">heroku cli</a> option to upload our application.</p>
+<p>&gt;[info] GitHub use
+&gt;For this example, we are going to use the Heroku CLI as it is the simplest method, but I strongly recommend making a pipeline using Git Hub, and if you need to know how to install the Heroku CLI, just follow the [instructions on the Heroku website](https ://devcenter.heroku.com/articles/heroku-cli), if you are using Linux I recommend using the tarball.</p>
+<p>Before we continue to configure the CLI, let's put the requirements file, which Heroku will identify to deploy, as we use poetry, we need to export the file.</p>
+<pre><code class="language-bash">poetry export -f requirements.txt --output requirements.txt
+</code></pre>
+<p>Let's also create the Procfile so we can start our app using the app.py from the flask with gunicorn.</p>
+<pre><code class="language-shell">web: gunicorn app:app
+</code></pre>
+<p>Now let's configure the environment variable so that Heroku identifies the name of the server you want to use in my case I'm going to use myfinances.guru.
+So let's click on Settings and then on Reveals Config Vars.
+<figure><img src="media/post-images/flask-domain-heroku-2.png" alt="Photo" /></figure>)
+<figure><img src="media/post-images/flask-domain-heroku-3.png" alt="Photo" /></figure>)
+In the KEY field, we will put <code>SERVER_NAME</code> and in value, we will put the domain which in my case is <code>myfinances.guru</code>
+<figure><img src="media/post-images/flask-domain-heroku-4.png" alt="Photo" /></figure>)
+Then just click on Add and in the sequence we will deploy.</p>
+<p>To start the Heroku CLI, let's log in using the command below:</p>
+<pre><code class="language-shell">heroku login
+</code></pre>
+<p>It will display a link with a login page in your browser, so just copy and paste and follow the login procedure after you're done just go back to the terminal.</p>
+<p>Let's add the latest changes to our main branch:</p>
+<pre><code class="language-shell">git add .
+git commit -m &quot;chore: add deploy configs&quot;
+git push origin main
+</code></pre>
+<p>Adding a remote for Heroku, in your app the configuration line will appear in my case it is the line below in your case it will be another line:</p>
+<pre><code class="language-shell">heroku git:remote -a example-subdomain-jonatas
+</code></pre>
+<p>Now just push to Heroku with the command below:</p>
+<pre><code class="language-shell">git push heroku main
+</code></pre>
+<p>&gt;[info] Which branch to use for push?
+&gt;In my case, my branch on Git Hub is main, but on Heroku the example will appear as master, so always put the branch you are using on github.</p>
+<p>When the deployment is finished it will display a heroku url for this project, in my case it looked like this:
+<code>remote:        https://example-subdomain-jonatas.herokuapp.com/ deployed to Heroku</code></p>
+<p>Let's now indicate to Heroku that we are going to use an external subdomain in my case myfinances.guru according to the line below:</p>
+<pre><code class="language-shell">heroku domains:add myfinances.guru
+</code></pre>
+<p>Now with the <code>heroku domain</code> command we verify the target that it will generate to put in the DNS.
+<figure><img src="media/post-images/flask-domain-terminal-1.png" alt="Photo" /></figure>)</p>
+<p>Now we also add our subdomain:</p>
+<pre><code class="language-shell">heroku domains:add subdomain.myfinances.guru
+</code></pre>
+<p>It will generate another target to be placed on CloudFlare.</p>
+<p>Now we need to go to Cloudflare and configure this URL using CNAME, in my case it will look like the image below:
+<figure><img src="media/post-images/flask-domain-cloudflare-6.png" alt="Photo" /></figure>)</p>
+<p>Now we need to wait a few minutes to propagate the DNS, but once the propagation is complete we can test our application using the domain.
+<figure><img src="media/post-images/flask-domain-route-main-domain.png" alt="Photo" /></figure>)
+<figure><img src="media/post-images/flask-domain-route-subdomain.png" alt="Photo" /></figure>)</p>
+<p>With that I close this guide, if you need any other information please let me know.</p>
+<ul>
+<li></li>
+</ul>
+<h2><a href="#references" aria-hidden="true" class="anchor" id="references"></a>References</h2>
+<ul>
+<li><a href="https://developers.cloudflare.com/">CloudFlare Documentation</a></li>
+<li><a href="https://devcenter.heroku.com/categories/reference">Heroku Documentation</a></li>
+</ul>
 <!-- Content Injected to every content markdown footer -->
 ]]></content:encoded></item><item><title>Rust Descomplicado: Desvendando os mistérios dos tipos básicos</title><link>https://blog.jonatasoliveira.dev//rust-descomplicado-desvendando-os-miste-rios-dos-tipos-ba-sicos.html</link><description><![CDATA["Neste artigo, vamos explorar os tipos primitivos de Rust, um dos blocos fundamentais para trabalhar nesta linguagem."]]></description><author>Jônatas Luiz de Oliveira</author><guid>https://blog.jonatasoliveira.dev//rust-descomplicado-desvendando-os-miste-rios-dos-tipos-ba-sicos.html</guid><pubDate>Fri, 12 Jan 2024 00:00:00 GMT</pubDate><source url="https://blog.jonatasoliveira.dev/">index</source><content:encoded><![CDATA[<!-- Content Injected to every content markdown header -->
 <h1><a href="#rust-descomplicado-desvendando-os-mistérios-dos-tipos-básicos" aria-hidden="true" class="anchor" id="rust-descomplicado-desvendando-os-mistérios-dos-tipos-básicos"></a>Rust Descomplicado: Desvendando os Mistérios dos Tipos Básicos</h1>
