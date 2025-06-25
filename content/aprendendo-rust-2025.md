@@ -2,7 +2,7 @@
 title: "Aprendendo Rust em 2025 e seus mitos"
 banner_image: "media/post-images/iniciando-rust.png"
 description: "Aprendendo Rust do zero - Removendo mitos e ajudando a começar"
-date: 2025-06-35
+date: 2025-06-25
 ---
 
 [Veja também em vídeo](https://www.youtube.com/watch?v=STMPnPRrv8k)

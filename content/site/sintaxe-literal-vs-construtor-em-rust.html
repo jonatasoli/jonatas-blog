@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content="Marmite" />
+    
+<meta property="og:title" content="Sintaxe literal vs Construtor em Rust">
+
+<meta property="og:description" content="As ferramentas que estou usando no meu workflow de trabalho">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Home">
+
+<meta property="article:published_time" content=" 2021-04-08T00:00:00+00:00">
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/sintaxe-literal-vs-construtor-em-rust.html"
+    },
+    "url": "/sintaxe-literal-vs-construtor-em-rust.html",
+    "headline": "Sintaxe literal vs Construtor em Rust",
+    "description": "As ferramentas que estou usando no meu workflow de trabalho",
+    
+    
+    "publisher": {
+        "@type": "Organization",
+        "name": "Home",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/"
+        }
+    },
+    "datePublished": "2021-04-08T00:00:00+00:00"
+}
+</script>
+
+
+    <title>Sintaxe literal vs Construtor em Rust | Home</title>
+    <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/marmite.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/custom.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
+
+
+
+    <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2025" href="archive-2025.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2024" href="archive-2024.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2023" href="archive-2023.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
+    
+
+    
+    
+    
+</head>
+<body>
+    
+    <div class="container-fluid announcement-wrapper">
+        <div class="announcement"><p>Fastecommerce agora é o Capicart de uma ☆ no <a href="https://github.com/jonatasoli/capi-cart">github</a></p>
+</div>
+    </div>
+    
+    <main class="container">
+        
+        <header class="header-content">
+            <nav class="header-nav">
+                <ul class="header-name">
+                    <li>
+                        <hgroup>
+                            <h2><a href="./" class="contrast">Home</a></h2>
+                            
+                        </hgroup>
+                    </li>
+                </ul>
+                <button id="menu-toggle" class="hamburger">&#9776;</button>
+                
+                <ul class="header-menu" id="header-menu">
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./tags.html">Tags</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./archive.html">Archive</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./authors.html">Authors</a>
+                        
+                    </li>
+                    
+                    <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
+                    
+                    <div class="underline"></div>
+                </ul>
+            </nav>
+            
+        </header>
+        
+        <section class="main-content">
+            
+
+
+
+<article>
+
+  
+
+
+<div class="content-title" id="title">
+    <h1>Sintaxe literal vs Construtor em Rust</h1> 
+    
+
+
+<span class="content-date">
+    <small> Apr  8, 2021 - &#10710; 7 min</small>
+</span>
+
+</div>
+
+  
+
+  <div class="content-html"><!-- Content Injected to every content markdown header -->
+<p>Essa é uma tradução livre <a href="https://steveklabnik.com/writing/structure-literals-vs-constructors-in-rust">deste artigo</a>.</p>
+<h1><a href="#estrutura-literal-vs-construtor-em-rust" aria-hidden="true" class="anchor" id="estrutura-literal-vs-construtor-em-rust"></a>Estrutura literal vs construtor em Rust</h1>
+<p>Aprender o básico de uma linguagem e a sintaxe é fácil. Agora como dar sentido para todos aqueles bits pode ser um pouco mais difícil. Há uma rede de interseções de três funcionalidades do Rust que vejo pessoas usando, mas nunca vi escrito.Eu espliquei essa técnica para algumas pessoas em <em>#rust-bennigers</em> outro dia, pensei em escrever pra ajudar você também.</p>
+<p>Um pequeno review, se você tem uma <em>struct</em> em Rust como este:</p>
+<pre><code>struct Point {
+    x: i32,
+    y: i32,
+}
+</code></pre>
+<p>Você pode usar a 'sintaxe literal do <em>struct</em>' para criar uma nova instância do struct:</p>
+<pre><code>let origin = Point { x: 0, y: 0 };
+</code></pre>
+<p>Normalmente, esta sintaxe somente funciona se você tem acessso a propriedade da <em>struct</em> e de seu membro pela regra de privacidade do <em>Rust</em>.</p>
+<pre><code>mod foo {
+    pub struct Point {
+        x: i32,
+        y: i32,
+    }
+
+    pub fn foo(x: i32, y: i32) -&gt; Point {
+        Point { x: x, y: y } // isto é bom , já que estamos no mesmo módulo
+    }
+}
+
+fn main() {
+    let origin = foo::Point { x: 0, y: 0 }; // isto não é bom
+}
+</code></pre>
+<p>Nós não podemos usar a sintaxe literal <em>struct</em> na função <em>main</em> por que <em>x</em> e <em>y</em> também não são publicos.</p>
+<p>Mas, dentro do mesmo módulo nós temos acesso, então funciona. Como podemos deixar <em>main</em> instanciar <em>Point</em>, se não podemos usar uma sintaxe literal? Bem, nossa função foo faz isto, então nós podemos expo-la. Seria mais conveniente se nós associarmos a uma função <em>new</em>.</p>
+<pre><code>mod foo {
+    pub struct Point {
+        x: i32,
+        y: i32,
+    }
+    
+    impl Point {
+        pub fn new(x: i32, y: i32) -&gt; Point {
+            Point { x: x, y: y } // Isto é bom, já que estamos no mesmo módulo
+        }
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+}
+
+</code></pre>
+<p>Certo, mas se por alguma razão nós quiséssemos que <em>x</em> e <em>y</em> sejam públicos ou ainda se quiséssemos forçar as pessoas a criar uma função <em>new</em> para criar um <em>Point</em>?</p>
+<p>Talvez nossa mudança gere um efeito colateral importante. Então se trocarmos nosso código para isto:</p>
+<pre><code>mod foo {
+    pub struct Point {
+        pub x: i32,
+        pub y: i32,
+    }
+    
+    impl Point {
+        pub fn new(x: i32, y: i32) -&gt; Point {
+            Point { x: x, y: y } // isto é bom, já que estamos no mesmo módulo
+        }
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+
+    // mas, isto também:
+    let origin = foo::Point { x: 0, y: 0 };
+}
+</code></pre>
+<p>Fazendo todos os elementos de <em>Point</em> publicos, nós reativariamos a sintaxe literal, que não é o que gostariamos de chegar, então o que fazer?</p>
+<p>Pra corrigir isso precisamos de dois <em>insights</em>. O primeiro é &quot;zero-size types&quot;. No Rust tem alguns tipos que não requerem nenhum armazenamento. Vamos pegar o exemplo da tupla vazia '()', ele também só tem uma possibilidade de valor que é a própria tupla vazia. Assim nós não há necessidade de armazenar nada em memória pra representa-la.</p>
+<p>Se nós temos um valor válido, nós já saberemos o que ele é. Isso significa que quando a aplicação é compilada a tupla vazia () simplesmente desaparece, então podemos fazer isso.</p>
+<pre><code>mod foo {
+    pub struct Point {
+        pub x: i32,
+        pub y: i32,
+        _secret: (),
+    }
+    
+    impl Point {
+        pub fn new(x: i32, y: i32) -&gt; Point {
+            Point { x: x, y: y, _secret: () }
+        }
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+}
+</code></pre>
+<p>Agora nós temos um novo atributo privado <em>_secret()</em>. Eu dei esse nome com o <em>underscore</em> '_', por que não temos intenção de usa-lo pra nada. Assim o Rust não vai nos dar nenhum warning pois como <em>_secret</em> é do tipo () e será gerado em tempo de compilação e não afetará nosso <em>struct</em> <em>Point</em>.</p>
+<p>Mas, tendo este atributo privado afeta a permissão que temos para contruir <em>Point</em>. <em>main</em> não pode usar a sintaxe literal de <em>struct</em> uma vez que nem todos os campos são públicos.</p>
+<p>No entanto lembre-se que privacidade é em nível de módulo em Rust, portanto ainda podemos usar a sintaxe literal dentro do módulo <em>foo</em>:</p>
+<pre><code>mod foo {
+    pub struct Point {
+        pub x: i32,
+        pub y: i32,
+        _secret: (),
+    }
+    
+    impl Point {
+        pub fn new(x: i32, y: i32) -&gt; Point {
+            Point { x: x, y: y, _secret: () }
+        }
+    }
+
+    fn foo() -&gt; Point {
+        Point: { x: 0, y: 0, _secret: () } // Isto ainda é permitido!
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+}
+</code></pre>
+<p>Para previnir que <em>foo</em> seja usado com sintaxe literal, nós precisamos de mais um conceito: <em>pub use</em>, veja isto:</p>
+<pre><code>mod foo {
+    mod point {
+        pub struct Point {
+            pub x: i32,
+            pub y: i32,
+            _secret: (),
+        }
+    
+        impl Point {
+            pub fn new(x: i32, y: i32) -&gt; Point {
+                Point { x: x, y: y, _secret: () }
+            }
+        }
+    }
+
+    pub use foo::point::Point;
+
+    fn foo() -&gt; Point {
+        Point::new(0, 0) // Precisamos usar `new` aqui, Já que não estamos mais dentro do mesmo módulo!
+    }
+}
+
+fn main() {
+    let origin = foo::Point::new(0, 0);
+}
+
+</code></pre>
+<p>Dando pra <em>Point</em> seu próprio módulo, tudo que é privado pra ele fica privado para quem o usa-lo também. Mas, escrevendo <code>foo::point::Point</code> fica verboso, ai <code>pub use</code> vem nos salvar! Nós re-exportamos a estrutura de <em>Point</em> em <em>foo</em>, então nós podemos ainda usar  <code>foo:Point</code>, mas uma vez que um de seus membros é privado, a sintaxe literal não é permitida.</p>
+<p>Para mim, entender coisas como essa é quando eu realmente começo a sentir que estou conhecendo uma linguagem: juntando três ou quatro conceitos díspares para atingir algum objetivo. É quando uma linguagem deixa de ser um monte de partes desconexas e começa a se tornar um todo coeso.</p>
+<!-- Content Injected to every content markdown footer -->
+</div>
+  
+  <footer class="data-tags-footer">
+
+    <div class="content-authors-flex">
+      <div class="content-authors-full">
+        
+
+      </div>
+
+      <div class="date-tags-container">
+        <div class="content-date">
+          
+
+
+<span class="content-date">
+    <small> Apr  8, 2021 - &#10710; 7 min</small>
+</span>
+
+        </div>
+
+        <ul class="content-tags">
+          
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+
+
+
+
+
+
+    <article><h5><a href="#comentários" aria-hidden="true" class="anchor" id="comentários"></a>Comentários</h5>
+<p><strong>remove</strong> the file to disable comments</p>
+<script src='https://utteranc.es/client.js'
+repo='rochacbruno/issue-bin'
+issue-term='pathname'
+theme='preferred-color-scheme'
+crossorigin='anonymous'
+async>
+</script>
+</article>
+
+
+
+        </section>
+        
+        <footer class="footer-content grid">
+            <div>Powered by <a href="https://github.com/rochacbruno/marmite">Marmite</a> | <small><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY_NC-SA</a></small></div>
+            
+        </footer>
+        
+    </main>
+
+    <script src="./static/marmite.js"></script>
+    <script src="./static/custom.js"></script>
+    
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+
+
+</body>
+</html>

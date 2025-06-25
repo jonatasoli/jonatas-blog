@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content="Marmite" />
+    
+<meta property="og:title" content="30 dias usando Helix">
+
+<meta property="og:description" content="Me desafiei a aprender a usar o editor Helix por 30 dias!">
+
+
+<meta property="og:image" content="/media/post-images/helix-30-dias.png">
+
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Home">
+
+<meta property="article:published_time" content=" 2025-06-09T00:00:00+00:00">
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/30-dias-usando-helix.html"
+    },
+    "url": "/30-dias-usando-helix.html",
+    "headline": "30 dias usando Helix",
+    "description": "Me desafiei a aprender a usar o editor Helix por 30 dias!",
+    "image": "/media/post-images/helix-30-dias.png",
+    
+    "publisher": {
+        "@type": "Organization",
+        "name": "Home",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/"
+        }
+    },
+    "datePublished": "2025-06-09T00:00:00+00:00"
+}
+</script>
+
+
+    <title>30 dias usando Helix | Home</title>
+    <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/marmite.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/custom.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
+
+
+
+    <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2025" href="archive-2025.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2024" href="archive-2024.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2023" href="archive-2023.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
+    
+
+    
+    
+    
+</head>
+<body>
+    
+    <div class="container-fluid announcement-wrapper">
+        <div class="announcement"><p>Fastecommerce agora é o Capicart de uma ☆ no <a href="https://github.com/jonatasoli/capi-cart">github</a></p>
+</div>
+    </div>
+    
+    <main class="container">
+        
+        <header class="header-content">
+            <nav class="header-nav">
+                <ul class="header-name">
+                    <li>
+                        <hgroup>
+                            <h2><a href="./" class="contrast">Home</a></h2>
+                            
+                        </hgroup>
+                    </li>
+                </ul>
+                <button id="menu-toggle" class="hamburger">&#9776;</button>
+                
+                <ul class="header-menu" id="header-menu">
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./tags.html">Tags</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./archive.html">Archive</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./authors.html">Authors</a>
+                        
+                    </li>
+                    
+                    <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
+                    
+                    <div class="underline"></div>
+                </ul>
+            </nav>
+            
+        </header>
+        
+        <section class="main-content">
+            
+
+
+<div class="content-banner-image" style="background-image: url(media/post-images/helix-30-dias.png);"></div>
+
+
+<article>
+
+  
+
+
+<div class="content-title" id="title">
+    <h1>30 dias usando Helix</h1> 
+    
+
+
+<span class="content-date">
+    <small> Jun  9, 2025 - &#10710; 16 min</small>
+</span>
+
+</div>
+
+  
+
+  <div class="content-html"><!-- Content Injected to every content markdown header -->
+<h3><a href="#veja-também-no-youtube" aria-hidden="true" class="anchor" id="veja-também-no-youtube"></a><a href="https://www.youtube.com/watch?v=MURMkIlCHRg&amp;t">Veja também no Youtube</a></h3>
+<p>Olá gente, estou esse mês me desafiando a usar o <a href="https://helix-editor.com/">helix</a> que é um editor baseado em rust por 30 dias.
+Só pra contextualizar, eu uso vim/neovim a um bom tempo e eu estou montando um material de como configurar o neovim do zero, nesse meio tempo tenho que continuar trabalhando, e eu decidi não usar uma vm pra ir configurando em paralelo enquanto minha config estável contuasse me atendendo. Então resolvi testar um editor novo que é em algumas partes inspirado no vim/neovim pra ir usando.</p>
+<h2><a href="#helix" aria-hidden="true" class="anchor" id="helix"></a>Helix</h2>
+<p>É um projeto feio em rust e tem como principais features, melhorar a parte de multicursos relacionado ao vim/neovim além de já ter uma configuração lsp pronta pra uso, quase como um mason do neovim só que ele em si não instala os server só detecta os mesmos.</p>
+<h2><a href="#alguns-desafios" aria-hidden="true" class="anchor" id="alguns-desafios"></a>Alguns desafios</h2>
+<p>Bom primeira coisa que acaba confundindo um pouco é que eu tenho alguns atalhos próprios no neovim e além de ele ter por padrão alguns atalhos estou precisando reaprender a usar do modo dele, uma coisa que é dificil pra mim é desapegar um pouco de algumas formas de navegar do neovim e usar ai fiz no meu obsidian um mapa dos principais atalhos que compartilho com vocês abaixo:
+<a href="helix-shortcuts.html" data-wikilink="true">Helix Shortcuts</a></p>
+<pre><code>`Ctrl`+`,` | Abre a caixa de diálogo de configurações.
+`Ctrl`+`Shift`+`,` | Salva as configurações atuais.
+`Ctrl`+`P` | Abre o painel de pesquisa.
+`Ctrl`+`B` | Abre a barra lateral.
+`Ctrl`+`F` | Abre a barra de pesquisa do editor.
+`Ctrl`+`E` | Abre a barra de navegação.
+`Ctrl`+`T` | Abre uma nova guia.
+`Ctrl`+`W` | Fecha a guia atual.
+`Ctrl`+`Shift`+`W` | Fecha todas as guias.
+`Ctrl`+`J` | Desloca para baixo uma linha.
+`Ctrl`+`K` | Desloca para cima uma linha.
+`Ctrl`+`H` | Apaga a palavra anterior.
+`Ctrl`+`D` | Apaga a letra anterior.
+`Ctrl`+`C` | Copia o texto selecionado.
+`Ctrl`+`V` | Cola o texto copiado.
+`Ctrl`+`X` | Corta o texto selecionado.
+`Ctrl`+`Z` | Desfaz a última alteração.
+`Ctrl`+`Y` | Refaz a última alteração.
+`Ctrl`+`A` | Seleciona todo o texto.
+`Ctrl`+`E` | Move o cursor até o final do texto.
+`Ctrl`+`B` | Move o cursor para o início do texto.
+`Home` | Move o cursor para o início da linha atual.
+`End` | Move o cursor para o fim da linha atual.
+`Page Up` | Move o cursor para cima uma página.
+`Page Down` | Move o cursor para baixo uma página.
+`Left` | Move o cursor para a esquerda.
+`Right` | Move o cursor para a direita.
+`Up` | Move o cursor para cima.
+`Down` | Move o cursor para baixo.
+</code></pre>
+<h2><a href="#novos-modos" aria-hidden="true" class="anchor" id="novos-modos"></a>Novos modos</h2>
+<p>No caso do Helix tem dois modos que estou usando que são bastante importantes, primeiro o modo <em>Space</em> que serve pra navegar entre os arquivos e buffers e o <em>Go To</em> mode que serve pra navegar nos arquivos em si, aqui o principal desafio é que muitas das coisas que estão ali eu já tinha uma forma personalizada de trabalhar no neovim, então estou com o trabalho de reaprender os atalhos até ver na <a href="https://docs.helix-editor.com/">documentação</a> se tem alguma forma de personalizar esses comandos para os que eu já estava usando.</p>
+<h2><a href="#config" aria-hidden="true" class="anchor" id="config"></a>Config</h2>
+<p>A configuração usa um arquivo .toml e é bem simples de trabalhar com ele vou mostrar as configurações que você configura no .config/helix/config.toml</p>
+<pre><code class="language-toml">theme = &quot;catppuccin_mocha&quot;
+
+[editor]
+line-number = &quot;relative&quot;
+mouse = false
+
+[editor.statusline]
+left = [&quot;mode&quot;, &quot;spinner&quot;]
+center = [&quot;file-name&quot;]
+right = [&quot;diagnostics&quot;, &quot;selections&quot;, &quot;position&quot;, &quot;file-encoding&quot;, &quot;file-line-ending&quot;, &quot;file-type&quot;]
+separator = &quot;│&quot;
+mode.normal = &quot;NORMAL&quot;
+mode.insert = &quot;INSERT&quot;
+mode.select = &quot;SELECT&quot;
+
+[editor.lsp]
+enable = true
+display-messages = false
+
+[editor.file-picker]
+hidden = false
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 25 # increase value to reduce forced mid-word wrapping
+max-indent-retain = 0
+wrap-indicator = &quot;&quot;  # set wrap-indicator to &quot;&quot; to hide it
+
+</code></pre>
+<p>Uma coisa legal ele já consegue pegar vários temas por default e é só passar o nome do tema.
+Na sessão <em>editor</em> eu deixo o número de linhas relativo pois é útil quando você quer pular linhas e desativo a iterção do mouse.
+Em <em>editor.statusline</em> eu crio uma linha de status bem simples pra ficar parecida com a que eu usava no neovim.
+Em <em>editor.lsp</em> eu habilito o linter e desativo as mensagens de progresso do linter na linha de status.
+Em <em>editor.file-picker</em> eu só desativo a opção de esconder arquivos ocultos.
+E finalmente me <em>editor.soft-wrap</em> eu habilito algumas opções para fazer a quebra de linha na tela.</p>
+<h2><a href="#configuração-dos-linters" aria-hidden="true" class="anchor" id="configuração-dos-linters"></a>Configuração dos linters</h2>
+<p>No meu caso eu uso majoritariamente python, typescript e rust como linguagens então precisei configurar globalmente os linters de cada uma das linguagens e preciso chegar usando <code>helix --health</code>pra ver as configurações ou se quero uma linguagem ou framework especifico uso o comando <code>helix --health python</code>por exemplo.</p>
+<p>A config das linguagens fica em .config/helix/languages.toml e meu arquivo no momento está assim:</p>
+<pre><code>[[language]]
+name = &quot;python&quot;
+language-servers = [&quot;pyright&quot;, &quot;ruff&quot;]
+[language-server.pyright]
+command = &quot;pyright-langserver&quot;
+args = [&quot;--stdio&quot;]
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = &quot;basic&quot;
+[language-server.ruff]
+command = &quot;ruff-lsp&quot;
+[language-server.ruff.config.settings]
+args = [&quot;--ignore&quot;, &quot;E501&quot;]
+[language.formatter]
+command = &quot;blue&quot;
+args = [&quot;--line-length&quot;, &quot;88&quot;, &quot;--quiet&quot;, &quot;-&quot;]
+
+[[language]]
+name = &quot;rust&quot;
+[language-server.rust-analyzer.config.check]
+command = &quot;clippy&quot;
+</code></pre>
+<p>Ainda não fiz as configs relativas a typescript, vue, nuxt e svelte por que nesses dias só fiz pequenos ajustes nos projetos que estão usando essa linguagem.
+No mais essa config ainda estou aprendendo e ela não está 100% preciso trabalhar um pouco em cima dela ainda.</p>
+<h2><a href="#desafios" aria-hidden="true" class="anchor" id="desafios"></a>Desafios</h2>
+<p>Bom um dos principais desafios no momento é quando preciso de algo que não está na documentação além de ser até bem abrangente ainda preciso caçar algumas coisas.
+Na parte do lsp deu um trabalhinho instalar o linter globalmente e ainda preciso remover algumas coisas que não nele.
+Copiar algo do editor e colar por exemplo no navegador no qual estou escrevendo esse artigo não funciona por padrão e ainda não descobri como fazer para habilitar o xclip por exemplo.
+Além disso eles possuem um artigo de quem está <a href="https://github.com/helix-editor/helix/wiki/Migrating-from-Vim">migrando do vim</a> que é bem útil pra quem está começando.</p>
+<p>Por enquanto é isso e vou atualizando conforme for progredindo aqui.</p>
+<h2><a href="#dia-2" aria-hidden="true" class="anchor" id="dia-2"></a>Dia 2</h2>
+<h2><a href="#sobre-alguns-desafios-anteriores" aria-hidden="true" class="anchor" id="sobre-alguns-desafios-anteriores"></a>Sobre alguns desafios anteriores</h2>
+<p>Bom descobri que tinha um health check pro clipboard</p>
+<pre><code class="language-bash">➜ helix --health clipboard
+System clipboard provider: wl-paste+wl-copy
+</code></pre>
+<p>No meu caso uso o wayland ai uso o <em>wl-copy</em> e estava funcionando, acontece que só usando o atalho <code>y</code> ele não copia pro <em>clipboard</em> no caso precisa usar <code>&lt;Space&gt;+y</code>para copia-lo.
+Uma coisa que acho meio perigosa no atalho que eles criaram para deletar caracteres com a letra <code>d</code> é que no vim temos um atalho <code>dd</code> que remove a linha inteira isso pode acabar confundindo, principalmente quem já tem a memória muscular pra fazer isso.
+Outra coisa meio ruim é que no NeoVIm eu uso muito <code>C+v</code> + um jump para copiar e agora preciso fazer essa sequencia.
+<code>v + jump + &lt;Space&gt;+y</code>
+antes eu fazia assim
+<code>&lt;Shift&gt; + v + jump +y</code>
+O espaço no final sempre acaba me pegando, mas acredito que é questão de praticar mais também para se adaptar.
+As vezes me confundo também com o <code>a</code> no caso do vim ele entra no mode de inserção no caractere posterior aqui no helix ele pula uma linha e entra no modo de inserção.</p>
+<h2><a href="#coisas-legais-que-descobri" aria-hidden="true" class="anchor" id="coisas-legais-que-descobri"></a>Coisas legais que descobri</h2>
+<p>Uma coisa legal que penso em levar pro meu Neovim é ele já fechar parenteses, chaves e colchetes automaticamente. Porém quando estou editando o script do meu <a href="https://www.udemy.com/course/rust-da-logica-aos-jogos/?referralCode=C82C9336A8CF938D12E7">curso de rust</a> as vezes da uma dor de cabeça já que estou usando o mkdocs pra trabalhar com ele e alguns marcações não precisam ser fechadas e ele fecha, acredito que deva haver alguma forma de resolver isso só não sei ainda.</p>
+<p>Uma coisa lega que descobri que consigo jogar o editor pra background e depois voltar, mais tarde descobri que também conseguia fazer isso com o vim por que na verdade é um comando do shell em si.</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+z</td>
+<td>joga o editor pra background</td>
+</tr>
+<tr>
+<td>fg</td>
+<td>volta o editor para primeiro plano</td>
+</tr>
+</tbody>
+</table>
+<h2><a href="#sobre-o-lsp" aria-hidden="true" class="anchor" id="sobre-o-lsp"></a>Sobre o LSP</h2>
+<p>Precisei hoje instalar os servers de svelte e vue</p>
+<pre><code class="language-bash">npm install -g svelte-language-server
+npm install -g typescript-svelte-plugin
+npm install -g @vue/language-server
+npm install -g prettier
+</code></pre>
+<p>Ai aproveitei e adicionei uma configuração extra no meu languages.toml</p>
+<pre><code class="language-toml">[[language]]
+name = &quot;vue&quot;
+auto-format = true
+formatter = { command = &quot;prettier&quot;, args = [&quot;--parser&quot;, &quot;vue&quot;] }
+</code></pre>
+<p>Um ponto importante é que o helix é dividido em 3 partes</p>
+<h2><a href="#language-configuration" aria-hidden="true" class="anchor" id="language-configuration"></a><a href="https://docs.helix-editor.com/guides/adding_languages.html#language-configuration">Language configuration</a></h2>
+<p>Nessa sessão fica as configurações especificas que você precisa de uma linguagem e a extensão da mesma.</p>
+<h2><a href="#grammar-configuration" aria-hidden="true" class="anchor" id="grammar-configuration"></a><a href="https://docs.helix-editor.com/guides/adding_languages.html#grammar-configuration">Grammar configuration</a></h2>
+<p>Se tiver uma configuração do tree-sitter disponível ele vai usar normalmente ele vai usar um caminho padrão, no meu caso eu precisei configurar os linters para funcionarem globalmente para o helix conseguir pegar.</p>
+<h2><a href="#queries" aria-hidden="true" class="anchor" id="queries"></a><a href="https://docs.helix-editor.com/guides/adding_languages.html#queries">Queries</a></h2>
+<p>As queries na verdade também fazem parte do tree-sitter e elas provem o highlight e a edentação da linguagem.</p>
+<p>fora isso é importando atualizar as gramáticas periodicamente.</p>
+<pre><code class="language-bash">helix --grammar fetch
+helix --grammar build
+</code></pre>
+<h3><a href="#afinal-o-que-é-lsp" aria-hidden="true" class="anchor" id="afinal-o-que-é-lsp"></a>Afinal o que é LSP</h3>
+<p>O Language Server Protocol (LSP) é um protocolo de comunicação usado entre um Editor de Código e um Servidor de Linguagem. Sua principal finalidade é permitir a integração eficiente de funcionalidades de análise de código e ferramentas específicas de linguagem diretamente nos editores de código.</p>
+<p><em>Como Funciona:</em></p>
+<ul>
+<li><strong>Cliente-Server Model:</strong> O LSP segue um modelo cliente-servidor, onde o editor (cliente) se comunica com um servidor específico para uma linguagem de programação.</li>
+<li><strong>Comunicação via JSON-RPC:</strong> As mensagens são trocadas entre o cliente e o servidor usando o formato JSON-RPC, o que facilita a implementação em várias linguagens.</li>
+</ul>
+<p>No nosso caso o helix tem um client LSP e precisamos instalar os servidores para usa-los com ele.</p>
+<h3><a href="#afinal-o-que-é-o-tree-sitter" aria-hidden="true" class="anchor" id="afinal-o-que-é-o-tree-sitter"></a>Afinal o que é o Tree-sitter</h3>
+<p>O Tree-sitter é um parser de código incremental e gerador de árvores de sintaxe. Ele é projetado para ser eficiente, preciso e capaz de lidar com linguagens de programação complexas.</p>
+<p><em>Como Funciona:</em></p>
+<ul>
+<li><strong>Análise Incremental:</strong> O Tree-sitter realiza análises incrementais, o que significa que, ao modificar o código-fonte, apenas as partes afetadas são reanalisadas, proporcionando uma resposta mais rápida.</li>
+<li><strong>Geração de Árvore de Sintaxe:</strong> Ele gera uma árvore de sintaxe para o código-fonte, representando a estrutura hierárquica do mesmo.</li>
+</ul>
+<p>Ele é muito importante para eu conseguir navegar pelo código através das arvores que ele gera.</p>
+<h3><a href="#navegação" aria-hidden="true" class="anchor" id="navegação"></a>Navegação</h3>
+<p>Uma coisa nova é a navegação ela tem algumas coisas parecidas com o vim e outras não e precisei fazer uma tabela de navegação para me ajudar a me orientar.</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>seleciona linha</td>
+</tr>
+<tr>
+<td>v</td>
+<td>entra no select mode</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Seleciono as mesmas palavras com multi-cursor</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Se estiver com linhas selecionadas da pra buscar um padrão dentro da seleção para fazer alteração</td>
+</tr>
+</tbody>
+</table>
+<h3><a href="#buscas" aria-hidden="true" class="anchor" id="buscas"></a>Buscas</h3>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>descipriton</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Space+/</td>
+<td>Busca nos arquivos</td>
+</tr>
+<tr>
+<td>Space+f</td>
+<td>Busca pelo nome do arquivo</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Uma coisa não muito boa, é que ele ainda não tem uma forma de fazer uma busca dentro dos arquivos, isso é algo que acabo usando muito em projetos grandes então é um ponto ainda pra melhorar. Ele possui uma busca, mas em alguns casos acabou não dando muito certo.</p>
+<h3><a href="#dica-extra" aria-hidden="true" class="anchor" id="dica-extra"></a>Dica extra</h3>
+<p>Você tem um tutorial bem legal se você é novato em editores como o vim que é o modo tutor dele:</p>
+<pre><code class="language-bash">helix --tutor
+</code></pre>
+<p>É sempre interessante pra quem quer começar olhar esse tutor, no caso do vim também tem e recomendo a todos que olhem.</p>
+<h3><a href="#próximos-cápitulos" aria-hidden="true" class="anchor" id="próximos-cápitulos"></a>Próximos cápitulos</h3>
+<p>Bom acredito que essa semana foi uma semana pra se adaptar e pensar algumas coisas de modo diferente nesse semana tenho um pouco mais de trabalho planejado com python e svelte então vou explorar um pouco mais o trabalho com os buffers e registradores além das diversas features relacionadas a manipular a seleção de código e multi cursores e dar uma refinada na minha configuração e criar alguns atalhos, então nos vemos na próxima semana.</p>
+<h2><a href="#semana-2" aria-hidden="true" class="anchor" id="semana-2"></a>Semana 2</h2>
+<p>Bom passamos a semana 2 com o hélix, essa semana com um trabalho mais afundo no editor.</p>
+<h3><a href="#criando-atalhos-no-space-mode" aria-hidden="true" class="anchor" id="criando-atalhos-no-space-mode"></a>Criando atalhos no space mode</h3>
+<p>Bom sinto falta de alguns atalhos de navegação, como no neovim se usa muito a memoria muscular eu decidi criar alguns atalhos no meu config.toml</p>
+<pre><code class="language-toml">[keys.normal.space]
+w = &quot;:write&quot; # Salvar buffer com espaço + w
+q = &quot;:bc&quot; # Fechar buffer
+z = &quot;:bp&quot; # Ir pro próximo buffer
+x = &quot;:bn&quot; # Ir pro buffer anterior
+
+</code></pre>
+<p>No caso a chave <code>keys.normal.space</code> representa as teclas de ação pra usar no space mode no modo normal.
+Ai criei atalhos pra navegar pra frente e para trás nos buffers, fechar um buffer e salvar um buffer, o que fez ajudar muito meu trabalho no dia-a-dia.</p>
+<h3><a href="#desafios-1" aria-hidden="true" class="anchor" id="desafios-1"></a>Desafios</h3>
+<p>Uma coisa não muito legal que estava me acontecendo é que eu criava uma exception num arquivo em python e quando ia usa-lo o helix não estava identificando para importar.
+Descobri que o meu languages.toml não estava funcionando, agora que estava trabalhando num projeto mais focado eu estava vendo que eu olhava o server e aparecia pylsp que é o default e não o pyright + ruff ou mesmo o svelte estava dando um monte de erro, ai percebi que tinha colocado language.toml ao invés de languages.toml então ele não estava usando a minha config ajustei ai começou a funcionar corretamente.</p>
+<p>Trabalhei bastante com svelte essa semana e auto format não funcionou direito assim como o auto-complete então vou ter que nas próximas semanas se esforçar um pouco mais.</p>
+<h3><a href="#coisas-legais" aria-hidden="true" class="anchor" id="coisas-legais"></a>Coisas Legais</h3>
+<p>Melhorando um pouco minha tabela com as navegações que mais uso:</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>seleciona linha</td>
+</tr>
+<tr>
+<td>v</td>
+<td>entra no select mode</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Seleciono as mesmas palavras com multi-cursor</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Se estiver com linhas selecionadas da pra buscar um padrão dentro da seleção para fazer alteração</td>
+</tr>
+<tr>
+<td>[f  ou ]f</td>
+<td>pula funções</td>
+</tr>
+<tr>
+<td>[t  ou]t</td>
+<td>pula classes</td>
+</tr>
+</tbody>
+</table>
+<p>Também os atalhos mais usados no go to mode</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d</td>
+<td>vai pra definição da função ou classe</td>
+</tr>
+<tr>
+<td>r</td>
+<td>vai aonde referencio a função ou classe</td>
+</tr>
+<tr>
+<td>a</td>
+<td>vou pro ultimo arquivo acessado</td>
+</tr>
+<tr>
+<td>m</td>
+<td>vou pro último arquivo modificado</td>
+</tr>
+</tbody>
+</table>
+<p>Outra coisa que uso muito no neovim é mudar o texto dentro de um parenteses ou aspas e aqui existe um modo pra fazer isso é que o match mode usando a tecla <code>m</code>no modo normal.</p>
+<table>
+<thead>
+<tr>
+<th>shortcut</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>muda o texto no que está dentro do padrão</td>
+</tr>
+<tr>
+<td>d</td>
+<td>deleta o que está dentro do padrão</td>
+</tr>
+<tr>
+<td>a</td>
+<td>seleciona tudo junto com o padrão</td>
+</tr>
+<tr>
+<td>i</td>
+<td>seleciona tudo dentro do padrão</td>
+</tr>
+</tbody>
+</table>
+<p>Quando digo o padrão é o <code>() {} [] &quot;&quot; ''</code>
+Sendo sincero isso está um pouco difícil de acostumar ainda acho mais funcional o jeito do vim de trabalhar com padrões.</p>
+<h3><a href="#concluindo" aria-hidden="true" class="anchor" id="concluindo"></a>Concluindo</h3>
+<p>Essa semana trabalhei mais com padrões e melhores mais meu fluxo de trabalho isso me ajudou a ser mais produtivo com a ferramenta.
+A parte de desenvolver com svelte não esta sendo muito boa então vou ter que me concentrar em ver qual o problema. No caso por exemplo do nuxtjs ele funcionou bem.</p>
+<h2><a href="#semana-3" aria-hidden="true" class="anchor" id="semana-3"></a>Semana 3</h2>
+<p>Ola gente compartilhando como foi minha terceira semana, como foi black friday e estava trabalhando num projeto não consegui explorar tanto em expandir meus recursos mais sim em trabalhar com o qie ja conhecia.</p>
+<h3><a href="#desafios-2" aria-hidden="true" class="anchor" id="desafios-2"></a>Desafios</h3>
+<p>Bom a parte de selecionar código algumas vezes me dava trabalho, por exemplo quando eu queria selecionar todo o arquivo se eu usava o v as vezes não pegava tudo e usando x não me parece uma ideia muito legal e em arquivos grandes se mostra algo não muito inteligente.
+Lembrando um chefe meu que usava vim, &quot;tudo no vim da para fazer com dois comandos.&quot;.
+Provavelmente não estava fazendo do jeito certo e tem um jeito melhor de fazer.
+Outra coisa que sinto falta é uma indicação visual nas tabs, estava com várias tabs abertas, mas não aparecia a tab que eu estava usando  em destaque ai não sabia se estava salvo o buffer ou não e isso as vezes me deu uma dor de cabeça.</p>
+<h3><a href="#coisas-legais-1" aria-hidden="true" class="anchor" id="coisas-legais-1"></a>Coisas legais</h3>
+<p>É incrível como usar por um tempo um editor você acaba trabalhando bem com seu fluxo. Essa semana eu precisei codar bastante e as coisas começam a ficar mais naturais.
+Parte de lint estava funcionando bem assim como as buscas o que ajuda a ficar produtivo, outra coisa que usei bastante foi o multi-cursor que realmente é algo bem útil no helix.</p>
+<p>Acabei colocando um server novo agora para ter uma camada de buffer de comandos</p>
+<p>Pra isso precisei instalar o <a href="https://github.com/estin/simple-completion-language-server">simple-completion-language-server</a></p>
+<p>Ajustar meu languages.toml</p>
+<pre><code class="language-toml">[language-server.scls]
+command = &quot;simple-completion-language-server&quot;
+config = { max_completion_items = 20, snippets_first = false }
+
+[language-server.scls.environment]
+RUST_LOG = &quot;debug,simple-completion-langauge-server=debug&quot;
+LOG_FILE = &quot;/tmp/completion.log&quot;
+
+
+[[language]]
+name = &quot;python&quot;
+roots = [&quot;pyproject.toml&quot;]
+language-servers = [&quot;scls&quot;, &quot;pyright&quot;, &quot;ruff&quot;]
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = &quot;basic&quot;
+
+[language-server.ruff]
+command = &quot;ruff-lsp&quot;
+
+[language-server.ruff.config.settings]
+args = [&quot;--ignore&quot;, &quot;E501&quot;]
+
+[language.formatter]
+command = &quot;blue&quot;
+
+
+[[language]]
+name = &quot;rust&quot;
+[language-server.rust-analyzer.config.check]
+auto-format = false
+language-servers = [&quot;rust-analyzer&quot;, &quot;scls&quot;]
+command = &quot;clippy&quot;
+
+
+[[language]]
+name = &quot;vue&quot;
+auto-format = true
+formatter = { command = &quot;prettier&quot;, args = [&quot;--parser&quot;, &quot;vue&quot;] }
+
+
+[[language]]
+name = &quot;svelte&quot;
+auto-format = true
+formatter = { command = 'prettier', args = [&quot;--plugin&quot;, &quot;prettier-plugin-svelte&quot;, &quot;--stdin&quot;] }
+
+
+[[language]]
+name = &quot;git-commit&quot;
+language-servers = [ &quot;scls&quot; ]
+
+
+</code></pre>
+<p>Ele além disso ele me da alguns snipets do código.</p>
+<p>Bom por enquanto ainda não tive muita fluência com o svelte ainda, trabalhei um pouco no meu blog e o auto-complete não estava tão legal, isso é uma coisa que sinto falta que tinha no neovim que são alguns snippets.</p>
+<p>Bom esse texto foi mais curto foi muito mais usando que qualquer coisa e a experiência está sendo interessante, convido você testar também ele pois é um editor muito interessante.</p>
+<p>Até semana que vem.</p>
+<h2><a href="#semana-4" aria-hidden="true" class="anchor" id="semana-4"></a>Semana 4</h2>
+<p>Olá, estamos na semana 4 e foi uma jornada muito interessante até aqui.
+Bom estou muito mais adaptado ao hélix alem de ainda ter velhos hábitos como apertar yy pra copiar ou DD pra deletar, principalmente quando eu estava querendo fazer algo mais rápido com pressa. Claro que poderia criar um atalho pra fazer esses comandos mas acabei não fazendo.
+Acho que no final dessa semana uma coisa que fiquei devendo bastante é ler a documentação com calma, eu meio que fui alterando e lendo e como não reservei um tempo pra ler tudo com calma fica o sentimento que poderia tirar mais do editor.</p>
+<h3><a href="#algumas-coisas-que-não-consegui-resolver" aria-hidden="true" class="anchor" id="algumas-coisas-que-não-consegui-resolver"></a>Algumas coisas que não consegui resolver</h3>
+<p>Como nem tudo são flores nos casos que abri muitos buffers fica um pouco difícil as vezes de visualizar em qual arquivo você está não explorei a fundo a customização nativa dele, talvez consiga algo melhor do que o default mas, ai foi um problema pra mim.
+Outro problema foi o svelte e o tailwind o primeiro ele ate me dava algumas coisas no auto complete porem não tudo, no caso do tailwind o meu problema foi ele não dar autocomplete.
+No caso de ele vir com o client lsp pra mim foi uma faca de dois gumes por um lado se você tem clients qie ja esta acostumado a instalar globalmente é muito bom, porem no caso do python por exemplo eu uso cliente diferentes pra projetos diferentes e ai não fica muito legal trabalhar assim.</p>
+<h3><a href="#alguns-ajustes" aria-hidden="true" class="anchor" id="alguns-ajustes"></a>Alguns ajustes</h3>
+<p>Bom como de costume em editores com arquivos de configuração é legal ver as configurações dos outros pra buscar ideias, no meu caso dei uma olhada no github no meu amigo Bruno Rocha e fiz algumas alterações no meu arquivo do config.toml</p>
+<p><code>color-modes = true</code> para cada modo ele muda a cor
+<code>gutters = [&quot;diff&quot;, &quot;diagnostics&quot;, &quot;line-numbers&quot;, &quot;spacer&quot;]</code> mostrar algumas diferenças visuais entre as versões de um arquivo</p>
+<h3><a href="#conclusão" aria-hidden="true" class="anchor" id="conclusão"></a>Conclusão</h3>
+<p>O hélix é um editor muito promissor, segue a filosofia do vim e kakaroune principalmente no segundo. Tenta trazer coisas novas como ter um client lsp já funcional, adicionou o suporte a multi servers que ajudou muito.
+Ainda sinto falta DD um sistema de plugins pra conseguir entender algumas coisas e trazer funcionalidades que ele ainda não tem, mas entendo qie ele esta querendo trazer uma experiencia mais &quot;baterias inclusas&quot; do que o neovim e arriscou dizer que é uma boa opção pra iniciantes por ser de algumas formas mais amigável que o neovim e mesmo assim você precisando aprender a configurar seu editor.
+Alem disso ainda tem coisas que me fazem continuar com o com como um suporte melhor ao svelte e ter um autocomplete bom pro tailwind. Nos próximos meses devo refazer minha config do zero pro neovim e enquanto isso devo continuar usando o hélix pois ele é muito bom e talvez ate contribuir com ele.
+Convido você que quer aprender a usar um editor de terminal experimente o hélix primeiro e depois vá pro vim ele tem uma configuração mais simples e você vai aprender a maior parte da navegação por ele. Não me leve a mal ainda gosto mais do neovim porém vejo que muitos novatos sofrem pra configurar o neovim no dia a dia o hélix é uma boa opção de começar a usar com menos configuração enquanto ajusta seu neovim aos poucos.
+Estero que quem acompanhou essa jornada se inspire a conhecer também.</p>
+<!-- Content Injected to every content markdown footer -->
+</div>
+  
+  <footer class="data-tags-footer">
+
+    <div class="content-authors-flex">
+      <div class="content-authors-full">
+        
+
+      </div>
+
+      <div class="date-tags-container">
+        <div class="content-date">
+          
+
+
+<span class="content-date">
+    <small> Jun  9, 2025 - &#10710; 16 min</small>
+</span>
+
+        </div>
+
+        <ul class="content-tags">
+          
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+
+
+
+
+
+
+    <article><h5><a href="#comentários" aria-hidden="true" class="anchor" id="comentários"></a>Comentários</h5>
+<p><strong>remove</strong> the file to disable comments</p>
+<script src='https://utteranc.es/client.js'
+repo='rochacbruno/issue-bin'
+issue-term='pathname'
+theme='preferred-color-scheme'
+crossorigin='anonymous'
+async>
+</script>
+</article>
+
+
+
+        </section>
+        
+        <footer class="footer-content grid">
+            <div>Powered by <a href="https://github.com/rochacbruno/marmite">Marmite</a> | <small><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY_NC-SA</a></small></div>
+            
+        </footer>
+        
+    </main>
+
+    <script src="./static/marmite.js"></script>
+    <script src="./static/custom.js"></script>
+    
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+
+
+</body>
+</html>
