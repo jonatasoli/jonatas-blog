@@ -41,6 +41,43 @@ menu:
 
 extra:
   colorscheme: catppuccin
+  comments:
+    title: Comentários
+    source: |
+      <div id="remark42"></div>
+
+      <script>
+        // build remark_config at runtime to avoid using content.* at build time
+        (function(){
+          try {
+            window.remark_config = {
+              host: 'https://comments.singularjourney.host',   // seu REMARK_URL
+              site_id: 'blog-jonatasoliveira-dev',             // seu SITE
+              // usa a URL completa da página para identificar a thread
+              url: window.location.href,
+              // título da página (fallback simples)
+              page_title: document.querySelector('title') ? document.querySelector('title').textContent : document.location.pathname,
+              components: ['embed']
+            };
+          } catch(e) {
+            console.error('remark_config build error', e);
+          }
+        })();
+      </script>
+
+      <script>
+      !function(components, document){
+        for(var i=0;i<components.length;i++){
+          var s = document.createElement("script"),
+              ext = ".js",
+              target = document.head || document.body;
+          s.async = true;
+          s.defer = true;
+          s.src = window.remark_config.host + "/web/" + components[i] + ext;
+          target.appendChild(s);
+        }
+      }(window.remark_config && window.remark_config.components || ["embed"], document);
+      </script>
 authors: {}
 toc: true
 json_feed: false

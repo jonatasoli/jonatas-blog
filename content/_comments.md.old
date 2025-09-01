@@ -1,0 +1,30 @@
+{% if content is defined %}
+##### Comentários
+
+<div id="remark42"></div>
+
+<script>
+  var remark_config = {
+    host: 'https://comments.singularjourney.host',
+    site_id: 'blog-jonatasoliveira-dev',
+    url: '{{ url_for(path=content.slug ~ ".html", abs=true) }}',
+    page_title: '{{ content.title | escape }}',
+    components: ['embed']
+  };
+</script>
+
+<script>
+!function(components, document){
+  for(var i=0;i<components.length;i++){
+    var s = document.createElement("script"),
+        ext = ".js",
+        target = document.head || document.body;
+    s.async = true;
+    s.defer = true;
+    s.src = remark_config.host + "/web/" + components[i] + ext;
+    target.appendChild(s);
+  }
+}(remark_config.components || ["embed"], document);
+</script>
+
+{% endif %}
