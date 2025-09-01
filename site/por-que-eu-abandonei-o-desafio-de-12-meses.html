@@ -70,6 +70,7 @@
     <link rel="alternate" type="application/rss+xml" title="author: Jônatas Luiz de Oliveira" href="author-jonatas-luiz-de-oliveira.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2025" href="archive-2025.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2024" href="archive-2024.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2023" href="archive-2023.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
     <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
     
@@ -105,15 +106,7 @@
                       
                     <li>
                         
-                        <a class="menu-item secondary"  href="./tags.html">Tags</a>
-                        
-                    </li>
-                    
-                      
-                      
-                    <li>
-                        
-                        <a class="menu-item secondary"  href="./archive.html">Archive</a>
+                        <a class="menu-item secondary"  href="https://newsletter.jonatasoliveira.dev" target="_blank" >Newsletter</a>
                         
                     </li>
                     
@@ -146,6 +139,14 @@
                     <li>
                         
                         <a class="menu-item secondary"  href="https://www.twitch.tv/devjonatas" target="_blank" >Twitch</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./archive.html">Archive</a>
                         
                     </li>
                     
@@ -292,12 +293,19 @@
 
     <article><h5><a href="#comentários" aria-hidden="true" class="anchor" id="comentários"></a>Comentários</h5>
 <p><strong>remove</strong> the file to disable comments</p>
-<script src='https://utteranc.es/client.js'
-repo='rochacbruno/issue-bin'
-issue-term='pathname'
-theme='preferred-color-scheme'
-crossorigin='anonymous'
-async>
+<div id="remark42"></div>
+<script>
+  window.remark_config = {
+    host: 'https://comments.singularjourney.host',
+    site_id: 'blog-jonatasoliveira-dev',                      
+    components: ['embed','count']
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = window.remark_config.host + '/web/remark.js';
+    s.defer = true; s.async = true;
+    d.getElementsByTagName('body')[0].appendChild(s);
+  })();
 </script>
 </article>
 

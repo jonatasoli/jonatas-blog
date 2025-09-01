@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content="Marmite" />
+    
+<meta property="og:title" content="Aprendendo Rust em 2025 e seus mitos">
+
+<meta property="og:description" content="Aprendendo Rust do zero - Removendo mitos e ajudando a começar">
+
+
+<meta property="og:image" content="https://blog.jonatasoliveira.dev/media/post-images/iniciando-rust.png">
+
+
+<meta property="og:url" content="https://blog.jonatasoliveira.dev/aprendendo-rust-em-2025-e-seus-mitos.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Jonatas">
+
+<meta property="article:published_time" content=" 2025-06-25T00:00:00+00:00">
+
+
+<meta property="article:author" content="https://blog.jonatasoliveira.dev/author-Jônatas Luiz de Oliveira.html">
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://blog.jonatasoliveira.dev/aprendendo-rust-em-2025-e-seus-mitos.html"
+    },
+    "url": "https://blog.jonatasoliveira.dev/aprendendo-rust-em-2025-e-seus-mitos.html",
+    "headline": "Aprendendo Rust em 2025 e seus mitos",
+    "description": "Aprendendo Rust do zero - Removendo mitos e ajudando a começar",
+    "image": "https://blog.jonatasoliveira.dev/media/post-images/iniciando-rust.png",
+    "author": {
+        "@type": "Person",
+        "name": "Jônatas Luiz de Oliveira",
+        "url": "https://blog.jonatasoliveira.dev/author-Jônatas Luiz de Oliveira.html",
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Jonatas",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://blog.jonatasoliveira.dev/"
+        }
+    },
+    "datePublished": "2025-06-25T00:00:00+00:00"
+}
+</script>
+
+
+    <title>Aprendendo Rust em 2025 e seus mitos | Jonatas</title>
+    <link rel="stylesheet" type="text/css" href="./static/pico.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/marmite.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/colorschemes/catppuccin.css">
+    
+    <link rel="stylesheet" type="text/css" href="./static/custom.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css" id="highlightjs-theme" />
+
+
+
+    <link rel="alternate" type="application/rss+xml" title="index" href="index.rss">
+    <link rel="alternate" type="application/rss+xml" title="author: Jônatas Luiz de Oliveira" href="author-jonatas-luiz-de-oliveira.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2025" href="archive-2025.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2024" href="archive-2024.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2023" href="archive-2023.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2022" href="archive-2022.rss">
+    <link rel="alternate" type="application/rss+xml" title="year: 2021" href="archive-2021.rss">
+    
+
+    
+    
+    
+</head>
+<body>
+    
+    <div class="container-fluid announcement-wrapper">
+        <div class="announcement"><p>Fastecommerce agora é o Capicart de uma ☆ no <a href="https://github.com/jonatasoli/capi-cart">github</a></p>
+</div>
+    </div>
+    
+    <main class="container">
+        
+        <header class="header-content">
+            <nav class="header-nav">
+                <ul class="header-name">
+                    <li>
+                        <hgroup>
+                            <h2><a href="./" class="contrast">Jonatas</a></h2>
+                             <p>Aprendendo a fazer jogos e se aventurando pelo Rust e Python</p> 
+                        </hgroup>
+                    </li>
+                </ul>
+                <button id="menu-toggle" class="hamburger">&#9776;</button>
+                
+                <ul class="header-menu" id="header-menu">
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://newsletter.jonatasoliveira.dev" target="_blank" >Newsletter</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://github.com/oliveira-mark" target="_blank" >Github</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://www.linkedin.com/in/jonatasoliveirame/" target="_blank" >Linkedin</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://www.youtube.com/@devjonatas" target="_blank" >Youtube</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="https://www.twitch.tv/devjonatas" target="_blank" >Twitch</a>
+                        
+                    </li>
+                    
+                      
+                      
+                    <li>
+                        
+                        <a class="menu-item secondary"  href="./archive.html">Archive</a>
+                        
+                    </li>
+                    
+                    <li><span class="theme-toggle secondary" title="dark mode">&#9789;</span></li>
+                    
+                    <li><a href="#" id="search-toggle" class="secondary" title="Search (Ctrl + Shift + F)"> <span class="search-txt">Search</span><span class="search-magnifier"></span></a></li>
+                    
+                    <div class="underline"></div>
+                </ul>
+            </nav>
+            
+            <div class="marmite-background-overlay" id="overlay-close"></div>
+            <div class="marmite-search-bar hidden">
+                <span></span>
+                <button class="marmite-close-button" id="search-close">X</button>
+                <input placeholder="Search" id="marmite-search-input" />
+                <div class="marmite-search-bar-result">
+                    <ul id="marmite-search-bar-result"></ul>
+                </div>
+            </div>
+            
+        </header>
+        
+        <section class="main-content">
+            
+
+
+<div class="content-banner-image" style="background-image: url(media/post-images/iniciando-rust.png);"></div>
+
+
+<article>
+
+  
+
+
+<div class="content-title" id="title">
+    <h1>Aprendendo Rust em 2025 e seus mitos</h1> 
+    
+
+
+<span class="content-date">
+    <small> Jun 25, 2025 - &#10710; 5 min</small>
+</span>
+
+</div>
+
+  
+  <div class="content-toc">
+    <a href="#" id="toc"></a>
+    <details>
+    <summary>🗒️</summary>
+    <ul>
+<ul>
+<li><a href="#mitos">Mitos:</a></li>
+<li><a href="#então-como-aprender-">Então como aprender ?</a></li>
+<ul>
+<li><a href="#praticar---não-adianta-só-ler">Praticar - não adianta só ler</a></li>
+<li><a href="#onde-posso-praticar-em-qualquer-lugar">Onde posso praticar em qualquer lugar?</a></li>
+</ul>
+<li><a href="#como-me-preparar-para-estudar">Como me preparar para estudar?</a></li>
+</ul>
+</ul>
+
+    </details>
+  </div>
+  
+
+  <div class="content-html"><!-- Content Injected to every content markdown header -->
+<p><a href="https://www.youtube.com/watch?v=STMPnPRrv8k">Veja também em vídeo</a></p>
+<p>Bom nesse breve texto quero falar um pouco sobre como aprender rust, além de tirar alguns mitos.</p>
+<p>Rust é uma linguagem muito legal, uso ela em alguns projetos além de usar ela no jogo que estou desenvolvendo, hoje falando com algumas pessoas percebo alguns obstáculos que se coloca para aprender rust e gostaria de ajudar a clarear um pouco.</p>
+<h2><a href="#mitos" aria-hidden="true" class="anchor" id="mitos"></a>Mitos:</h2>
+<p><strong>Aprender C/C++:</strong> Além de que se você souber a linguagem seja algo que te ajude, não é algo mandatório para aprender Rust, tem muita gente na comunidade que tem esse background.</p>
+<p>**Saber estrutura de dados e algortimos: **Também é um conhecimento importante pra se tornar um programador melhor, porém não é mandatório.</p>
+<p>**Saber design partterns: **Esse eu vejo as pessoas muito obsecadas pelo livro da Gang of 4 mas, sinceramente é algo que você deve estudar depois de já ter certo conhecimento em qualquer linguagem, além de que algumas linguagens resolvem os patterns de outras formas.</p>
+<p><strong>Aprender ponteiros:</strong> Como disse tem pessoas de outros backgrounds, e conforme você aprende Rust você vai identificando como a mémoria é alocada e suas referências e isso pode até te levar aprender como funcionam os ponteiros em c/C++ por exemplo, mas não é mandatório.</p>
+<p><strong>Aprender Rust por que não quer aprender ponteiros:</strong> como disse tem pessoas na comunidade com background em C/C++ e que continuam trabalhando nessas linguagens, inclusive usam-se Rust hoje no desenvolvimento do kernel Linux, não vejo essas pessoas que trabalham lá usando Rust por que simplesmente não querem aprender ponteiros.</p>
+<p><strong>Então nada disso é importante?</strong>
+Como falei coisas que citei anteriormente podem ser importantes para se tornar um programador melhor (como algorimo e estrutura de dados), porém se você está aprendendo a linguagem não é mandatório, com o tempo você vai incluindo isso no seu plano de estudos.</p>
+<p>Bom tirando os mitos como você pode aprender rust? Vou dar algumas dicas para você começar a estudar.
+<strong>Pra quem está iniciando</strong>: Pensando em mercado de trabalho é interessante conhecer outra linguagem, e disso isso não por que o Rust é dificil, mas por que pensando em trabalhar com a linguagem, normalmente vão pedir que você tenha conhecimento em outra linguagem.</p>
+<p><strong>Conhecimento gradual:</strong> Penso que assim como no vim o Rust (e na real qualquer outra linguagem) você precisa de consistência, não adianta estudar 40 horas uma semana e depois ficar 1 mês sem estudar. O importante mesmo que seja pouco tempo que seja constante, assim você vai conseguindo aprender de forma graudal.</p>
+<h2><a href="#então-como-aprender-" aria-hidden="true" class="anchor" id="então-como-aprender-"></a>Então como aprender ?</h2>
+<p><strong>Restringindo o material:</strong> Como sempre falo, não adianta comprar 10 livros e 5 cursos se você está inciando na linguagem, isso vai mais atrapalhar que ajudar, a principio use apenas um material e com o tempo conforme já vai tendo conhecimento aumente o seu conteúdo.
+Aqui algumas sugestões de materiais gratuitos pra começar:</p>
+<p><strong>Documentação do Rust</strong>
+<a href="https://rust.sh">https://rust.sh</a>
+<a href="https://livro.rustbr.org/">https://livro.rustbr.org/</a>  - Pt_Bt</p>
+<h3><a href="#praticar---não-adianta-só-ler" aria-hidden="true" class="anchor" id="praticar---não-adianta-só-ler"></a>Praticar - não adianta só ler</h3>
+<p>Não leia um livro técnico como um romance e nem assista um curso como netflix, sempre tente refazer os exemplos e fazer exercícios do tópico que está aprendendo com isso você vai conseguir fixar os conceitos.</p>
+<h3><a href="#onde-posso-praticar-em-qualquer-lugar" aria-hidden="true" class="anchor" id="onde-posso-praticar-em-qualquer-lugar"></a>Onde posso praticar em qualquer lugar?</h3>
+<p>Rust playground pra mim é uma ótima ferramenta pra quem ta começando pois você pode usar seja no computador quanto no celular.</p>
+<p><a href="http://play.rust-lang.org/">http://play.rust-lang.org/</a></p>
+<h2><a href="#como-me-preparar-para-estudar" aria-hidden="true" class="anchor" id="como-me-preparar-para-estudar"></a>Como me preparar para estudar?</h2>
+<p><strong>Tempo e ambiente pra estudos:</strong> Defina um tempo na sua semana (ela pode variar durante a semana) e foque em estudar, tenha um ambiente onde você consiga definir como local de estudo, se tem barulho tente um fone para rudizir ruidos, se muito silêncio te atrapalha tente ruido branco, procure apenas deixar o ambiente proprio para focar.</p>
+<p><strong>Um computador:</strong> Além de acreditar que da pra fazer muitas coisas com o celular, mas em algum momento você vai precisar de um computador, e pode ser um computador antigo o importante na minha visão é ser pelo menos com um processador de 64bits e ter pelo menos uns 2Gb de memória.</p>
+<p><strong>Linux, Mas ou Windows?:</strong> Sinceramente pra mim é uma questão de gosto o Rust roda em todos esses sistemas, só diria que se seu computador for antigo e sem muitos recursos o linux funcionaria melhor com uma distribuição mais focada nesse nicho.</p>
+<p><strong>Instalar linguagem:</strong> Linux e Mac da pra insalar usando o script da página da linguagem e com o windows você vai precisar usar algo como chocolately ou wsl2.</p>
+<p><strong>Faça Exercícios:</strong> Isso é muito importante sempre pratique o que está aprendendo e se precisar de uma dica de site sempre recomendo o <a href="https://exercism.io">exercism</a></p>
+<p><strong>Expandindo material:</strong> Você já conseguiu um conhecimento básico da linguagem? Já consegue fazer pequenos projeto? Então pode tentar buscar novos livros e cursos para aprofundar em algum tópico.
+O que eu recomendo
+Livros:
+<a href="https://amzn.to/3Whg1VN">Hands on Rust - Inglês</a>
+<a href="https://amzn.to/4cTG2zT">Programming Rust - Inglês</a>
+<a href="https://amzn.to/4cYbqgJ">Rust: Concorrência e alta performance com segurança</a>
+<a href="https://amzn.to/3Weo7yq">Programação Funcional e Concorrente em Rust</a></p>
+<p>Curso
+<a href="https://hackerspace.jonatasoliveira.dev/courses-page/rust-logica-com-jogos/">Meu curso de rust</a>
+<a href="https://www.udemy.com/course/ultimate-rust-crash-course/?couponCode=ST9MT71624">Ultimate Rust Crash Course - Inglês</a></p>
+<p>Caso tenha gostado do artigo eu elaboro um pouco mais ele no meu vídeo não deixe de dar uma conferida.
+<a href="https://youtu.be/STMPnPRrv8k">https://youtu.be/STMPnPRrv8k</a></p>
+<!-- Content Injected to every content markdown footer -->
+</div>
+  
+  <footer class="data-tags-footer">
+
+    <div class="content-authors-flex">
+      <div class="content-authors-full">
+        
+<div class="content-authors">
+    <ul>
+        
+            
+            
+            <li >
+                <a class="secondary" href="author-Jônatas Luiz de Oliveira.html">
+                    <img src="static/avatar-placeholder.png" alt="Jônatas Luiz de Oliveira" class="avatar">
+                    Jônatas Luiz de Oliveira
+                </a>
+            </li>
+            
+        
+    </ul>
+</div>
+
+
+      </div>
+
+      <div class="date-tags-container">
+        <div class="content-date">
+          
+
+
+<span class="content-date">
+    <small> Jun 25, 2025 - &#10710; 5 min</small>
+</span>
+
+        </div>
+
+        <ul class="content-tags">
+          
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+
+
+    <article><h5><a href="#comentários" aria-hidden="true" class="anchor" id="comentários"></a>Comentários</h5>
+<p><strong>remove</strong> the file to disable comments</p>
+<div id="remark42"></div>
+<script>
+  window.remark_config = {
+    host: 'https://comments.singularjourney.host',
+    site_id: 'blog-jonatasoliveira-dev',                      
+    components: ['embed','count']
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = window.remark_config.host + '/web/remark.js';
+    s.defer = true; s.async = true;
+    d.getElementsByTagName('body')[0].appendChild(s);
+  })();
+</script>
+</article>
+
+
+
+        </section>
+        
+        <footer class="footer-content grid">
+            <strong>Copyright Singular Journey</strong>
+            
+        </footer>
+        
+    </main>
+
+    <script src="./static/marmite.js"></script>
+    <script src="./static/custom.js"></script>
+    
+    <script type="module" src="./static/search.js"></script>
+    
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+
+
+</body>
+</html>
