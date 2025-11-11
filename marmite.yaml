@@ -13,6 +13,7 @@ streams_title: Streams
 streams_content_title: ''
 default_author: 'Jônatas Luiz de Oliveira'
 authors_title: Authors
+build_sitemap: true
 enable_search: true
 enable_related_content: false
 search_title: ''
