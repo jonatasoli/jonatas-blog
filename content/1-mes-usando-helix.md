@@ -15,7 +15,7 @@ Só pra contextualizar, eu uso vim/neovim a um bom tempo e eu estou montando um 
 
 ## Alguns desafios
 Bom primeira coisa que acaba confundindo um pouco é que eu tenho alguns atalhos próprios no neovim e além de ele ter por padrão alguns atalhos estou precisando reaprender a usar do modo dele, uma coisa que é dificil pra mim é desapegar um pouco de algumas formas de navegar do neovim e usar ai fiz no meu obsidian um mapa dos principais atalhos que compartilho com vocês abaixo:
-[[Helix Shortcuts]]
+Helix Shortcuts
 
 ```
 `Ctrl`+`,` | Abre a caixa de diálogo de configurações.

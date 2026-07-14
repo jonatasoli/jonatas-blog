@@ -52,8 +52,8 @@ extra:
         (function(){
           try {
             window.remark_config = {
-              host: 'https://comments.singularjourney.host',   // seu REMARK_URL
-              site_id: 'blog-jonatasoliveira-dev',             // seu SITE
+              host: 'https://comments.singularjourney.org',
+              site_id: 'blog-jonatasoliveira-dev',
               // usa a URL completa da página para identificar a thread
               url: window.location.href,
               // título da página (fallback simples)
