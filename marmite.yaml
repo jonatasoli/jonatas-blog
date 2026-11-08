@@ -54,12 +54,40 @@ extra:
             window.remark_config = {
               host: 'https://comments.singularjourney.org',
               site_id: 'blog-jonatasoliveira-dev',
-              // usa a URL completa da página para identificar a thread
-              url: window.location.href,
+              locale: 'pt',
+              // usa origin+pathname para identificar a thread (evita criar
+              // threads separadas por #ancora do TOC ou ?utm_... na URL)
+              url: window.location.origin + window.location.pathname,
               // título da página (fallback simples)
               page_title: document.querySelector('title') ? document.querySelector('title').textContent : document.location.pathname,
+              // sincroniza o tema do Remark42 com o tema ativo do Marmite
+              theme: (function(){
+                try {
+                  var t = document.documentElement.getAttribute('data-theme');
+                  if (t === 'dark' || t === 'light') return t;
+                  var ls = window.localStorage && window.localStorage.getItem('picoPreferredColorScheme');
+                  if (ls === 'dark' || ls === 'light') return ls;
+                } catch (e) {}
+                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+              })(),
               components: ['embed']
             };
+            // mantem o tema sincronizado quando o usuario alterna no Marmite
+            (function(){
+              var btns = document.querySelectorAll('.theme-toggle');
+              btns.forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  setTimeout(function(){
+                    try {
+                      var t = document.documentElement.getAttribute('data-theme');
+                      if (window.REMARK42 && typeof window.REMARK42.changeTheme === 'function' && (t === 'dark' || t === 'light')) {
+                        window.REMARK42.changeTheme(t);
+                      }
+                    } catch (e) {}
+                  }, 50);
+                });
+              });
+            })();
           } catch(e) {
             console.error('remark_config build error', e);
           }
